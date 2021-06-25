@@ -11,7 +11,7 @@ import com.example.atmsimulator.views.login.LoginActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements IMainView
 {
 
     @Override

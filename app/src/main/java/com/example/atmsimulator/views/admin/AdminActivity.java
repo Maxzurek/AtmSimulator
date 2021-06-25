@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.atmsimulator.R;
 
-public class AdminActivity extends AppCompatActivity
+public class AdminActivity extends AppCompatActivity implements IAdminView
 {
 
     @Override
