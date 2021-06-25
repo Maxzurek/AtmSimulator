@@ -1,5 +1,5 @@
 package com.example.atmsimulator.models;
 
-public class User
+public class Atm
 {
 }
