@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements IMainView
         setContentView(R.layout.activity_main);
         setTitle(R.string.main_activity_title);
 
-        //Simulate 3 seconds loading
+
         TimerTask task = new TimerTask()
         {
             @Override
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements IMainView
             }
         };
 
+        //Simulate 3 seconds loading
         Timer timer = new Timer();
         timer.schedule(task, 3000);
     }

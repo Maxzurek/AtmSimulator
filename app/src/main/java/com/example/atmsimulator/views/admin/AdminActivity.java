@@ -8,7 +8,6 @@ import com.example.atmsimulator.R;
 
 public class AdminActivity extends AppCompatActivity implements IAdminView
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
