@@ -14,15 +14,21 @@ import com.example.atmsimulator.R;
 
 public class AtmActivity extends AppCompatActivity implements IAtmView
 {
-
+    /************************************************************************/
+    /* Class attributes                                                     */
+    /************************************************************************/
     private static final String KEY_INPUT = "key_input";
     private static final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
     private static final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
     private static final String KEY_CHECK_AMOUNT = "key_check_amount";
     private static final String KEY_SAVING_AMOUNT = "key_saving_amount";
     private static final String KEY_ACCOUNT_SUMMARY_VISIBILITY = "key_account_summary_visibility";
+
     private static boolean accountSummaryVisibility = false;
 
+    /************************************************************************/
+    /* Override Methods                                                     */
+    /************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -66,6 +72,70 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         }
     }
 
+    /************************************************************************/
+    /* Private class methods                                                */
+    /************************************************************************/
+    private Bundle getSaveInstanceBundle()
+    {
+        Bundle bundle = new Bundle();
+
+        EditText editTextInput = findViewById(R.id.editTextInput);
+        RadioGroup radioGroupTransaction = findViewById(R.id.radioGroupTransaction);
+        int transactionCheckedRadioButtonID = radioGroupTransaction.getCheckedRadioButtonId();
+        RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
+        int accountCheckedRadioButtonID = radioGroupAccount.getCheckedRadioButtonId();
+        TextView textViewCheckAmount = findViewById(R.id.textViewCheckAmount);
+        TextView textViewSavingAmount = findViewById(R.id.textViewSavingAmount);
+
+        bundle.putString(KEY_INPUT, editTextInput.getText().toString());
+        if(transactionCheckedRadioButtonID != -1)
+        {
+            bundle.putInt(KEY_RADIO_GROUP_TRANSACTION, transactionCheckedRadioButtonID);
+        }
+        if(accountCheckedRadioButtonID != -1)
+        {
+            bundle.putInt(KEY_RADIO_GROUP_ACCOUNT, accountCheckedRadioButtonID);
+        }
+        bundle.putString(KEY_CHECK_AMOUNT, textViewCheckAmount.getText().toString());
+        bundle.putString(KEY_SAVING_AMOUNT, textViewSavingAmount.getText().toString());
+        bundle.putBoolean(KEY_ACCOUNT_SUMMARY_VISIBILITY, accountSummaryVisibility);
+
+        return bundle;
+    }
+
+    private void setAccountSummaryVisibility(boolean isVisible)
+    {
+        int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
+        TextView textViewCheck = (TextView)findViewById(R.id.textViewCheck);
+        TextView textViewSaving = (TextView)findViewById(R.id.textViewSaving);
+        TextView textViewCheckAmount = (TextView)findViewById(R.id.textViewCheckAmount);
+        TextView textViewSavingAmount = (TextView)findViewById(R.id.textViewSavingAmount);
+
+        textViewCheck.setVisibility(visibility);
+        textViewSaving.setVisibility(visibility);
+        textViewCheckAmount.setVisibility(visibility);
+        textViewSavingAmount.setVisibility(visibility);
+
+        accountSummaryVisibility = isVisible;
+    }
+
+    private void appendToEditTextInput(String text)
+    {
+        EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
+
+        editTextAmount.append(text);
+    }
+
+    private void clearEditTextInput()
+    {
+        EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
+
+        editTextAmount.setText("");
+    }
+
+    /************************************************************************/
+    /* Events Handling                                                      */
+    /************************************************************************/
     public void onCLickButtons(View view)
     {
         switch(view.getId())
@@ -120,63 +190,5 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
             default:
                 break;
         }
-    }
-
-    private void setAccountSummaryVisibility(boolean isVisible)
-    {
-        int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
-        TextView textViewCheck = (TextView)findViewById(R.id.textViewCheck);
-        TextView textViewSaving = (TextView)findViewById(R.id.textViewSaving);
-        TextView textViewCheckAmount = (TextView)findViewById(R.id.textViewCheckAmount);
-        TextView textViewSavingAmount = (TextView)findViewById(R.id.textViewSavingAmount);
-
-        textViewCheck.setVisibility(visibility);
-        textViewSaving.setVisibility(visibility);
-        textViewCheckAmount.setVisibility(visibility);
-        textViewSavingAmount.setVisibility(visibility);
-
-        accountSummaryVisibility = isVisible;
-    }
-
-    private void appendToEditTextInput(String text)
-    {
-        EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
-
-        editTextAmount.append(text);
-    }
-
-    private void clearEditTextInput()
-    {
-        EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
-
-        editTextAmount.setText("");
-    }
-
-    private Bundle getSaveInstanceBundle()
-    {
-        Bundle bundle = new Bundle();
-
-        EditText editTextInput = findViewById(R.id.editTextInput);
-        RadioGroup radioGroupTransaction = findViewById(R.id.radioGroupTransaction);
-        int transactionCheckedRadioButtonID = radioGroupTransaction.getCheckedRadioButtonId();
-        RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
-        int accountCheckedRadioButtonID = radioGroupAccount.getCheckedRadioButtonId();
-        TextView textViewCheckAmount = findViewById(R.id.textViewCheckAmount);
-        TextView textViewSavingAmount = findViewById(R.id.textViewSavingAmount);
-
-        bundle.putString(KEY_INPUT, editTextInput.getText().toString());
-        if(transactionCheckedRadioButtonID != -1)
-        {
-            bundle.putInt(KEY_RADIO_GROUP_TRANSACTION, transactionCheckedRadioButtonID);
-        }
-        if(accountCheckedRadioButtonID != -1)
-        {
-            bundle.putInt(KEY_RADIO_GROUP_ACCOUNT, accountCheckedRadioButtonID);
-        }
-        bundle.putString(KEY_CHECK_AMOUNT, textViewCheckAmount.getText().toString());
-        bundle.putString(KEY_SAVING_AMOUNT, textViewSavingAmount.getText().toString());
-        bundle.putBoolean(KEY_ACCOUNT_SUMMARY_VISIBILITY, accountSummaryVisibility);
-
-        return bundle;
     }
 }

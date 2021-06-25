@@ -7,22 +7,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.atmsimulator.R;
+import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
+import com.example.atmsimulator.views.admin.IAdminView;
 import com.example.atmsimulator.views.atm.AtmActivity;
 
 import org.jetbrains.annotations.NotNull;
 
-public class LoginActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity implements ILoginView
 {
+    /************************************************************************/
+    /* Class attributes                                                     */
+    /************************************************************************/
     private static final String KEY_USERNAME = "key_username";
     private static final String KEY_NIP = "key_nip";
 
+    private LoginActivityPresenter presenter;
+    private boolean textViewErrorVisibility = false;
+
+    /************************************************************************/
+    /* Override Methods                                                     */
+    /************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        presenter = new LoginActivityPresenter(this);
+
+        setTextViewErrorVisibility(textViewErrorVisibility);
     }
 
     @Override
@@ -51,13 +67,9 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
-    public void onClickButtonSignIn(View view)
-    {
-        Intent atmScreen = new Intent(this, AtmActivity.class);
-
-        startActivity(atmScreen);
-    }
-
+    /************************************************************************/
+    /* Private class methods                                                */
+    /************************************************************************/
     private Bundle getSaveInstanceBundle()
     {
         Bundle bundle = new Bundle();
@@ -68,5 +80,24 @@ public class LoginActivity extends AppCompatActivity
         bundle.putString(KEY_NIP, editTextNIP.getText().toString());
 
         return bundle;
+    }
+
+    private void setTextViewErrorVisibility(boolean isVisible)
+    {
+        int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
+        TextView textViewError= (TextView)findViewById(R.id.textViewError);
+
+        textViewError.setVisibility(visibility);
+
+        textViewErrorVisibility = isVisible;
+    }
+    /************************************************************************/
+    /* Events Handling                                                      */
+    /************************************************************************/
+    public void onClickButtonSignIn(View view)
+    {
+        Intent atmScreen = new Intent(this, AtmActivity.class);
+
+        startActivity(atmScreen);
     }
 }
