@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.atmsimulator.R;
+
 public class AdminActivity extends AppCompatActivity
 {
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
