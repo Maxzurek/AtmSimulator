@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.atm.AtmActivity">
+
+    <TextView
+        android:id="@+id/textViewSavingAmount"
+        android:layout_width="132dp"
+        android:layout_height="30dp"
+        android:gravity="end"
+        android:text="@string/default_monetary_value"
+        android:textColor="#071CD5"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/textViewCheckAmount"
+        app:layout_constraintTop_toTopOf="@+id/textViewSaving" />
+
+    <TextView
+        android:id="@+id/textViewCheckAmount"
+        android:layout_width="132dp"
+        android:layout_height="30dp"
+        android:gravity="end"
+        android:text="@string/default_monetary_value"
+        android:textColor="#071CD5"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSubmit"
+        app:layout_constraintTop_toTopOf="@+id/textViewCheck" />
+
+    <TextView
+        android:id="@+id/textViewSaving"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
+        android:text="@string/atm_activity_textView_saving"
+        android:textColor="#071CD5"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/textViewCheck"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCheck" />
+
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_clear"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonDot"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_9"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDot"
+        app:layout_constraintStart_toEndOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+    <Button
+        android:id="@+id/buttonDot"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_dot"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/buttonClear"
+        app:layout_constraintStart_toEndOf="@+id/button9"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_8"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_6"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintStart_toEndOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_5"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button6"
+        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/button1" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_7"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_4"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button0" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_1"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/button0"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogout" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_2"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/button1"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogout" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_3"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogout" />
+
+    <EditText
+        android:id="@+id/editTextInput"
+        android:layout_width="347dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/buttonClear"
+        app:layout_constraintStart_toStartOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/button8"
+        android:importantForAutofill="no"
+        android:hint="@string/atm_activity_editTextInput_hint"/>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/atm_activity_title"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonLogout" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="164dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_logout"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button0"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_0"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/button1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogout" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="132dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="2dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_submit"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroupAccount"
+        app:layout_constraintTop_toTopOf="@+id/buttonAccountSummary" />
+
+    <Button
+        android:id="@+id/buttonAccountSummary"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#CFCECE"
+        android:onClick="onCLickButtons"
+        android:text="@string/atm_activity_button_accountSummary"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/radioGroupTransaction"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTransaction" />
+
+    <TextView
+        android:id="@+id/textViewCheck"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:text="@string/atm_activity_textView_check"
+        android:textColor="#071CD5"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/buttonAccountSummary"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAccountSummary" />
+
+    <TextView
+        android:id="@+id/textViewTransactionSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounded_corner"
+        android:padding="15dp"
+        android:textColor="#453939"
+        android:visibility="visible"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSavingAmount"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/textViewSaving"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSaving"
+        app:layout_constraintVertical_bias="0.285" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupAccount"
+        android:layout_width="93dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextInput"
+        app:layout_constraintTop_toBottomOf="@+id/editTextInput">
+
+        <RadioButton
+            android:id="@+id/radioButtonCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/atm_activity_radioButton_check" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSaving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/atm_activity_radioButton_saving" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupTransaction"
+        android:layout_width="123dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextInput"
+        app:layout_constraintTop_toBottomOf="@+id/editTextInput">
+
+        <RadioButton
+            android:id="@+id/radioButtonDeposit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/atm_activity_radioButton_deposit" />
+
+        <RadioButton
+            android:id="@+id/radioButtonWidthdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/atm_activity_radioButton_withdraw" />
+
+        <RadioButton
+            android:id="@+id/radioButtonTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/atm_activity_radioButton_transfert" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

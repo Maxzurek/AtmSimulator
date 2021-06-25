@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">AtmSimulator</string>
+    <string name="default_monetary_value">0.00$</string>
+
+    <string name="login_activity_editTextUsername_hint">Username</string>
+    <string name="login_activity_editTextNIP_hint">NIP</string>
+    <string name="login_activity_buttonSignIn">SIGN IN</string>
+    <string name="login_activity_textview_error_invalid">Le username ou le NIP entré est invalide</string>
+    <string name="login_activity_textview_error_loginAttempts">Trop d\'échec de connection. Veuillez réessayer plus tard</string>
+
+    <string name="atm_activity_editTextInput_hint">Montant</string>
+    <string name="main_activity_title">Guichet automatique ATM</string>
+    <string name="atm_activity_title">Bonjour Android ATM</string>
+    <string name="atm_activity_button_logout">LOGOUT</string>
+    <string name="atm_activity_button_0">0</string>
+    <string name="atm_activity_button_1">1</string>
+    <string name="atm_activity_button_2">2</string>
+    <string name="atm_activity_button_3">3</string>
+    <string name="atm_activity_button_4">4</string>
+    <string name="atm_activity_button_5">5</string>
+    <string name="atm_activity_button_6">6</string>
+    <string name="atm_activity_button_7">7</string>
+    <string name="atm_activity_button_8">8</string>
+    <string name="atm_activity_button_9">9</string>
+    <string name="atm_activity_button_dot">.</string>
+    <string name="atm_activity_button_clear">c</string>
+    <string name="atm_activity_radioButton_deposit">Dépot</string>
+    <string name="atm_activity_radioButton_withdraw">Retrait</string>
+    <string name="atm_activity_radioButton_transfert">Virement</string>
+    <string name="atm_activity_radioButton_check">Chèque</string>
+    <string name="atm_activity_radioButton_saving">Épargne</string>
+    <string name="atm_activity_button_accountSummary">ÉTAT DES COMPTES</string>
+    <string name="atm_activity_button_submit">SOUMETTRE</string>
+    <string name="atm_activity_textView_check">Solde compte Chèque:</string>
+    <string name="atm_activity_textView_saving">Solde compte Épargne:</string>
+</resources>
