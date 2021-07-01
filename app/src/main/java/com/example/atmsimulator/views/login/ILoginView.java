@@ -4,4 +4,5 @@ import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
 
 public interface ILoginView
 {
+    void startAtmActivity();
 }

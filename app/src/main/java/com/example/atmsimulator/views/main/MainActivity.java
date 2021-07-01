@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.atmsimulator.R;
+import com.example.atmsimulator.presenters.main.MainActivityPresenter;
 import com.example.atmsimulator.views.login.LoginActivity;
 
 import java.util.Timer;
@@ -13,7 +14,14 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements IMainView
 {
+    /************************************************************************/
+    /* Class attributes                                                     */
+    /************************************************************************/
+    private MainActivityPresenter presenter;
 
+    /************************************************************************/
+    /* Overridden Methods                                                   */
+    /************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -21,22 +29,15 @@ public class MainActivity extends AppCompatActivity implements IMainView
         setContentView(R.layout.activity_main);
         setTitle(R.string.main_activity_title);
 
+        presenter = new MainActivityPresenter(this);
 
-        TimerTask task = new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                startLoginActivity();
-            }
-        };
-
-        //Simulate 3 seconds loading
-        Timer timer = new Timer();
-        timer.schedule(task, 3000);
+        presenter.initializeApp();
     }
 
-    private void startLoginActivity()
+    /************************************************************************/
+    /* Interface Implementation                                             */
+    /************************************************************************/
+    public void startLoginActivity()
     {
         Intent loginScreen = new Intent(this, LoginActivity.class);
         startActivity(loginScreen);

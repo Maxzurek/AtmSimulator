@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     private boolean textViewErrorVisibility = false;
 
     /************************************************************************/
-    /* Override Methods                                                     */
+    /* Overridden Methods                                                   */
     /************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,6 +68,16 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     }
 
     /************************************************************************/
+    /* Interface Implementation                                             */
+    /************************************************************************/
+    public void startAtmActivity()
+    {
+        Intent atmScreen = new Intent(this, AtmActivity.class);
+
+        startActivity(atmScreen);
+    }
+
+    /************************************************************************/
     /* Private class methods                                                */
     /************************************************************************/
     private Bundle getSaveInstanceBundle()
@@ -96,8 +106,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     /************************************************************************/
     public void onClickButtonSignIn(View view)
     {
-        Intent atmScreen = new Intent(this, AtmActivity.class);
 
-        startActivity(atmScreen);
     }
 }
