@@ -1,5 +1,6 @@
 package com.example.atmsimulator.presenters.login;
 
+import com.example.atmsimulator.R;
 import com.example.atmsimulator.models.Client;
 import com.example.atmsimulator.views.login.ILoginView;
 
@@ -11,6 +12,7 @@ public class LoginActivityPresenter
     /* Class attributes                                                     */
     /************************************************************************/
     private ILoginView view;
+    private int invalidLoginAttempt;
     private ArrayList<Client> clients;
 
     /************************************************************************/
@@ -19,27 +21,57 @@ public class LoginActivityPresenter
     public LoginActivityPresenter(ILoginView view)
     {
         this.view = view;
-
+        invalidLoginAttempt = 0;
         clients = new ArrayList<Client>();
-        clients.add(new Client());
+        clients.add(new Client("Zurek", "Maxime", "MaxZurek", "1234"));
     }
 
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    public boolean validateUser(String userName, int nip)
+    public void loginAttempt(String userName, String NIP)
     {
-        boolean isValidUser = false;
+        if(invalidLoginAttempt == 3)
+        {
+            view.displayLoginAttemptsError();
+            return;
+        }
 
-        return isValidUser;
+        if(userName.isEmpty())
+        {
+            view.displayEmptyUsernameError();
+            return;
+        }
+        else if(NIP.isEmpty())
+        {
+            view.displayEmptyNIPError();
+            return;
+        }
+
+        if(isUserValid(userName, NIP))
+        {
+            view.startAtmActivity();
+        }
+        else
+        {
+            invalidLoginAttempt++;
+            view.displayInvalidLoginError();
+        }
     }
 
     /************************************************************************/
     /* Private Methods                                                      */
     /************************************************************************/
-    private boolean findUserName(String userName)
+    private boolean isUserValid(String userName, String NIP)
     {
-        //TODO iterate through the arraylist of clients to find a username, return true if user is found
-       return true;
+        for(Client client : clients)
+        {
+            if(client.getUserName().equals(userName) && client.getAccountNIP().equals(NIP))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

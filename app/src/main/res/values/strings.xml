@@ -5,8 +5,10 @@
     <string name="login_activity_editTextUsername_hint">Username</string>
     <string name="login_activity_editTextNIP_hint">NIP</string>
     <string name="login_activity_buttonSignIn">SIGN IN</string>
-    <string name="login_activity_textview_error_invalid">Le username ou le NIP entré est invalide</string>
-    <string name="login_activity_textview_error_loginAttempts">Trop d\'échec de connection. Veuillez réessayer plus tard</string>
+    <string name="login_activity_textview_emptyUsername_error">Le nom d\'utilisateur est vide.\nVeuillez entrer un nom d\'utilisateur.</string>
+    <string name="login_activity_textview_emptyNIP_error">Le NIP est vide.\nVeuillez entrer un NIP.</string>
+    <string name="login_activity_textview_invalidLogin_error">Le username ou le NIP entré est invalide.</string>
+    <string name="login_activity_textview_loginAttempts_error">Trop d\'échec de connection.\nVeuillez réessayer plus tard.</string>
 
     <string name="atm_activity_editTextInput_hint">Montant</string>
     <string name="main_activity_title">Guichet automatique ATM</string>

@@ -70,11 +70,65 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     /************************************************************************/
     /* Interface Implementation                                             */
     /************************************************************************/
+    @Override
     public void startAtmActivity()
     {
         Intent atmScreen = new Intent(this, AtmActivity.class);
 
         startActivity(atmScreen);
+    }
+
+    @Override
+    public void displayEmptyUsernameError()
+    {
+        TextView textViewError = findViewById(R.id.textViewError);
+        String errorMessage = getResources().getString(R.string.login_activity_textview_emptyUsername_error);
+
+        setTextViewErrorVisibility(true);
+        textViewError.setText(errorMessage);
+    }
+
+    @Override
+    public void displayEmptyNIPError()
+    {
+        TextView textViewError = findViewById(R.id.textViewError);
+        String errorMessage = getResources().getString(R.string.login_activity_textview_emptyNIP_error);
+
+        setTextViewErrorVisibility(true);
+        textViewError.setText(errorMessage);
+    }
+
+    @Override
+    public void displayInvalidLoginError()
+    {
+        TextView textViewError = findViewById(R.id.textViewError);
+        String errorMessage = getResources().getString(R.string.login_activity_textview_invalidLogin_error);
+
+        setTextViewErrorVisibility(true);
+        textViewError.setText(errorMessage);
+    }
+
+    @Override
+    public void displayLoginAttemptsError()
+    {
+        TextView textViewError = findViewById(R.id.textViewError);
+        String errorMessage = getResources().getString(R.string.login_activity_textview_loginAttempts_error);
+
+        setTextViewErrorVisibility(true);
+        textViewError.setText(errorMessage);
+    }
+
+    /************************************************************************/
+    /* Events Handling                                                      */
+    /************************************************************************/
+    public void onClickButtonSignIn(View view)
+    {
+        EditText editTextUserName = findViewById(R.id.editTextUsername);
+        EditText editTextNIP = findViewById(R.id.editTextNIP);
+        String userName = editTextUserName.getText().toString();
+        String NIP = editTextNIP.getText().toString();
+
+        presenter.loginAttempt(userName, NIP);
     }
 
     /************************************************************************/
@@ -98,14 +152,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         TextView textViewError= (TextView)findViewById(R.id.textViewError);
 
         textViewError.setVisibility(visibility);
-
         textViewErrorVisibility = isVisible;
-    }
-    /************************************************************************/
-    /* Events Handling                                                      */
-    /************************************************************************/
-    public void onClickButtonSignIn(View view)
-    {
-
     }
 }
