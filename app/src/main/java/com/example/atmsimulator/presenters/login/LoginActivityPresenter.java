@@ -1,5 +1,6 @@
 package com.example.atmsimulator.presenters.login;
 
+import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.models.Client;
 import com.example.atmsimulator.views.login.ILoginView;
 
@@ -13,11 +14,10 @@ public class LoginActivityPresenter
     /* Class attributes                                                     */
     /************************************************************************/
     private ILoginView view;
-
+    private AtmData atmData;
     private int invalidLoginAttempt;
     private final int LOGIN_LOCK_WAIT_TIME = 10000;
     private long loginLockStartTime;
-
     private ArrayList<Client> clients;
 
     /************************************************************************/
@@ -29,12 +29,14 @@ public class LoginActivityPresenter
         invalidLoginAttempt = 3;
         clients = new ArrayList<Client>();
         clients.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
+
+        atmData = (AtmData) view.getAtmData();
     }
 
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    public void attemptLogin(String userName, String NIP)
+    public void attemptLogin(String userName, String nip)
     {
         long currentSystemTime = System.currentTimeMillis();
 
@@ -49,15 +51,19 @@ public class LoginActivityPresenter
             view.displayEmptyUsernameError();
             return;
         }
-        else if(NIP.isEmpty())
+        else if(nip.isEmpty())
         {
             view.displayEmptyNIPError();
             return;
         }
 
-        if(validateUser(userName, NIP))
+        if(isAdmin(userName, nip))
         {
-            view.startAtmActivity();
+            view.startAdminActivity(atmData);
+        }
+        else if(validateUser(userName, nip))
+        {
+            view.startAtmActivity(atmData);
         }
         else
         {
@@ -78,11 +84,24 @@ public class LoginActivityPresenter
     /************************************************************************/
     /* Private Methods                                                      */
     /************************************************************************/
-    private boolean validateUser(String userName, String NIP)
+    private boolean isAdmin(String userName, String nip)
+    {
+        final String USERNAME = "Admin";
+        final String NIP = "D001";
+
+        if(userName.equals(USERNAME) && nip.equals(NIP))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean validateUser(String userName, String nip)
     {
         for(Client client : clients)
         {
-            if(client.getUserName().equals(userName) && client.getAccountNIP().equals(NIP))
+            if(client.getUserName().equals(userName) && client.getAccountNIP().equals(nip))
             {
                 return true;
             }

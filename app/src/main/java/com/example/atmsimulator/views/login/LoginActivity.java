@@ -10,16 +10,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.atmsimulator.R;
+import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
+import com.example.atmsimulator.views.admin.AdminActivity;
 import com.example.atmsimulator.views.atm.AtmActivity;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView
 {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
+    private final String ATM_DATA_KEY = "atmData";
     private static final String KEY_USERNAME = "key_username";
     private static final String KEY_NIP = "key_nip";
 
@@ -70,11 +75,27 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     /* Interface Implementation                                             */
     /************************************************************************/
     @Override
-    public void startAtmActivity()
+    public Serializable getAtmData()
     {
-        Intent atmScreen = new Intent(this, AtmActivity.class);
+        return getIntent().getSerializableExtra(ATM_DATA_KEY);
+    }
 
-        startActivity(atmScreen);
+    @Override
+    public void startAtmActivity(Serializable atmData)
+    {
+        Intent atmActivity = new Intent(this, AtmActivity.class);
+
+        atmActivity.putExtra(ATM_DATA_KEY, atmData);
+        startActivity(atmActivity);
+    }
+
+    @Override
+    public void startAdminActivity(Serializable atmData)
+    {
+        Intent adminActivity = new Intent(this, AdminActivity.class);
+
+        adminActivity.putExtra(ATM_DATA_KEY, atmData);
+        startActivity(adminActivity);
     }
 
     @Override
