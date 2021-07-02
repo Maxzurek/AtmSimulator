@@ -10,7 +10,7 @@ public interface ILoginView
 
     void displayEmptyNIPError();
 
-    void displayInvalidLoginError();
+    void displayInvalidLoginError(final String REMAINING_ATTEMPT);
 
-    void displayLoginAttemptsError();
+    void displayLoginAttemptsError(final String LOGIN_LOCK_WAIT_TIME_REMAINING);
 }

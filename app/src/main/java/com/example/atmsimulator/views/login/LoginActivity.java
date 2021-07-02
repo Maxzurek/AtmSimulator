@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
-import com.example.atmsimulator.views.admin.IAdminView;
 import com.example.atmsimulator.views.atm.AtmActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -99,20 +98,24 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     }
 
     @Override
-    public void displayInvalidLoginError()
+    public void displayInvalidLoginError(final String REMAINING_ATTEMPT)
     {
         TextView textViewError = findViewById(R.id.textViewError);
-        String errorMessage = getResources().getString(R.string.login_activity_textview_invalidLogin_error);
+        String errorMessage = getResources().getString(R.string.login_activity_textview_invalidLogin_error)
+                +"\n"+REMAINING_ATTEMPT
+                +" "+getResources().getString(R.string.login_activity_textview_invalidLogin_errorEnding);
 
         setTextViewErrorVisibility(true);
         textViewError.setText(errorMessage);
     }
 
     @Override
-    public void displayLoginAttemptsError()
+    public void displayLoginAttemptsError(final String LOGIN_LOCK_WAIT_TIME_REMAINING)
     {
         TextView textViewError = findViewById(R.id.textViewError);
-        String errorMessage = getResources().getString(R.string.login_activity_textview_loginAttempts_error);
+        String errorMessage = getResources().getString(R.string.login_activity_textview_loginAttempts_error)
+                +" "+LOGIN_LOCK_WAIT_TIME_REMAINING
+                +" "+getResources().getString(R.string.login_activity_textview_loginAttempts_errorEnding);
 
         setTextViewErrorVisibility(true);
         textViewError.setText(errorMessage);
@@ -128,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         String userName = editTextUserName.getText().toString();
         String NIP = editTextNIP.getText().toString();
 
-        presenter.loginAttempt(userName, NIP);
+        presenter.attemptLogin(userName, NIP);
     }
 
     /************************************************************************/

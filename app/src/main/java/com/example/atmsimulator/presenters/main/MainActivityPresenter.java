@@ -16,6 +16,7 @@ public class MainActivityPresenter
     /* Class attributes                                                     */
     /************************************************************************/
     private IMainView view;
+    final private int LOADING_WAIT_TIME = 3000;
 
     /************************************************************************/
     /* Constructor(s)                                                       */
@@ -46,6 +47,6 @@ public class MainActivityPresenter
 
         //Simulate 3 seconds loading
         Timer timer = new Timer();
-        timer.schedule(task, 3000);
+        timer.schedule(task, LOADING_WAIT_TIME);
     }
 }

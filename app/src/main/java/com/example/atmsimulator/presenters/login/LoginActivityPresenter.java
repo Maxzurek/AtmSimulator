@@ -1,10 +1,11 @@
 package com.example.atmsimulator.presenters.login;
 
-import com.example.atmsimulator.R;
 import com.example.atmsimulator.models.Client;
 import com.example.atmsimulator.views.login.ILoginView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginActivityPresenter
 {
@@ -12,7 +13,11 @@ public class LoginActivityPresenter
     /* Class attributes                                                     */
     /************************************************************************/
     private ILoginView view;
+
     private int invalidLoginAttempt;
+    private final int LOGIN_LOCK_WAIT_TIME = 10000;
+    private long loginLockStartTime;
+
     private ArrayList<Client> clients;
 
     /************************************************************************/
@@ -21,19 +26,21 @@ public class LoginActivityPresenter
     public LoginActivityPresenter(ILoginView view)
     {
         this.view = view;
-        invalidLoginAttempt = 0;
+        invalidLoginAttempt = 3;
         clients = new ArrayList<Client>();
-        clients.add(new Client("Zurek", "Maxime", "MaxZurek", "1234"));
+        clients.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
     }
 
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    public void loginAttempt(String userName, String NIP)
+    public void attemptLogin(String userName, String NIP)
     {
-        if(invalidLoginAttempt == 3)
+        long currentSystemTime = System.currentTimeMillis();
+
+        if( isLoginLocked())
         {
-            view.displayLoginAttemptsError();
+            view.displayLoginAttemptsError(getLoginLockTimeRemaining());
             return;
         }
 
@@ -48,21 +55,30 @@ public class LoginActivityPresenter
             return;
         }
 
-        if(isUserValid(userName, NIP))
+        if(validateUser(userName, NIP))
         {
             view.startAtmActivity();
         }
         else
         {
-            invalidLoginAttempt++;
-            view.displayInvalidLoginError();
+            invalidLoginAttempt--;
+
+            if(invalidLoginAttempt == 0)
+            {
+                lockLogin();
+                view.displayLoginAttemptsError(getLoginLockTimeRemaining());
+            }
+            else
+            {
+                view.displayInvalidLoginError(String.valueOf(invalidLoginAttempt));
+            }
         }
     }
 
     /************************************************************************/
     /* Private Methods                                                      */
     /************************************************************************/
-    private boolean isUserValid(String userName, String NIP)
+    private boolean validateUser(String userName, String NIP)
     {
         for(Client client : clients)
         {
@@ -73,5 +89,33 @@ public class LoginActivityPresenter
         }
 
         return false;
+    }
+
+    private boolean isLoginLocked()
+    {
+        if( (System.currentTimeMillis() - loginLockStartTime) < LOGIN_LOCK_WAIT_TIME )
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private String getLoginLockTimeRemaining()
+    {
+        //We want the remaining lock time in seconds
+        long remainingTime = ( LOGIN_LOCK_WAIT_TIME - (System.currentTimeMillis() - loginLockStartTime) ) /1000;
+
+        return String.valueOf(remainingTime);
+    }
+
+    private void lockLogin()
+    {
+        loginLockStartTime = System.currentTimeMillis();
+    }
+
+    private void unlockLogin()
+    {
+        invalidLoginAttempt = 0;
     }
 }
