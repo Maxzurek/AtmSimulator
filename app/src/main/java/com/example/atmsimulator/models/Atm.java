@@ -2,7 +2,7 @@ package com.example.atmsimulator.models;
 
 import java.io.Serializable;
 
-public class Atm
+public class Atm implements Serializable
 {
     /**
      * This class is represented by both the LoginActivity and AtmActivity presenters.
