@@ -36,6 +36,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         setContentView(R.layout.activity_atm);
 
         setAccountSummaryVisibility(accountSummaryVisibility);
+        setTransactionSummaryVisibility(false);
     }
 
     @Override
@@ -106,10 +107,10 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     private void setAccountSummaryVisibility(boolean isVisible)
     {
         int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
-        TextView textViewCheck = (TextView)findViewById(R.id.textViewCheck);
-        TextView textViewSaving = (TextView)findViewById(R.id.textViewSaving);
-        TextView textViewCheckAmount = (TextView)findViewById(R.id.textViewCheckAmount);
-        TextView textViewSavingAmount = (TextView)findViewById(R.id.textViewSavingAmount);
+        TextView textViewCheck = findViewById(R.id.textViewCheck);
+        TextView textViewSaving = findViewById(R.id.textViewSaving);
+        TextView textViewCheckAmount = findViewById(R.id.textViewCheckAmount);
+        TextView textViewSavingAmount = findViewById(R.id.textViewSavingAmount);
 
         textViewCheck.setVisibility(visibility);
         textViewSaving.setVisibility(visibility);
@@ -117,6 +118,14 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         textViewSavingAmount.setVisibility(visibility);
 
         accountSummaryVisibility = isVisible;
+    }
+
+    private void setTransactionSummaryVisibility(boolean isVisible)
+    {
+        int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+        textViewTransactionSummary.setVisibility(visibility);
     }
 
     private void appendToEditTextInput(String text)
