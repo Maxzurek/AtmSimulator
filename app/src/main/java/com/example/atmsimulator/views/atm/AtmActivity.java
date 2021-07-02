@@ -11,23 +11,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.atmsimulator.R;
+import com.example.atmsimulator.presenters.atm.AtmActivityPresenter;
+
+import java.io.Serializable;
 
 public class AtmActivity extends AppCompatActivity implements IAtmView
 {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private static final String KEY_INPUT = "key_input";
-    private static final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
-    private static final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
-    private static final String KEY_CHECK_AMOUNT = "key_check_amount";
-    private static final String KEY_SAVING_AMOUNT = "key_saving_amount";
-    private static final String KEY_ACCOUNT_SUMMARY_VISIBILITY = "key_account_summary_visibility";
+    private final String ATM_DATA_KEY = "atmData";
+    private final String KEY_INPUT = "key_input";
+    private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
+    private final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
+    private final String KEY_CHECK_AMOUNT = "key_check_amount";
+    private final String KEY_SAVING_AMOUNT = "key_saving_amount";
+    private final String KEY_ACCOUNT_SUMMARY_VISIBILITY = "key_account_summary_visibility";
 
-    private static boolean accountSummaryVisibility = false;
+    private AtmActivityPresenter presenter;
+    private boolean accountSummaryVisibility = false;
 
     /************************************************************************/
-    /* Override Methods                                                     */
+    /* Overridden Methods                                                   */
     /************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,6 +40,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atm);
 
+        presenter = new AtmActivityPresenter(this);
         setAccountSummaryVisibility(accountSummaryVisibility);
         setTransactionSummaryVisibility(false);
     }
@@ -70,6 +76,73 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
             textViewSavingAmount.setText(savedInstanceState.getString(KEY_SAVING_AMOUNT));
 
             setAccountSummaryVisibility(savedInstanceState.getBoolean(KEY_ACCOUNT_SUMMARY_VISIBILITY));
+        }
+    }
+
+    /************************************************************************/
+    /* Interface Implementation                                             */
+    /************************************************************************/
+    public Serializable getAtmData()
+    {
+        return getIntent().getSerializableExtra(ATM_DATA_KEY);
+    }
+
+    /************************************************************************/
+    /* Events Handling                                                      */
+    /************************************************************************/
+    public void onCLickButtons(View view)
+    {
+        switch(view.getId())
+        {
+            case R.id.buttonLogout:
+                Toast.makeText(this, "Logout Pressed", Toast.LENGTH_LONG); //REMOVE TEST
+                //TODO
+                break;
+            case R.id.button0:
+                appendToEditTextInput("0");
+                break;
+            case R.id.button1:
+                appendToEditTextInput("1");
+                break;
+            case R.id.button2:
+                appendToEditTextInput("2");
+                break;
+            case R.id.button3:
+                appendToEditTextInput("3");
+                break;
+            case R.id.button4:
+                appendToEditTextInput("4");
+                break;
+            case R.id.button5:
+                appendToEditTextInput("5");
+                break;
+            case R.id.button6:
+                appendToEditTextInput("6");
+                break;
+            case R.id.button7:
+                appendToEditTextInput("7");
+                break;
+            case R.id.button8:
+                appendToEditTextInput("8");
+                break;
+            case R.id.button9:
+                appendToEditTextInput("9");
+                break;
+            case R.id.buttonDot:
+                appendToEditTextInput(".");
+                break;
+            case R.id.buttonClear:
+                clearEditTextInput();
+                break;
+            case R.id.buttonAccountSummary:
+                setAccountSummaryVisibility(accountSummaryVisibility ? false : true);
+                break;
+            case R.id.buttonSubmit:
+                Toast.makeText(this, "Submit Pressed", Toast.LENGTH_LONG); //REMOVE TEST
+                //TODO
+                break;
+            default:
+                break;
         }
     }
 
@@ -140,64 +213,5 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
 
         editTextAmount.setText("");
-    }
-
-    /************************************************************************/
-    /* Events Handling                                                      */
-    /************************************************************************/
-    public void onCLickButtons(View view)
-    {
-        switch(view.getId())
-        {
-            case R.id.buttonLogout:
-                Toast.makeText(this, "Logout Pressed", Toast.LENGTH_LONG); //REMOVE TEST
-                //TODO
-                break;
-            case R.id.button0:
-                appendToEditTextInput("0");
-                break;
-            case R.id.button1:
-                appendToEditTextInput("1");
-                break;
-            case R.id.button2:
-                appendToEditTextInput("2");
-                break;
-            case R.id.button3:
-                appendToEditTextInput("3");
-                break;
-            case R.id.button4:
-                appendToEditTextInput("4");
-                break;
-            case R.id.button5:
-                appendToEditTextInput("5");
-                break;
-            case R.id.button6:
-                appendToEditTextInput("6");
-                break;
-            case R.id.button7:
-                appendToEditTextInput("7");
-                break;
-            case R.id.button8:
-                appendToEditTextInput("8");
-                break;
-            case R.id.button9:
-                appendToEditTextInput("9");
-                break;
-            case R.id.buttonDot:
-                appendToEditTextInput(".");
-                break;
-            case R.id.buttonClear:
-                clearEditTextInput();
-                break;
-            case R.id.buttonAccountSummary:
-                setAccountSummaryVisibility(accountSummaryVisibility ? false : true);
-                break;
-            case R.id.buttonSubmit:
-                Toast.makeText(this, "Submit Pressed", Toast.LENGTH_LONG); //REMOVE TEST
-                //TODO
-                break;
-            default:
-                break;
-        }
     }
 }

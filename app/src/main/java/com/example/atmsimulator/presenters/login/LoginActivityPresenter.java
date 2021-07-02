@@ -5,8 +5,6 @@ import com.example.atmsimulator.models.Client;
 import com.example.atmsimulator.views.login.ILoginView;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LoginActivityPresenter
 {
@@ -29,7 +27,6 @@ public class LoginActivityPresenter
         invalidLoginAttempt = 3;
         clients = new ArrayList<Client>();
         clients.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
-
         atmData = (AtmData) view.getAtmData();
     }
 
@@ -57,7 +54,7 @@ public class LoginActivityPresenter
             return;
         }
 
-        if(isAdmin(userName, nip))
+        if(isUserAdmin(userName, nip))
         {
             view.startAdminActivity(atmData);
         }
@@ -84,12 +81,12 @@ public class LoginActivityPresenter
     /************************************************************************/
     /* Private Methods                                                      */
     /************************************************************************/
-    private boolean isAdmin(String userName, String nip)
+    private boolean isUserAdmin(String userName, String nip)
     {
-        final String USERNAME = "Admin";
-        final String NIP = "D001";
+        final String ADMIN_USERNAME = "Admin";
+        final String ADMIN_NIP = "D001";
 
-        if(userName.equals(USERNAME) && nip.equals(NIP))
+        if(userName.equals(ADMIN_USERNAME) && nip.equals(ADMIN_NIP))
         {
             return true;
         }
