@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements IMainView
     /************************************************************************/
     public void startLoginActivity()
     {
-        Intent loginScreen = new Intent(this, LoginActivity.class);
-        startActivity(loginScreen);
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        startActivity(loginIntent);
     }
 }
