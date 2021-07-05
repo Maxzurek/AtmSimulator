@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
 import com.example.atmsimulator.views.admin.AdminActivity;
 import com.example.atmsimulator.views.atm.AtmActivity;
@@ -25,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     /* Class attributes                                                     */
     /************************************************************************/
     private final String ATM_DATA_KEY = "atmData";
+    private final String USER_ACCOUNTS_KEY = "userAccountKey";
     private static final String KEY_USERNAME = "key_username";
     private static final String KEY_NIP = "key_nip";
 
@@ -81,11 +81,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     }
 
     @Override
-    public void startAtmActivity(Serializable atmData)
+    public void startAtmActivity(Serializable userAccounts)
     {
         Intent atmActivity = new Intent(this, AtmActivity.class);
 
-        atmActivity.putExtra(ATM_DATA_KEY, atmData);
+        atmActivity.putExtra(USER_ACCOUNTS_KEY, userAccounts);
         startActivity(atmActivity);
     }
 
@@ -96,6 +96,15 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
 
         adminActivity.putExtra(ATM_DATA_KEY, atmData);
         startActivity(adminActivity);
+    }
+
+    @Override
+    public void setTextViewErrorText(String text)
+    {
+        TextView textViewError = findViewById(R.id.textViewError);
+
+        setTextViewErrorVisibility(true);
+        textViewError.setText(text);
     }
 
     @Override

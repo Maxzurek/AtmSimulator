@@ -1,8 +1,9 @@
-package com.example.atmsimulator.models;
+package com.example.atmsimulator.models.users;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Client
+public abstract class User implements Serializable
 {
     /************************************************************************/
     /* Class attributes                                                     */
@@ -15,11 +16,15 @@ public class Client
     /************************************************************************/
     /* Constructor(s)                                                       */
     /************************************************************************/
-    private Client()
+    public User()
     {
+        lastName = "";
+        firstName = "";
+        userName = "Guest";
+        accountNIP = "";
     }
 
-    public Client(String lastName, String firstName, String userName, String accountNIP)
+    public User(String lastName, String firstName, String userName, String accountNIP)
     {
         this.setLastName(lastName);
         this.setFirstName(firstName);
@@ -27,7 +32,7 @@ public class Client
         this.setAccountNIP(accountNIP);
     }
 
-    public Client(Client other)
+    public User(Client other)
     {
         this.setLastName(other.getLastName());
         this.setFirstName(other.getFirstName());
@@ -41,7 +46,7 @@ public class Client
     @Override
     public String toString()
     {
-        return "Client{" +
+        return "{" +
                 "lastName='" + getLastName() + '\'' +
                 ", firstName='" + getFirstName() + '\'' +
                 ", userName='" + getUserName() + '\'' +

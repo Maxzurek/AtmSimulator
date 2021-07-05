@@ -1,7 +1,10 @@
 package com.example.atmsimulator.presenters.atm;
 
 import com.example.atmsimulator.models.AtmData;
+import com.example.atmsimulator.models.account.Account;
 import com.example.atmsimulator.views.atm.IAtmView;
+
+import java.util.ArrayList;
 
 public class AtmActivityPresenter
 {
@@ -9,7 +12,7 @@ public class AtmActivityPresenter
     /* Class attributes                                                     */
     /************************************************************************/
     private IAtmView view;
-    private AtmData atmData;
+    private ArrayList<Account> userAccounts;
     //TODO
     /************************************************************************/
     /* Constructor(s)                                                       */
@@ -17,7 +20,7 @@ public class AtmActivityPresenter
     public AtmActivityPresenter(IAtmView view)
     {
         this.view = view;
-        atmData = (AtmData) view.getAtmData();
+        userAccounts = (ArrayList<Account>) view.getUserAccounts();
     }
 
     /************************************************************************/

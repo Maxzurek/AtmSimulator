@@ -1,7 +1,9 @@
 package com.example.atmsimulator.presenters.login;
 
 import com.example.atmsimulator.models.AtmData;
-import com.example.atmsimulator.models.Client;
+import com.example.atmsimulator.models.users.Admin;
+import com.example.atmsimulator.models.users.Client;
+import com.example.atmsimulator.models.users.User;
 import com.example.atmsimulator.views.login.ILoginView;
 
 import java.util.ArrayList;
@@ -54,13 +56,26 @@ public class LoginActivityPresenter
             return;
         }
 
-        if(isUserAdmin(userName, nip))
+        if(atmData.validateUser(userName, nip))
         {
-            view.startAdminActivity(atmData);
-        }
-        else if(validateUser(userName, nip))
-        {
-            view.startAtmActivity(atmData);
+            User user = atmData.getUser(userName, nip);
+
+            if(user != null)
+            {
+                if(user instanceof Admin)
+                {
+                    view.startAdminActivity(atmData);
+                }
+                else
+                {
+                    view.startAtmActivity(atmData.getUserAccounts(nip));
+                }
+            }
+            else
+            {
+                //TODO interface method + res sting
+                view.setTextViewErrorText("There was an error while fetching data");
+            }
         }
         else
         {
@@ -81,32 +96,6 @@ public class LoginActivityPresenter
     /************************************************************************/
     /* Private Methods                                                      */
     /************************************************************************/
-    private boolean isUserAdmin(String userName, String nip)
-    {
-        final String ADMIN_USERNAME = "Admin";
-        final String ADMIN_NIP = "D001";
-
-        if(userName.equals(ADMIN_USERNAME) && nip.equals(ADMIN_NIP))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    private boolean validateUser(String userName, String nip)
-    {
-        for(Client client : clients)
-        {
-            if(client.getUserName().equals(userName) && client.getAccountNIP().equals(nip))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private boolean isLoginLocked()
     {
         if( (System.currentTimeMillis() - loginLockStartTime) < LOGIN_LOCK_WAIT_TIME )
@@ -128,10 +117,5 @@ public class LoginActivityPresenter
     private void lockLogin()
     {
         loginLockStartTime = System.currentTimeMillis();
-    }
-
-    private void unlockLogin()
-    {
-        invalidLoginAttempt = 0;
     }
 }

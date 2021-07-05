@@ -12,6 +12,8 @@ public interface ILoginView
 
     void startAdminActivity(Serializable atmData);
 
+    void setTextViewErrorText(String text);
+
     void displayEmptyUsernameError();
 
     void displayEmptyNIPError();

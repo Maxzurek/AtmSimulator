@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public interface IAtmView
 {
-    Serializable getAtmData();
+    Serializable getUserAccounts();
 }

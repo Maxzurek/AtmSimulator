@@ -82,7 +82,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     /************************************************************************/
     /* Interface Implementation                                             */
     /************************************************************************/
-    public Serializable getAtmData()
+    public Serializable getUserAccounts()
     {
         return getIntent().getSerializableExtra(ATM_DATA_KEY);
     }
