@@ -41,46 +41,6 @@ public abstract class User implements Serializable
     }
 
     /************************************************************************/
-    /* Overridden Methods                                                   */
-    /************************************************************************/
-    @Override
-    public String toString()
-    {
-        return "{" +
-                "lastName='" + getLastName() + '\'' +
-                ", firstName='" + getFirstName() + '\'' +
-                ", userName='" + getUserName() + '\'' +
-                ", accountNIP=" + getAccountNIP() +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-
-        Client client = (Client) o;
-
-        return getAccountNIP() == client.getAccountNIP() &&
-                Objects.equals(getLastName(), client.getLastName()) &&
-                Objects.equals(getFirstName(), client.getFirstName()) &&
-                Objects.equals(getUserName(), client.getUserName());
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(getLastName(), getFirstName(), getUserName(), getAccountNIP());
-    }
-
-    /************************************************************************/
     /* Getters/Setters                                                      */
     /************************************************************************/
     public String getLastName()
@@ -121,5 +81,45 @@ public abstract class User implements Serializable
     public void setAccountNIP(String accountNIP)
     {
         this.accountNIP = accountNIP;
+    }
+
+    /************************************************************************/
+    /* Overridden Methods                                                   */
+    /************************************************************************/
+    @Override
+    public String toString()
+    {
+        return "{" +
+                "lastName='" + getLastName() + '\'' +
+                ", firstName='" + getFirstName() + '\'' +
+                ", userName='" + getUserName() + '\'' +
+                ", accountNIP=" + getAccountNIP() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Client client = (Client) o;
+
+        return getAccountNIP() == client.getAccountNIP() &&
+                Objects.equals(getLastName(), client.getLastName()) &&
+                Objects.equals(getFirstName(), client.getFirstName()) &&
+                Objects.equals(getUserName(), client.getUserName());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getLastName(), getFirstName(), getUserName(), getAccountNIP());
     }
 }
