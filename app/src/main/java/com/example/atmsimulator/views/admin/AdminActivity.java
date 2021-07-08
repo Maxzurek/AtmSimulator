@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.models.AtmData;
@@ -58,12 +59,27 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
     {
         return null;
     }
+
     //TODO
 
     /************************************************************************/
     /* Events Handling                                                      */
     /************************************************************************/
-    //TODO
+    public void onClickPayInterest(View view)
+    {
+    }
+    
+    public void onClickCheckAccountList(View view)
+    {
+    }
+
+    public void onCLickSavingAccountList(View view)
+    {
+    }
+
+    public void onClickClientList(View view)
+    {
+    }
 
     /************************************************************************/
     /* Private class methods                                                */

@@ -4,4 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.admin.AdminActivity"/>
+    tools:context=".views.admin.AdminActivity">
+
+    <Button
+        android:id="@+id/buttonCheckAccountList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onClickCheckAccountList"
+        android:text="COMPTES CHEQUES"
+        app:layout_constraintEnd_toEndOf="@+id/buttonPayInterest"
+        app:layout_constraintStart_toStartOf="@+id/buttonPayInterest"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPayInterest" />
+
+    <Button
+        android:id="@+id/buttonPayInterest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="204dp"
+        android:onClick="onClickPayInterest"
+        android:text="PAIEMENT DES INTERETS"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSavingAccountList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onCLickSavingAccountList"
+        android:text="COMPTES EPARGNES"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCheckAccountList"
+        app:layout_constraintStart_toStartOf="@+id/buttonCheckAccountList"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCheckAccountList" />
+
+    <Button
+        android:id="@+id/buttonClientList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onClickClientList"
+        android:text="LISTE DES CLIENTS"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSavingAccountList"
+        app:layout_constraintStart_toStartOf="@+id/buttonSavingAccountList"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSavingAccountList" />
+
+    <Button
+        android:id="@+id/buttonAdminLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="299dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="18dp"
+        android:text="LOGOUT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
