@@ -92,10 +92,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     @Override
     public void startAdminActivity(Serializable atmData)
     {
-        Intent adminActivity = new Intent(this, AdminActivity.class);
+        Intent adminIntent = new Intent(this, AdminActivity.class);
 
-        adminActivity.putExtra(ATM_DATA_KEY, atmData);
-        startActivity(adminActivity);
+        adminIntent.putExtra(ATM_DATA_KEY, atmData);
+
+        startActivity(adminIntent);
     }
 
     @Override

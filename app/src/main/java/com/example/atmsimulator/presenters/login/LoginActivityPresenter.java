@@ -39,7 +39,7 @@ public class LoginActivityPresenter
     {
         long currentSystemTime = System.currentTimeMillis();
 
-        if( isLoginLocked())
+        if(isLoginLocked())
         {
             view.displayLoginAttemptsError(getLoginLockTimeRemaining());
             return;
