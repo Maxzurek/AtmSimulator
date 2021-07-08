@@ -3,6 +3,9 @@ package com.example.atmsimulator.views.atm;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +23,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private final String ATM_DATA_KEY = "atmData";
+    private final String USER_ACCOUNTS_KEY = "userAccount";
     private final String KEY_INPUT = "key_input";
     private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
     private final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
@@ -79,12 +82,18 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         }
     }
 
+    @Override
+    public void onBackPressed()
+    {
+       displayLogoutWarning();
+    }
+
     /************************************************************************/
     /* Interface Implementation                                             */
     /************************************************************************/
     public Serializable getUserAccounts()
     {
-        return getIntent().getSerializableExtra(ATM_DATA_KEY);
+        return getIntent().getSerializableExtra(USER_ACCOUNTS_KEY);
     }
 
     /************************************************************************/
@@ -213,5 +222,37 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
 
         editTextAmount.setText("");
+    }
+
+    private void displayLogoutWarning()
+    {
+        AlertDialog.Builder logoutWarningBuilder = new AlertDialog.Builder(this);
+
+        logoutWarningBuilder.setMessage("Do you want to log out.");
+        logoutWarningBuilder.setCancelable(true);
+        logoutWarningBuilder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        Intent intent = new Intent();
+                        //TODO get accounts data from presenter and add them to the intent
+                        //intent.putExtra(USER_ACCOUNTS_KEY, )
+                        dialog.cancel();
+                    }
+                });
+        logoutWarningBuilder.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog logoutWarning = logoutWarningBuilder.create();
+
+        logoutWarning.show();
     }
 }

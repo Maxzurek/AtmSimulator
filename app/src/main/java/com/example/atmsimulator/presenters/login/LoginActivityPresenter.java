@@ -1,11 +1,13 @@
 package com.example.atmsimulator.presenters.login;
 
 import com.example.atmsimulator.models.AtmData;
+import com.example.atmsimulator.models.account.Account;
 import com.example.atmsimulator.models.users.Admin;
 import com.example.atmsimulator.models.users.Client;
 import com.example.atmsimulator.models.users.User;
 import com.example.atmsimulator.views.login.ILoginView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LoginActivityPresenter
@@ -90,6 +92,16 @@ public class LoginActivityPresenter
             {
                 view.displayInvalidLoginError(String.valueOf(invalidLoginAttempt));
             }
+        }
+    }
+
+    public void updateUserAccounts(Serializable userAccounts)
+    {
+        ArrayList<Account> accounts = (ArrayList<Account>) userAccounts;
+
+        if(accounts != null)
+        {
+
         }
     }
 

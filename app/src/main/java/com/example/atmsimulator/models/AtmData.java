@@ -69,4 +69,17 @@ public class AtmData implements Serializable
     {
         return usersAccounts.get(userNip);
     }
+
+    public boolean updateUserAccounts(ArrayList<Account> userAccounts)
+    {
+        if(userAccounts != null)
+        {
+            //TODO Get account nip and replace data in the usersAccounts hashmap with the specified key
+            //userAccounts.get(0);
+
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -1,6 +1,9 @@
 package com.example.atmsimulator.presenters.main;
 
+import android.content.Intent;
+
 import com.example.atmsimulator.models.AtmData;
+import com.example.atmsimulator.views.login.LoginActivity;
 import com.example.atmsimulator.views.main.IMainView;
 
 import java.util.Timer;

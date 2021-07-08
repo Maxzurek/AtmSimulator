@@ -1,8 +1,11 @@
 package com.example.atmsimulator.views.login;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,10 +27,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     /* Class attributes                                                     */
     /************************************************************************/
     private final String ATM_DATA_KEY = "atmData";
-    private final String USER_ACCOUNTS_KEY = "userAccountKey";
-    private static final String KEY_USERNAME = "key_username";
-    private static final String KEY_NIP = "key_nip";
+    private final String USER_ACCOUNTS_KEY = "userAccounts";
+    private static final String USERNAME_KEY = "username";
+    private static final String NIP_KEY = "nip";
 
+    private ActivityResultLauncher<Intent> atmActivityLauncher;
     private LoginActivityPresenter presenter;
     private boolean textViewErrorVisibility = false;
 
@@ -41,6 +45,17 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         setContentView(R.layout.activity_login);
 
         presenter = new LoginActivityPresenter(this);
+
+        atmActivityLauncher = registerForActivityResult
+                (
+                new ActivityResultContracts.StartActivityForResult(),
+                        result -> {
+                            if (result.getResultCode() == Activity.RESULT_OK)
+                            {
+                                Intent data = result.getData();
+                                presenter.updateUserAccounts(data.getSerializableExtra(USER_ACCOUNTS_KEY));
+                            }
+                        });
 
         setTextViewErrorVisibility(textViewErrorVisibility);
     }
@@ -66,8 +81,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
 
         if(savedInstanceState != null)
         {
-            editTextUsername.setText(savedInstanceState.getString(KEY_USERNAME));
-            editTextNIP.setText(savedInstanceState.getString(KEY_NIP));
+            editTextUsername.setText(savedInstanceState.getString(USERNAME_KEY));
+            editTextNIP.setText(savedInstanceState.getString(NIP_KEY));
         }
     }
 
@@ -86,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         Intent atmActivity = new Intent(this, AtmActivity.class);
 
         atmActivity.putExtra(USER_ACCOUNTS_KEY, userAccounts);
-        startActivity(atmActivity);
+        atmActivityLauncher.launch(atmActivity);
     }
 
     @Override
@@ -95,7 +110,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         Intent adminIntent = new Intent(this, AdminActivity.class);
 
         adminIntent.putExtra(ATM_DATA_KEY, atmData);
-
         startActivity(adminIntent);
     }
 
@@ -174,8 +188,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         EditText editTextUsername = findViewById(R.id.editTextUsername);
         EditText editTextNIP = findViewById(R.id.editTextNIP);
 
-        bundle.putString(KEY_USERNAME, editTextUsername.getText().toString());
-        bundle.putString(KEY_NIP, editTextNIP.getText().toString());
+        bundle.putString(USERNAME_KEY, editTextUsername.getText().toString());
+        bundle.putString(NIP_KEY, editTextNIP.getText().toString());
 
         return bundle;
     }
