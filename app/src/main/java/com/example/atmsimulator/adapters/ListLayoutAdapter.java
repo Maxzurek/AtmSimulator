@@ -54,11 +54,11 @@ public class ListLayoutAdapter extends ArrayAdapter<IListLayoutAdapter>
 
             if(data instanceof User)
             {
-                imageViewIcon.setImageResource(R.drawable.listView_UserIcon);
+                imageViewIcon.setImageResource(R.drawable.list_view_user_icon);
             }
             else if(data instanceof Account)
             {
-                imageViewIcon.setImageResource(R.drawable.listView_AccountIcon);
+                imageViewIcon.setImageResource(R.drawable.list_view_account_icon);
             }
 
             final TextView item1 = view.findViewById(R.id.textViewListItem1);
