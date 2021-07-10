@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 public class AdminListActivity extends AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

@@ -19,9 +19,9 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
+    private final String ATM_DATA_KEY = "atmData";
+
     private AdminActivityPresenter presenter;
-    private AtmData atmData;
-    //TODO
 
     /************************************************************************/
     /* Overridden Methods                                                   */
@@ -57,7 +57,7 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
     @Override
     public Serializable getAtmData()
     {
-        return null;
+        return getIntent().getSerializableExtra(ATM_DATA_KEY);
     }
 
     //TODO

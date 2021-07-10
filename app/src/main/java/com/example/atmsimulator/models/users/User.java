@@ -1,9 +1,11 @@
 package com.example.atmsimulator.models.users;
 
+import com.example.atmsimulator.adapters.IListLayoutAdapter;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class User implements Serializable
+public abstract class User implements Serializable, IListLayoutAdapter
 {
     /************************************************************************/
     /* Class attributes                                                     */
@@ -82,6 +84,12 @@ public abstract class User implements Serializable
     {
         this.accountNIP = accountNIP;
     }
+
+    /************************************************************************/
+    /* Interface Implementation                                             */
+    /************************************************************************/
+    public String getItem1(){return firstName;}
+    public String getItem2(){return lastName;}
 
     /************************************************************************/
     /* Overridden Methods                                                   */
