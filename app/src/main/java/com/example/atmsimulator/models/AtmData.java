@@ -9,10 +9,8 @@ import com.example.atmsimulator.models.users.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class AtmData implements Serializable
@@ -31,16 +29,7 @@ public class AtmData implements Serializable
         users = new ArrayList<>();
         usersAccounts = new HashMap<>();
 
-        users.add(new Admin("Doe", "John", "Admin", "D001"));
-
-        users.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
-        ArrayList<Account> zurekMaximeAccounts = new ArrayList<>();
-        zurekMaximeAccounts.add(new CheckAccount());
-        zurekMaximeAccounts.add(new SavingAccount());
-
-        Collections.sort(users);
-        //TODO Sort zurekMaximeAccounts, implement compare to in Account class
-        usersAccounts.put("1234", zurekMaximeAccounts);
+        initializeData(users, usersAccounts);
     }
 
     /************************************************************************/
@@ -132,5 +121,22 @@ public class AtmData implements Serializable
         }
 
         return false;
+    }
+
+    /************************************************************************/
+    /* Private Class methods                                                */
+    /************************************************************************/
+    private void initializeData(ArrayList<User> users,HashMap<String, ArrayList<Account>> usersAccounts)
+    {
+        users.add(new Admin("Doe", "John", "Admin", "D001"));
+
+        users.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
+        ArrayList<Account> zurekMaximeAccounts = new ArrayList<>();
+        zurekMaximeAccounts.add(new CheckAccount());
+        zurekMaximeAccounts.add(new SavingAccount());
+
+        Collections.sort(users);
+        //TODO Sort zurekMaximeAccounts, implement compare to in Account class
+        usersAccounts.put("1234", zurekMaximeAccounts);
     }
 }
