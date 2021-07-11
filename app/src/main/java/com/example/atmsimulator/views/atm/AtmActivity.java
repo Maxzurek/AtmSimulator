@@ -3,6 +3,7 @@ package com.example.atmsimulator.views.atm;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.presenters.atm.AtmActivityPresenter;
+import com.example.atmsimulator.views.EViewKey;
 
 import java.io.Serializable;
 
@@ -23,7 +25,6 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private final String USER_ACCOUNTS_KEY = "userAccount";
     private final String KEY_INPUT = "key_input";
     private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
     private final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
@@ -93,7 +94,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     /************************************************************************/
     public Serializable getUserAccounts()
     {
-        return getIntent().getSerializableExtra(USER_ACCOUNTS_KEY);
+        return getIntent().getSerializableExtra(EViewKey.USER_ACCOUNTS.label);
     }
 
     /************************************************************************/
@@ -236,10 +237,12 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        Intent intent = new Intent();
+                        Intent returnIntent = new Intent();
                         //TODO get accounts data from presenter and add them to the intent
-                        //intent.putExtra(USER_ACCOUNTS_KEY, )
+                        //returnIntent.putExtra(USER_ACCOUNTS_KEY, /*accounts*/)
+                        setResult(Activity.RESULT_OK, returnIntent);
                         dialog.cancel();
+                        finish();
                     }
                 });
         logoutWarningBuilder.setNegativeButton(
@@ -251,6 +254,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
                         dialog.cancel();
                     }
                 });
+
         AlertDialog logoutWarning = logoutWarningBuilder.create();
 
         logoutWarning.show();

@@ -1,5 +1,6 @@
 package com.example.atmsimulator.views.login;
 
+import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
+import com.example.atmsimulator.views.EViewKey;
 import com.example.atmsimulator.views.admin.AdminActivity;
 import com.example.atmsimulator.views.atm.AtmActivity;
 
@@ -26,12 +28,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private final String ATM_DATA_KEY = "atmData";
-    private final String USER_ACCOUNTS_KEY = "userAccounts";
     private static final String USERNAME_KEY = "username";
     private static final String NIP_KEY = "nip";
 
     private ActivityResultLauncher<Intent> atmActivityLauncher;
+    private ActivityResultLauncher<Intent> adminActivityLauncher;
     private LoginActivityPresenter presenter;
     private boolean textViewErrorVisibility = false;
 
@@ -46,17 +47,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
 
         presenter = new LoginActivityPresenter(this);
 
-        atmActivityLauncher = registerForActivityResult
-                (
-                new ActivityResultContracts.StartActivityForResult(),
-                        result -> {
-                            if (result.getResultCode() == Activity.RESULT_OK)
-                            {
-                                Intent data = result.getData();
-                                presenter.updateUserAccounts(data.getSerializableExtra(USER_ACCOUNTS_KEY));
-                            }
-                        });
-
+        initAtmActivityLauncher();
+        initAdminActivityLauncher();
         setTextViewErrorVisibility(textViewErrorVisibility);
     }
 
@@ -92,16 +84,16 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     @Override
     public Serializable getAtmData()
     {
-        return getIntent().getSerializableExtra(ATM_DATA_KEY);
+        return getIntent().getSerializableExtra(EViewKey.ATM_DATA.label);
     }
 
     @Override
     public void startAtmActivity(Serializable userAccounts)
     {
-        Intent atmActivity = new Intent(this, AtmActivity.class);
+        Intent atmIntent = new Intent(this, AtmActivity.class);
 
-        atmActivity.putExtra(USER_ACCOUNTS_KEY, userAccounts);
-        atmActivityLauncher.launch(atmActivity);
+        atmIntent.putExtra(EViewKey.USER_ACCOUNTS.label, userAccounts);
+        atmActivityLauncher.launch(atmIntent);
     }
 
     @Override
@@ -109,61 +101,23 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     {
         Intent adminIntent = new Intent(this, AdminActivity.class);
 
-        adminIntent.putExtra(ATM_DATA_KEY, atmData);
-        startActivity(adminIntent);
+        adminIntent.putExtra(EViewKey.ATM_DATA.label, atmData);
+        adminActivityLauncher.launch(adminIntent);
     }
 
     @Override
-    public void setTextViewErrorText(String text)
+    public void displayErrorMessage(String errorMessage)
     {
         TextView textViewError = findViewById(R.id.textViewError);
-
         setTextViewErrorVisibility(true);
-        textViewError.setText(text);
-    }
 
-    @Override
-    public void displayEmptyUsernameError()
-    {
-        TextView textViewError = findViewById(R.id.textViewError);
-        String errorMessage = getResources().getString(R.string.login_activity_textview_emptyUsername_error);
-
-        setTextViewErrorVisibility(true);
         textViewError.setText(errorMessage);
     }
 
     @Override
-    public void displayEmptyNIPError()
+    public void hideErrorMessage()
     {
-        TextView textViewError = findViewById(R.id.textViewError);
-        String errorMessage = getResources().getString(R.string.login_activity_textview_emptyNIP_error);
-
-        setTextViewErrorVisibility(true);
-        textViewError.setText(errorMessage);
-    }
-
-    @Override
-    public void displayInvalidLoginError(final String REMAINING_ATTEMPT)
-    {
-        TextView textViewError = findViewById(R.id.textViewError);
-        String errorMessage = getResources().getString(R.string.login_activity_textview_invalidLogin_error)
-                +"\n"+REMAINING_ATTEMPT
-                +" "+getResources().getString(R.string.login_activity_textview_invalidLogin_errorEnding);
-
-        setTextViewErrorVisibility(true);
-        textViewError.setText(errorMessage);
-    }
-
-    @Override
-    public void displayLoginAttemptsError(final String LOGIN_LOCK_WAIT_TIME_REMAINING)
-    {
-        TextView textViewError = findViewById(R.id.textViewError);
-        String errorMessage = getResources().getString(R.string.login_activity_textview_loginAttempts_error)
-                +" "+LOGIN_LOCK_WAIT_TIME_REMAINING
-                +" "+getResources().getString(R.string.login_activity_textview_loginAttempts_errorEnding);
-
-        setTextViewErrorVisibility(true);
-        textViewError.setText(errorMessage);
+        setTextViewErrorVisibility(false);
     }
 
     /************************************************************************/
@@ -176,12 +130,40 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
         String userName = editTextUserName.getText().toString();
         String NIP = editTextNIP.getText().toString();
 
-        presenter.attemptLogin(userName, NIP);
+        presenter.attemptLogin(this, userName, NIP);
     }
 
     /************************************************************************/
     /* Private class methods                                                */
     /************************************************************************/
+    private void initAtmActivityLauncher()
+    {
+        atmActivityLauncher = registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    (ActivityResult result) ->
+                    {
+                        if (result.getResultCode() == Activity.RESULT_OK)
+                        {
+                            Intent data = result.getData();
+                            presenter.updateUserAccounts(data.getSerializableExtra(EViewKey.USER_ACCOUNTS.label));
+                        }
+                    });
+    }
+
+    private void initAdminActivityLauncher()
+    {
+        adminActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                (ActivityResult result) ->
+                {
+                    if (result.getResultCode() == Activity.RESULT_OK)
+                    {
+                        Intent data = result.getData();
+                        presenter.updateAtmData(data.getSerializableExtra(EViewKey.ATM_DATA.label));
+                    }
+                });
+    }
+
     private Bundle getSaveInstanceBundle()
     {
         Bundle bundle = new Bundle();

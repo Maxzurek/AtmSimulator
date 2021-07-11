@@ -1,5 +1,8 @@
 package com.example.atmsimulator.presenters.login;
 
+import android.content.Context;
+
+import com.example.atmsimulator.R;
 import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.models.account.Account;
 import com.example.atmsimulator.models.users.Admin;
@@ -9,18 +12,22 @@ import com.example.atmsimulator.views.login.ILoginView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginActivityPresenter
 {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
+    private final int LOGIN_LOCK_WAIT_TIME = 10000;
+    private final int MAX_LOGIN_ATTEMPT = 3;
+
     private ILoginView view;
     private AtmData atmData;
-    private int invalidLoginAttempt;
-    private final int LOGIN_LOCK_WAIT_TIME = 10000;
-    private long loginLockStartTime;
     private ArrayList<Client> clients;
+    private int invalidLoginAttempt;
+    private long loginLockStartTime;
 
     /************************************************************************/
     /* Constructor(s)                                                       */
@@ -28,33 +35,43 @@ public class LoginActivityPresenter
     public LoginActivityPresenter(ILoginView view)
     {
         this.view = view;
-        invalidLoginAttempt = 3;
+        atmData = (AtmData) view.getAtmData();
         clients = new ArrayList<Client>();
         clients.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
-        atmData = (AtmData) view.getAtmData();
     }
 
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    public void attemptLogin(String userName, String nip)
+    public void attemptLogin(Context context, String userName, String nip)
     {
-        long currentSystemTime = System.currentTimeMillis();
+        String errorMessage;
 
         if(isLoginLocked())
         {
-            view.displayLoginAttemptsError(getLoginLockTimeRemaining());
+            errorMessage = context.getString(R.string.login_activity_textview_loginAttempts_error)
+                    +" "+getLoginLockTimeRemaining()
+                    +" "+context.getString(R.string.login_activity_textview_loginAttempts_errorEnding);
+
+            view.displayErrorMessage(errorMessage);
+
             return;
         }
 
         if(userName.isEmpty())
         {
-            view.displayEmptyUsernameError();
+            errorMessage = context.getString(R.string.login_activity_textview_emptyUsername_error);
+
+            view.displayErrorMessage(errorMessage);
+
             return;
         }
         else if(nip.isEmpty())
         {
-            view.displayEmptyNIPError();
+            errorMessage = context.getString(R.string.login_activity_textview_emptyNIP_error);
+
+            view.displayErrorMessage(errorMessage);
+
             return;
         }
 
@@ -64,6 +81,8 @@ public class LoginActivityPresenter
 
             if(user != null)
             {
+                view.hideErrorMessage();
+
                 if(user instanceof Admin)
                 {
                     view.startAdminActivity(atmData);
@@ -76,22 +95,31 @@ public class LoginActivityPresenter
             else
             {
                 //TODO interface method + res sting
-                view.setTextViewErrorText("There was an error while fetching data");
+                view.displayErrorMessage("There was an error while fetching data");
             }
         }
         else
         {
-            invalidLoginAttempt--;
+            invalidLoginAttempt++;
 
-            if(invalidLoginAttempt == 0)
+            if(invalidLoginAttempt == MAX_LOGIN_ATTEMPT)
             {
-                lockLogin();
-                view.displayLoginAttemptsError(getLoginLockTimeRemaining());
+                lockLogin(context);
+
+                errorMessage = context.getString(R.string.login_activity_textview_loginAttempts_error)
+                        +" "+getLoginLockTimeRemaining()
+                        +" "+context.getString(R.string.login_activity_textview_loginAttempts_errorEnding);
+
             }
             else
             {
-                view.displayInvalidLoginError(String.valueOf(invalidLoginAttempt));
+                errorMessage = context.getString(R.string.login_activity_textview_invalidLogin_error)
+                        +"\n"+getRemainLoginAttempt()
+                        +" "+context.getString(R.string.login_activity_textview_invalidLogin_errorEnding);
+
             }
+
+            view.displayErrorMessage(errorMessage);
         }
     }
 
@@ -101,8 +129,13 @@ public class LoginActivityPresenter
 
         if(accounts != null)
         {
-
+            atmData.updateUserAccounts(accounts);
         }
+    }
+
+    public void updateAtmData(Serializable atmData)
+    {
+        this.atmData = (AtmData)atmData;
     }
 
     /************************************************************************/
@@ -126,8 +159,24 @@ public class LoginActivityPresenter
         return String.valueOf(remainingTime);
     }
 
-    private void lockLogin()
+    private String getRemainLoginAttempt()
+    {
+        return String.valueOf(MAX_LOGIN_ATTEMPT - invalidLoginAttempt);
+    }
+
+    private void lockLogin(Context context)
     {
         loginLockStartTime = System.currentTimeMillis();
+
+        Timer unlockTimer = new Timer();
+        TimerTask unlockTask = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+               invalidLoginAttempt = 0;
+            }
+        };
+        unlockTimer.schedule(unlockTask, LOGIN_LOCK_WAIT_TIME);
     }
 }

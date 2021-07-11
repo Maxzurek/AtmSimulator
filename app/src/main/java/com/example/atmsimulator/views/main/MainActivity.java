@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.presenters.main.MainActivityPresenter;
+import com.example.atmsimulator.views.EViewKey;
 import com.example.atmsimulator.views.login.LoginActivity;
 
 import java.io.Serializable;
@@ -19,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements IMainView
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private final String ATM_DATA_KEY = "atmData";
     private MainActivityPresenter presenter;
 
     /************************************************************************/
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements IMainView
     public void startLoginActivity(Serializable atmData)
     {
         Intent loginIntent = new Intent(this, LoginActivity.class);
-        loginIntent.putExtra(ATM_DATA_KEY,atmData);
+        loginIntent.putExtra(EViewKey.ATM_DATA.label, atmData);
         startActivity(loginIntent);
     }
 }

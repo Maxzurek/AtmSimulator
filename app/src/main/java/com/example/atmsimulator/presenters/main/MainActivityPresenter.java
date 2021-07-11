@@ -16,8 +16,6 @@ public class MainActivityPresenter
     /************************************************************************/
     private IMainView view;
     private AtmData atmData;
-    private final int LOADING_WAIT_TIME = 3000;
-    private final int ROTATION_DELAY = 90;
 
     /************************************************************************/
     /* Constructor(s)                                                       */
@@ -43,6 +41,9 @@ public class MainActivityPresenter
 
     private void simulateLoading()
     {
+        final int LOADING_WAIT_TIME = 3000;
+        final int ROTATION_DELAY = 0;
+        final int ROTATION_PERIOD = 90;
         final float IMAGE_VIEW_ROTATION = 10; //10 degrees
 
         //Spin loading icon in main view
@@ -55,7 +56,7 @@ public class MainActivityPresenter
                 view.rotateImageViewLoading(IMAGE_VIEW_ROTATION);
             }
         };
-        timerRotate.schedule(taskRotate, 0, ROTATION_DELAY);
+        timerRotate.schedule(taskRotate, ROTATION_DELAY, ROTATION_PERIOD);
 
 
         //Simulate 3 seconds loading

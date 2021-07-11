@@ -12,13 +12,7 @@ public interface ILoginView
 
     void startAdminActivity(Serializable atmData);
 
-    void setTextViewErrorText(String text);
+    void displayErrorMessage(String errorMessage);
 
-    void displayEmptyUsernameError();
-
-    void displayEmptyNIPError();
-
-    void displayInvalidLoginError(final String REMAINING_ATTEMPT);
-
-    void displayLoginAttemptsError(final String LOGIN_LOCK_WAIT_TIME_REMAINING);
+    void hideErrorMessage();
 }
