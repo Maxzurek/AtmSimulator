@@ -7,4 +7,5 @@ import java.io.Serializable;
 public interface IAdminView
 {
     Serializable getAtmData();
+    void startAdminListActivity(Serializable listData);
 }

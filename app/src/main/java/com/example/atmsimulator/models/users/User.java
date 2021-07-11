@@ -1,11 +1,12 @@
 package com.example.atmsimulator.models.users;
 
+import com.example.atmsimulator.R;
 import com.example.atmsimulator.adapters.IListLayoutAdapter;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class User implements Serializable, IListLayoutAdapter
+public abstract class User implements Comparable<User>, Serializable, IListLayoutAdapter
 {
     /************************************************************************/
     /* Class attributes                                                     */
@@ -88,8 +89,14 @@ public abstract class User implements Serializable, IListLayoutAdapter
     /************************************************************************/
     /* Interface Implementation                                             */
     /************************************************************************/
-    public String getItem1(){return firstName;}
-    public String getItem2(){return lastName;}
+    @Override
+    public int compareTo(User other)
+    {
+        String thisUserLastName = lastName;
+        String otherUserLastName = other.lastName;
+
+        return thisUserLastName.compareToIgnoreCase(otherUserLastName);
+    }
 
     /************************************************************************/
     /* Overridden Methods                                                   */

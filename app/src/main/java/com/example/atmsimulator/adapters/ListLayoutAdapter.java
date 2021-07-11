@@ -51,21 +51,15 @@ public class ListLayoutAdapter extends ArrayAdapter<IListLayoutAdapter>
         if (data != null)
         {
             final ImageView imageViewIcon = view.findViewById(R.id.imageViewListIcon);
+            imageViewIcon.setImageResource(data.getIconResID());
 
-            if(data instanceof User)
-            {
-                imageViewIcon.setImageResource(R.drawable.list_view_user_icon);
-            }
-            else if(data instanceof Account)
-            {
-                imageViewIcon.setImageResource(R.drawable.list_view_account_icon);
-            }
+            //TODO implement interface in Account class
 
             final TextView item1 = view.findViewById(R.id.textViewListItem1);
-            item1.setText(data.getItem1());
+            item1.setText(data.getItem1(context));
 
             final TextView item2= view.findViewById(R.id.textViewListItem2);
-            item2.setText(data.getItem2());
+            item2.setText(data.getItem2(context));
         }
 
         return view;

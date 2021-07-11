@@ -1,6 +1,12 @@
 package com.example.atmsimulator.models.users;
 
-public class Admin extends User
+import android.content.Context;
+
+import com.example.atmsimulator.R;
+
+import java.io.Serializable;
+
+public class Admin extends User implements Serializable
 {
     /************************************************************************/
     /* Constructor(s)                                                       */
@@ -19,6 +25,18 @@ public class Admin extends User
     {
         super(other);
     }
+
+    /************************************************************************/
+    /* Interface Implementation                                             */
+    /************************************************************************/
+    @Override
+    public int getIconResID(){return R.drawable.list_view_user_icon;};
+
+    @Override
+    public String getItem1(Context context){return context.getString(R.string.list_layout_item1_admin_prefix)+" "+getLastName();}
+
+    @Override
+    public String getItem2(Context context){return context.getString(R.string.list_layout_item2_admin_prefix)+" "+getFirstName();}
 
     /************************************************************************/
     /* Overridden Methods                                                   */

@@ -1,16 +1,14 @@
 package com.example.atmsimulator.views.admin;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.atmsimulator.AdminListActivity;
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.presenters.admin.AdminActivityPresenter;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
@@ -20,6 +18,8 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
     /* Class attributes                                                     */
     /************************************************************************/
     private final String ATM_DATA_KEY = "atmData";
+    private final String LIST_TITLE_KEY = "listTitleKey";
+    private final String LIST_DATA_KEY = "listDataKey";
 
     private AdminActivityPresenter presenter;
 
@@ -35,22 +35,6 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
         presenter = new AdminActivityPresenter(this);
     }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull @NotNull Bundle outState)
-    {
-        super.onSaveInstanceState(outState);
-
-        //TODO
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
-    {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        //TODO
-    }
-
     /************************************************************************/
     /* Interface Implementation                                             */
     /************************************************************************/
@@ -60,7 +44,16 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
         return getIntent().getSerializableExtra(ATM_DATA_KEY);
     }
 
-    //TODO
+    @Override
+    public void startAdminListActivity(Serializable listData)
+    {
+        Intent adminListIntent = new Intent(this, AdminListActivity.class);
+
+        adminListIntent.putExtra(LIST_TITLE_KEY, getString(R.string.list_layout_title_client));
+        adminListIntent.putExtra(LIST_DATA_KEY, listData);
+        startActivity(adminListIntent);
+    }
+
 
     /************************************************************************/
     /* Events Handling                                                      */
@@ -79,6 +72,7 @@ public class AdminActivity extends AppCompatActivity implements IAdminView
 
     public void onClickClientList(View view)
     {
+        presenter.handleOnClickClientList();
     }
 
     /************************************************************************/

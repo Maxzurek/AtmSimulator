@@ -9,7 +9,11 @@ import com.example.atmsimulator.models.users.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class AtmData implements Serializable
 {
@@ -33,24 +37,16 @@ public class AtmData implements Serializable
         ArrayList<Account> zurekMaximeAccounts = new ArrayList<>();
         zurekMaximeAccounts.add(new CheckAccount());
         zurekMaximeAccounts.add(new SavingAccount());
+
+        Collections.sort(users);
+        //TODO Sort zurekMaximeAccounts, implement compare to in Account class
         usersAccounts.put("1234", zurekMaximeAccounts);
     }
 
     /************************************************************************/
     /* Public Class methods                                                 */
     /************************************************************************/
-    public boolean validateUser(String userName, String nip)
-    {
-        for(User user : users)
-        {
-            if(user.getUserName().equals(userName) && user.getAccountNIP().equals(nip))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public ArrayList<User> getUsers(){return users;}
 
     public User getUser(String userName, String nip)
     {
@@ -65,12 +61,67 @@ public class AtmData implements Serializable
         return null;
     }
 
-    public ArrayList<Account> getUserAccounts(String userNip)
+    public boolean validateUser(final String userName, final String nip)
+    {
+        for(User user : users)
+        {
+            if(user.getUserName().equals(userName) && user.getAccountNIP().equals(nip))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public ArrayList<Client> getClients()
+    {
+        ArrayList<Client> clients = new ArrayList<>();
+
+        for(User user : users)
+        {
+            if(user instanceof Client)
+            {
+                clients.add((Client)user);
+            }
+        }
+
+        return clients;
+    }
+
+    public ArrayList<Admin> getAdmins()
+    {
+        ArrayList<Admin> admins = new ArrayList<>();
+
+        for(User user : users)
+        {
+            if(user instanceof Admin)
+            {
+                admins.add((Admin)user);
+            }
+        }
+
+        return admins;
+    }
+
+    public ArrayList<Account> getAccounts()
+    {
+        ArrayList<Account> accounts = new ArrayList<>();
+
+        for(Map.Entry<String, ArrayList<Account>> entry : usersAccounts.entrySet())
+        {
+            accounts.addAll(entry.getValue());
+        }
+
+        return accounts;
+    }
+
+    public ArrayList<Account> getUserAccounts(final String userNip)
     {
         return usersAccounts.get(userNip);
     }
 
-    public boolean updateUserAccounts(ArrayList<Account> userAccounts)
+    public boolean updateUserAccounts(final ArrayList<Account> userAccounts)
     {
         if(userAccounts != null)
         {

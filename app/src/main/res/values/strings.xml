@@ -37,4 +37,10 @@
     <string name="atm_activity_button_submit">SOUMETTRE</string>
     <string name="atm_activity_textView_check">Solde compte Chèque:</string>
     <string name="atm_activity_textView_saving">Solde compte Épargne:</string>
+
+    <string name="list_layout_title_client">Liste des clients</string>
+    <string name="list_layout_item1_client_prefix">Nom du client:</string>
+    <string name="list_layout_item2_client_prefix">Prenom du client:</string>
+    <string name="list_layout_item1_admin_prefix">Nom de l\'administrateur:</string>
+    <string name="list_layout_item2_admin_prefix">Prenom de l\'administrateur:</string>
 </resources>

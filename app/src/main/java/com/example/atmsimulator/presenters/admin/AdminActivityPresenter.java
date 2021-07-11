@@ -23,7 +23,10 @@ public class AdminActivityPresenter
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    //TODO
+    public void handleOnClickClientList()
+    {
+        view.startAdminListActivity(atmData.getClients());
+    }
 
     /************************************************************************/
     /* Private Methods                                                      */
