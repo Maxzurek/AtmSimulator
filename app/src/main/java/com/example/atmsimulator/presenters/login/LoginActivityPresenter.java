@@ -94,7 +94,6 @@ public class LoginActivityPresenter
             }
             else
             {
-                //TODO interface method + res sting
                 view.displayErrorMessage("There was an error while fetching data");
             }
         }

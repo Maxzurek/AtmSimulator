@@ -5,16 +5,17 @@
     <string name="login_activity_editTextUsername_hint">Username</string>
     <string name="login_activity_editTextNIP_hint">NIP</string>
     <string name="login_activity_buttonSignIn">SIGN IN</string>
-    <string name="login_activity_textview_emptyUsername_error">Le nom d\'utilisateur est vide.\nVeuillez entrer un nom d\'utilisateur.</string>
-    <string name="login_activity_textview_emptyNIP_error">Le NIP est vide.\nVeuillez entrer un NIP.</string>
-    <string name="login_activity_textview_invalidLogin_error">Échec de connection.\nLe username ou le NIP entré est invalide.</string>
-    <string name="login_activity_textview_invalidLogin_errorEnding">tentative(s) restante(s).</string>
-    <string name="login_activity_textview_loginAttempts_error">Limite d\'échec de connection atteinte.\nVeuillez réessayer dans</string>
-    <string name="login_activity_textview_loginAttempts_errorEnding">secondes.</string>
+    <string name="login_activity_textview_fetchingData_error">There was an error while login.\\nPlease contact our support team if the problem persists.</string>
+    <string name="login_activity_textview_emptyUsername_error">Username is empty.\nEnter a username.</string>
+    <string name="login_activity_textview_emptyNIP_error">NIP is empty.\nEnter a NIP.</string>
+    <string name="login_activity_textview_invalidLogin_error">Connection failed.\nThe username or password entered is wrong.</string>
+    <string name="login_activity_textview_invalidLogin_errorEnding">try left.</string>
+    <string name="login_activity_textview_loginAttempts_error">Too many failed connection attempt.\nTry again in</string>
+    <string name="login_activity_textview_loginAttempts_errorEnding">seconds.</string>
 
-    <string name="atm_activity_editTextInput_hint">Montant</string>
-    <string name="main_activity_title">Guichet automatique ATM</string>
-    <string name="atm_activity_title">Bonjour Android ATM</string>
+    <string name="atm_activity_editTextInput_hint">Amount</string>
+    <string name="main_activity_title">Android ATM</string>
+    <string name="atm_activity_title">Welcome android ATM</string>
     <string name="atm_activity_button_logout">LOGOUT</string>
     <string name="atm_activity_button_0">0</string>
     <string name="atm_activity_button_1">1</string>
@@ -28,19 +29,23 @@
     <string name="atm_activity_button_9">9</string>
     <string name="atm_activity_button_dot">.</string>
     <string name="atm_activity_button_clear">c</string>
-    <string name="atm_activity_radioButton_deposit">Dépot</string>
-    <string name="atm_activity_radioButton_withdraw">Retrait</string>
-    <string name="atm_activity_radioButton_transfert">Virement</string>
-    <string name="atm_activity_radioButton_check">Chèque</string>
-    <string name="atm_activity_radioButton_saving">Épargne</string>
-    <string name="atm_activity_button_accountSummary">ÉTAT DES COMPTES</string>
-    <string name="atm_activity_button_submit">SOUMETTRE</string>
-    <string name="atm_activity_textView_check">Solde compte Chèque:</string>
-    <string name="atm_activity_textView_saving">Solde compte Épargne:</string>
+    <string name="atm_activity_radioButton_deposit">Deposit</string>
+    <string name="atm_activity_radioButton_withdraw">Withdraw</string>
+    <string name="atm_activity_radioButton_transfert">Transfer</string>
+    <string name="atm_activity_radioButton_check">Check</string>
+    <string name="atm_activity_radioButton_saving">Saving</string>
+    <string name="atm_activity_button_accountSummary">Accounts summary</string>
+    <string name="atm_activity_button_submit">SUBMIT</string>
+    <string name="atm_activity_textView_check">Check account balance:</string>
+    <string name="atm_activity_textView_saving">Saving account balance:</string>
 
-    <string name="list_layout_title_client">Liste des clients</string>
-    <string name="list_layout_item1_client_prefix">Nom du client:</string>
-    <string name="list_layout_item2_client_prefix">Prenom du client:</string>
-    <string name="list_layout_item1_admin_prefix">Nom de l\'administrateur:</string>
-    <string name="list_layout_item2_admin_prefix">Prenom de l\'administrateur:</string>
+    <string name="list_layout_title_client">Client list</string>
+    <string name="list_layout_item1_client_prefix">Client last name:</string>
+    <string name="list_layout_item2_client_prefix">Client first name:</string>
+    <string name="list_layout_item1_admin_prefix">Admin last name:</string>
+    <string name="list_layout_item2_admin_prefix">Admin first name:</string>
+
+    <string name="logout_warning_message">Do you want to log out?</string>
+    <string name="logout_warning_button_yes">Yes</string>
+    <string name="logout_warning_button_no">No</string>
 </resources>

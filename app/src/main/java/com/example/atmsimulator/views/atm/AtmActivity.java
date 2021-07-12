@@ -229,10 +229,10 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     {
         AlertDialog.Builder logoutWarningBuilder = new AlertDialog.Builder(this);
 
-        logoutWarningBuilder.setMessage("Do you want to log out.");
+        logoutWarningBuilder.setMessage(getString(R.string.logout_warning_message));
         logoutWarningBuilder.setCancelable(true);
         logoutWarningBuilder.setPositiveButton(
-                "Yes",
+                getString(R.string.logout_warning_button_yes),
                 new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
@@ -246,7 +246,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
                     }
                 });
         logoutWarningBuilder.setNegativeButton(
-                "No",
+                getString(R.string.logout_warning_button_no),
                 new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
