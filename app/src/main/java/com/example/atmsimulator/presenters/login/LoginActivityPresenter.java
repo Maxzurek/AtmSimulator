@@ -94,7 +94,7 @@ public class LoginActivityPresenter
             }
             else
             {
-                view.displayErrorMessage("There was an error while fetching data");
+                view.displayErrorMessage(context.getString(R.string.login_activity_textview_fetchingData_error));
             }
         }
         else
