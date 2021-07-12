@@ -44,6 +44,7 @@
     <string name="list_layout_item2_client_prefix">Prenom du client:</string>
     <string name="list_layout_item1_admin_prefix">Nom de l\'administrateur:</string>
     <string name="list_layout_item2_admin_prefix">Prenom de l\'administrateur:</string>
+    <string name="list_layout_item1_account_prefix">Numéro du compte:</string>
 
     <string name="logout_warning_message">Voulez-vous vous déconnecter?</string>
     <string name="logout_warning_button_yes">Oui</string>

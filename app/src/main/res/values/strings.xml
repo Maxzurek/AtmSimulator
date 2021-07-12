@@ -44,6 +44,7 @@
     <string name="list_layout_item2_client_prefix">Client first name:</string>
     <string name="list_layout_item1_admin_prefix">Admin last name:</string>
     <string name="list_layout_item2_admin_prefix">Admin first name:</string>
+    <string name="list_layout_item1_account_prefix">Account number:</string>
 
     <string name="logout_warning_message">Do you want to log out?</string>
     <string name="logout_warning_button_yes">Yes</string>
