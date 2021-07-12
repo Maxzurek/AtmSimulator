@@ -188,11 +188,12 @@
         android:layout_height="54dp"
         android:layout_marginTop="5dp"
         android:ems="10"
+        android:hint="@string/atm_activity_editTextInput_hint"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/buttonClear"
-        app:layout_constraintTop_toBottomOf="@+id/buttonClear"
-        android:importantForAutofill="no"
-        android:hint="@string/atm_activity_editTextInput_hint"/>
+        app:layout_constraintStart_toStartOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/buttonClear" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -215,10 +216,10 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.289"
+        app:layout_constraintHorizontal_bias="0.314"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintVertical_bias="0.046" />
 
     <Button
         android:id="@+id/button0"

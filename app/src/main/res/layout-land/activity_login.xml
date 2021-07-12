@@ -23,7 +23,7 @@
         android:id="@+id/editTextUsername"
         android:layout_width="345dp"
         android:layout_height="53dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/login_activity_editTextUsername_hint"
         android:importantForAutofill="no"
