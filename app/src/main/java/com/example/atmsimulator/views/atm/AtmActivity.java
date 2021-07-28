@@ -100,61 +100,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
     /************************************************************************/
     /* Events Handling                                                      */
     /************************************************************************/
-    public void onCLickButtons(View view)
-    {
-        switch(view.getId())
-        {
-            case R.id.buttonLogout:
-                Toast.makeText(this, "Logout Pressed", Toast.LENGTH_LONG); //REMOVE TEST
-                //TODO
-                break;
-            case R.id.button0:
-                appendToEditTextInput("0");
-                break;
-            case R.id.button1:
-                appendToEditTextInput("1");
-                break;
-            case R.id.button2:
-                appendToEditTextInput("2");
-                break;
-            case R.id.button3:
-                appendToEditTextInput("3");
-                break;
-            case R.id.button4:
-                appendToEditTextInput("4");
-                break;
-            case R.id.button5:
-                appendToEditTextInput("5");
-                break;
-            case R.id.button6:
-                appendToEditTextInput("6");
-                break;
-            case R.id.button7:
-                appendToEditTextInput("7");
-                break;
-            case R.id.button8:
-                appendToEditTextInput("8");
-                break;
-            case R.id.button9:
-                appendToEditTextInput("9");
-                break;
-            case R.id.buttonDot:
-                appendToEditTextInput(".");
-                break;
-            case R.id.buttonClear:
-                clearEditTextInput();
-                break;
-            case R.id.buttonAccountSummary:
-                setAccountSummaryVisibility(accountSummaryVisibility ? false : true);
-                break;
-            case R.id.buttonSubmit:
-                Toast.makeText(this, "Submit Pressed", Toast.LENGTH_LONG); //REMOVE TEST
-                //TODO
-                break;
-            default:
-                break;
-        }
-    }
+
 
     /************************************************************************/
     /* Private class methods                                                */
@@ -209,20 +155,6 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
         textViewTransactionSummary.setVisibility(visibility);
-    }
-
-    private void appendToEditTextInput(String text)
-    {
-        EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
-
-        editTextAmount.append(text);
-    }
-
-    private void clearEditTextInput()
-    {
-        EditText editTextAmount = (EditText)findViewById(R.id.editTextInput);
-
-        editTextAmount.setText("");
     }
 
     private void displayLogoutWarning()
