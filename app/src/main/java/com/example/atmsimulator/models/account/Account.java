@@ -1,5 +1,8 @@
 package com.example.atmsimulator.models.account;
 
+import android.content.Context;
+
+import com.example.atmsimulator.R;
 import com.example.atmsimulator.adapters.IListLayoutAdapter;
 
 
@@ -65,7 +68,18 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /************************************************************************/
         /* Interface Implementation                                             */
         /************************************************************************/
+        //Comparable
         @Override
+        public int getIconResID(){return R.drawable.list_view_user_icon;};
+
+        @Override
+        public String getItem1(Context context){return context.getString(R.string.list_layout_item1_admin_prefix)+" "+getAccountNumber();}
+
+        @Override
+        public String getItem2(Context context){return context.getString(R.string.list_layout_item2_admin_prefix)+" "+getAccountAmount();}
+        @Override
+
+        //Comparable
         public int compareTo(Account other)
         {
             String thisAccountNumber = accountNumber;
