@@ -2,8 +2,11 @@ package com.example.atmsimulator.presenters.atm;
 
 import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.models.account.Account;
+import com.example.atmsimulator.models.account.CheckAccount;
+import com.example.atmsimulator.models.account.SavingAccount;
 import com.example.atmsimulator.views.atm.IAtmView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class AtmActivityPresenter
@@ -26,7 +29,7 @@ public class AtmActivityPresenter
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    //TODO
+    public Serializable getUserAccounts(){return userAccounts;}
 
     /************************************************************************/
     /* Private Methods                                                      */

@@ -9,13 +9,11 @@ import android.widget.ImageView;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.presenters.main.MainActivityPresenter;
 import com.example.atmsimulator.views.EViewKey;
-import com.example.atmsimulator.views.login.LoginActivity;
+import com.example.atmsimulator.views.login.LoginView;
 
 import java.io.Serializable;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements IMainView
+public class MainView extends AppCompatActivity implements IMainView
 {
     /************************************************************************/
     /* Class attributes                                                     */
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements IMainView
     @Override
     public void startLoginActivity(Serializable atmData)
     {
-        Intent loginIntent = new Intent(this, LoginActivity.class);
+        Intent loginIntent = new Intent(this, LoginView.class);
         loginIntent.putExtra(EViewKey.ATM_DATA.label, atmData);
         startActivity(loginIntent);
     }

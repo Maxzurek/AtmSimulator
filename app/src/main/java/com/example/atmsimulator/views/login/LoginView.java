@@ -16,14 +16,14 @@ import android.widget.TextView;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
 import com.example.atmsimulator.views.EViewKey;
-import com.example.atmsimulator.views.admin.AdminActivity;
-import com.example.atmsimulator.views.atm.AtmActivity;
+import com.example.atmsimulator.views.admin.AdminView;
+import com.example.atmsimulator.views.atm.AtmView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
-public class LoginActivity extends AppCompatActivity implements ILoginView
+public class LoginView extends AppCompatActivity implements ILoginView
 {
     /************************************************************************/
     /* Class attributes                                                     */
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     @Override
     public void startAtmActivity(Serializable userAccounts)
     {
-        Intent atmIntent = new Intent(this, AtmActivity.class);
+        Intent atmIntent = new Intent(this, AtmView.class);
 
         atmIntent.putExtra(EViewKey.USER_ACCOUNTS.label, userAccounts);
         atmActivityLauncher.launch(atmIntent);
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView
     @Override
     public void startAdminActivity(Serializable atmData)
     {
-        Intent adminIntent = new Intent(this, AdminActivity.class);
+        Intent adminIntent = new Intent(this, AdminView.class);
 
         adminIntent.putExtra(EViewKey.ATM_DATA.label, atmData);
         adminActivityLauncher.launch(adminIntent);

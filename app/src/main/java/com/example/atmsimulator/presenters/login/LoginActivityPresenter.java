@@ -25,7 +25,6 @@ public class LoginActivityPresenter
 
     private ILoginView view;
     private AtmData atmData;
-    private ArrayList<Client> clients;
     private int invalidLoginAttempt;
     private long loginLockStartTime;
 
@@ -36,8 +35,6 @@ public class LoginActivityPresenter
     {
         this.view = view;
         atmData = (AtmData) view.getAtmData();
-        clients = new ArrayList<Client>();
-        clients.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
     }
 
     /************************************************************************/

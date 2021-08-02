@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AtmSimulator">
         <activity android:name=".AdminListActivity"></activity>
-        <activity android:name=".views.admin.AdminActivity" />
-        <activity android:name=".views.atm.AtmActivity" />
-        <activity android:name=".views.login.LoginActivity" />
-        <activity android:name=".views.main.MainActivity">
+        <activity android:name=".views.admin.AdminView" />
+        <activity android:name=".views.atm.AtmView" />
+        <activity android:name=".views.login.LoginView" />
+        <activity android:name=".views.main.MainView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

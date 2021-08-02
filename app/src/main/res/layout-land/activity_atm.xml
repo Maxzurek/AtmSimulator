@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.atm.AtmActivity">
+    tools:context=".views.atm.AtmView">
 
     <TextView
         android:id="@+id/textViewSavingAmount"

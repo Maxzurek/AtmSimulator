@@ -20,7 +20,7 @@ import com.example.atmsimulator.views.EViewKey;
 
 import java.io.Serializable;
 
-public class AtmActivity extends AppCompatActivity implements IAtmView
+public class AtmView extends AppCompatActivity implements IAtmView
 {
     /************************************************************************/
     /* Class attributes                                                     */
@@ -171,7 +171,7 @@ public class AtmActivity extends AppCompatActivity implements IAtmView
                     {
                         Intent returnIntent = new Intent();
                         //TODO get accounts data from presenter and add them to the intent
-                        //returnIntent.putExtra(USER_ACCOUNTS_KEY, /*accounts*/)
+                        returnIntent.putExtra(EViewKey.ATM_DATA.label, presenter.getUserAccounts());
                         setResult(Activity.RESULT_OK, returnIntent);
                         dialog.cancel();
                         finish();

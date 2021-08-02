@@ -16,7 +16,7 @@ import com.example.atmsimulator.views.EViewKey;
 
 import java.io.Serializable;
 
-public class AdminActivity extends AppCompatActivity implements IAdminView
+public class AdminView extends AppCompatActivity implements IAdminView
 {
     /************************************************************************/
     /* Class attributes                                                     */
