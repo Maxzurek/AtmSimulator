@@ -14,8 +14,8 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /************************************************************************/
         /* Class attributes                                                     */
         /************************************************************************/
-        private String accountNumber;
-        private String accountAmount;
+        private int accountNumber;
+        private double accountAmount;
 
 
         /************************************************************************/
@@ -23,12 +23,12 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /************************************************************************/
     public Account()
         {
-            accountNumber = "";
-            accountAmount = "";
+            accountNumber = 0;
+            accountAmount = 0;
 
         }
 
-    public Account(String accountNumber, String accountAmount)
+    public Account(int accountNumber, double accountAmount)
         {
             this.setAccountNumber(accountNumber);
             this.setAccountAmount(accountAmount);
@@ -45,22 +45,22 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /************************************************************************/
         /* Getters/Setters                                                      */
         /************************************************************************/
-        public String getAccountNumber()
+        public int getAccountNumber()
         {
             return accountNumber;
         }
 
-        public void setAccountNumber(String accountNumber)
+        public void setAccountNumber(int accountNumber)
         {
             this.accountNumber = accountNumber;
         }
 
-        public String getAccountAmount()
+        public double getAccountAmount()
         {
             return accountAmount;
         }
 
-        public void setAccountAmount(String accountAmount)
+        public void setAccountAmount(double accountAmount)
         {
             this.accountAmount = accountAmount;
         }
@@ -82,10 +82,15 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         //Comparable
         public int compareTo(Account other)
         {
-            String thisAccountNumber = accountNumber;
-            String otherAccountNumber = other.accountNumber;
-
-            return thisAccountNumber.compareToIgnoreCase(otherAccountNumber);
+            if(accountAmount < other.getAccountAmount())
+            {
+                return -1;
+            }
+            if (accountAmount == other.getAccountAmount())
+            {
+                return 0;
+            }
+            return 1;
         }
 
         /************************************************************************/
@@ -129,22 +134,41 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /* Public Methods                                                       */
         /************************************************************************/
 
-        public float withdraw(float Amount){
 
-            float newAccountAmount;
-            newAccountAmount = Float.parseFloat(accountAmount) - Amount;
+        public boolean withdraw(double amount)
+        {
+            if (amount > accountAmount)
+            {
+                return false;
+            }
+            if (amount > 1000)
+            {
+                return false;
+            }
+            if (amount % 10 != 0)
+            {
+                return false;
+            }
+            else
+            {
+                accountAmount = accountAmount - amount;
 
-            return newAccountAmount;
-
+                return true;
+            }
         }
 
-        public float deposit(float Amount){
+        public boolean deposit(double Amount){
 
-            float newAccountAmount;
-            newAccountAmount = Float.parseFloat(accountAmount) + Amount;
+            if(Amount < 0)
+            {
+                return false;
+            }
+            else
+            {
+                accountAmount = accountAmount + Amount;
 
-            return newAccountAmount;
-
+                return true;
+            }
         }
 
     }
