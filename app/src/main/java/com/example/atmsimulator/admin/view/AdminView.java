@@ -1,4 +1,4 @@
-package com.example.atmsimulator.views.admin;
+package com.example.atmsimulator.admin.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.atmsimulator.AdminListActivity;
+import com.example.atmsimulator.AdminListView;
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.presenters.admin.AdminActivityPresenter;
+import com.example.atmsimulator.admin.presenter.AdminActivityPresenter;
 import com.example.atmsimulator.views.EViewKey;
 
 import java.io.Serializable;
@@ -50,15 +50,6 @@ public class AdminView extends AppCompatActivity implements IAdminView
         return getIntent().getSerializableExtra(EViewKey.ATM_DATA.label);
     }
 
-    @Override
-    public void startAdminListActivity(Serializable listData)
-    {
-        Intent adminListIntent = new Intent(this, AdminListActivity.class);
-
-        adminListIntent.putExtra(EViewKey.ADMIN_LIST_TITLE.label, getString(R.string.list_layout_title_client));
-        adminListIntent.putExtra(EViewKey.ADMIN_LIST_DATA.label, listData);
-        startActivity(adminListIntent);
-    }
 
 
     /************************************************************************/
@@ -71,22 +62,26 @@ public class AdminView extends AppCompatActivity implements IAdminView
 
     public void onClickPayInterest(View view)
     {
-        presenter.handleOnClickPayInterest();
+
     }
     
     public void onClickCheckAccountList(View view)
     {
-        presenter.handleOnClickCheckAccountList();
+
     }
 
     public void onCLickSavingAccountList(View view)
     {
-        presenter.handleOnClickSavingAccountList();
+
     }
 
     public void onClickClientList(View view)
     {
-        presenter.handleOnClickClientList();
+        Intent adminListIntent = new Intent(this, AdminListView.class);
+
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_TITLE.label, getString(R.string.list_layout_title_client));
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_DATA.label, getAtmData());
+        startActivity(adminListIntent);
     }
 
     /************************************************************************/

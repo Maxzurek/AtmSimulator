@@ -1,6 +1,4 @@
-package com.example.atmsimulator.views.login;
-
-import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
+package com.example.atmsimulator.login.view;
 
 import java.io.Serializable;
 

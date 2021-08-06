@@ -12,7 +12,7 @@ import com.example.atmsimulator.views.EViewKey;
 
 import java.util.ArrayList;
 
-public class AdminListActivity extends AppCompatActivity
+public class AdminListView extends AppCompatActivity
 {
     /************************************************************************/
     /* Overridden Methods                                                   */

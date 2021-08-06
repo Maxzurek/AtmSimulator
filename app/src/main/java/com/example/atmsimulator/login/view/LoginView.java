@@ -1,4 +1,4 @@
-package com.example.atmsimulator.views.login;
+package com.example.atmsimulator.login.view;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -14,10 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.presenters.login.LoginActivityPresenter;
+import com.example.atmsimulator.login.presenter.LoginActivityPresenter;
 import com.example.atmsimulator.views.EViewKey;
-import com.example.atmsimulator.views.admin.AdminView;
-import com.example.atmsimulator.views.atm.AtmView;
+import com.example.atmsimulator.admin.view.AdminView;
+import com.example.atmsimulator.atm.view.AtmView;
 
 import org.jetbrains.annotations.NotNull;
 

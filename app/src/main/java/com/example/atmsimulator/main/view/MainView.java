@@ -1,4 +1,4 @@
-package com.example.atmsimulator.views.main;
+package com.example.atmsimulator.main.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.presenters.main.MainActivityPresenter;
+import com.example.atmsimulator.main.presenter.MainActivityPresenter;
 import com.example.atmsimulator.views.EViewKey;
-import com.example.atmsimulator.views.login.LoginView;
+import com.example.atmsimulator.login.view.LoginView;
 
 import java.io.Serializable;
 

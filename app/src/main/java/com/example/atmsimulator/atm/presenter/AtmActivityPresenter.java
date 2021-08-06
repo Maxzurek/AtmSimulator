@@ -1,53 +1,32 @@
-package com.example.atmsimulator.presenters.admin;
+package com.example.atmsimulator.atm.presenter;
 
-import com.example.atmsimulator.models.AtmData;
-import com.example.atmsimulator.views.admin.IAdminView;
+import com.example.atmsimulator.models.account.Account;
+import com.example.atmsimulator.atm.view.IAtmView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class AdminActivityPresenter
+public class AtmActivityPresenter
 {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private IAdminView view;
-    private AtmData atmData;
-
+    private IAtmView view;
+    private ArrayList<Account> userAccounts;
+    //TODO
     /************************************************************************/
     /* Constructor(s)                                                       */
     /************************************************************************/
-    public AdminActivityPresenter(IAdminView view)
+    public AtmActivityPresenter(IAtmView view)
     {
         this.view = view;
-        atmData = (AtmData)view.getAtmData();
+        userAccounts = (ArrayList<Account>) view.getUserAccounts();
     }
-
-    /************************************************************************/
-    /* Getters/Setters                                                      */
-    /************************************************************************/
-    public Serializable getAtmData(){return atmData;}
 
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    public void handleOnClickPayInterest()
-    {
-    }
-
-    public void handleOnClickCheckAccountList()
-    {
-
-    }
-
-    public void handleOnClickSavingAccountList()
-    {
-
-    }
-
-    public void handleOnClickClientList()
-    {
-        view.startAdminListActivity(atmData.getClients());
-    }
+    public Serializable getUserAccounts(){return userAccounts;}
 
     /************************************************************************/
     /* Private Methods                                                      */

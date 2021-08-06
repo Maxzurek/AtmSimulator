@@ -1,4 +1,4 @@
-package com.example.atmsimulator.views.main;
+package com.example.atmsimulator.main.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;

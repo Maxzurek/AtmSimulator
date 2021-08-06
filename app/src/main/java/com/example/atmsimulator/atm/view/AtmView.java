@@ -1,4 +1,4 @@
-package com.example.atmsimulator.views.atm;
+package com.example.atmsimulator.atm.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.presenters.atm.AtmActivityPresenter;
+import com.example.atmsimulator.atm.presenter.AtmActivityPresenter;
 import com.example.atmsimulator.views.EViewKey;
 
 import java.io.Serializable;

@@ -50,4 +50,6 @@
     <string name="logout_warning_button_yes">Oui</string>
     <string name="logout_warning_button_no">Non</string>
     <string name="login_activity_textview_fetchingData_error">Une erreur est survenue lors de la connection.\\nVeuillez contacter notre equipe de support si le problème persiste.</string>
+    <string name="list_layout_title_account_check">List des comptes chèques</string>
+    <string name="list_layout_title_account_saving">Liste des comptes épargnes</string>
 </resources>

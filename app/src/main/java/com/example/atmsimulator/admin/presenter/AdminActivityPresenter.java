@@ -1,35 +1,35 @@
-package com.example.atmsimulator.presenters.atm;
+package com.example.atmsimulator.admin.presenter;
 
 import com.example.atmsimulator.models.AtmData;
-import com.example.atmsimulator.models.account.Account;
-import com.example.atmsimulator.models.account.CheckAccount;
-import com.example.atmsimulator.models.account.SavingAccount;
-import com.example.atmsimulator.views.atm.IAtmView;
+import com.example.atmsimulator.admin.view.IAdminView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-public class AtmActivityPresenter
+public class AdminActivityPresenter
 {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private IAtmView view;
-    private ArrayList<Account> userAccounts;
-    //TODO
+    private IAdminView view;
+    private AtmData atmData;
+
     /************************************************************************/
     /* Constructor(s)                                                       */
     /************************************************************************/
-    public AtmActivityPresenter(IAtmView view)
+    public AdminActivityPresenter(IAdminView view)
     {
         this.view = view;
-        userAccounts = (ArrayList<Account>) view.getUserAccounts();
+        atmData = (AtmData)view.getAtmData();
     }
+
+    /************************************************************************/
+    /* Getters/Setters                                                      */
+    /************************************************************************/
+    public Serializable getAtmData(){return atmData;}
 
     /************************************************************************/
     /* Public Methods                                                       */
     /************************************************************************/
-    public Serializable getUserAccounts(){return userAccounts;}
 
     /************************************************************************/
     /* Private Methods                                                      */

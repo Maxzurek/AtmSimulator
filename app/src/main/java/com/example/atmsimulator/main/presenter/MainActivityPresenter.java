@@ -1,7 +1,7 @@
-package com.example.atmsimulator.presenters.main;
+package com.example.atmsimulator.main.presenter;
 
 import com.example.atmsimulator.models.AtmData;
-import com.example.atmsimulator.views.main.IMainView;
+import com.example.atmsimulator.main.view.IMainView;
 
 import java.util.Timer;
 import java.util.TimerTask;

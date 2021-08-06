@@ -40,6 +40,8 @@
     <string name="atm_activity_textView_saving">Saving account balance:</string>
 
     <string name="list_layout_title_client">Client list</string>
+    <string name="list_layout_title_account_check">Check account list</string>
+    <string name="list_layout_title_account_saving">Saving account list</string>
     <string name="list_layout_item1_client_prefix">Client last name:</string>
     <string name="list_layout_item2_client_prefix">Client first name:</string>
     <string name="list_layout_item1_admin_prefix">Admin last name:</string>

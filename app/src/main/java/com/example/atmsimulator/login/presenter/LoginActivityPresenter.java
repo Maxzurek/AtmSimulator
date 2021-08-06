@@ -1,4 +1,4 @@
-package com.example.atmsimulator.presenters.login;
+package com.example.atmsimulator.login.presenter;
 
 import android.content.Context;
 
@@ -6,9 +6,8 @@ import com.example.atmsimulator.R;
 import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.models.account.Account;
 import com.example.atmsimulator.models.users.Admin;
-import com.example.atmsimulator.models.users.Client;
 import com.example.atmsimulator.models.users.User;
-import com.example.atmsimulator.views.login.ILoginView;
+import com.example.atmsimulator.login.view.ILoginView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
