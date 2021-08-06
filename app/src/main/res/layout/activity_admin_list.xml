@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".admin.AdminListView">
+    tools:context=".admin.view.AdminListView">
 
     <TextView
         android:id="@+id/textViewAdminListTitle"

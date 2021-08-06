@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AtmSimulator">
-        <activity android:name=".admin.AdminListView"></activity>
+        <activity android:name=".admin.view.AdminListView"></activity>
         <activity android:name=".admin.view.AdminView" />
         <activity android:name=".atm.view.AtmView" />
         <activity android:name=".login.view.LoginView" />

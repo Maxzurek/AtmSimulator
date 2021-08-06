@@ -9,13 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.atmsimulator.admin.AdminListView;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.admin.presenter.AdminActivityPresenter;
 import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.models.AtmData;
-
-import java.io.Serializable;
 
 public class AdminView extends AppCompatActivity implements IAdminView
 {
@@ -61,7 +58,7 @@ public class AdminView extends AppCompatActivity implements IAdminView
 
     public void onClickPayInterest(View view)
     {
-
+        
     }
     
     public void onClickCheckAccountList(View view)
