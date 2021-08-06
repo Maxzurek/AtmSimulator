@@ -19,7 +19,7 @@ public class AtmData implements Serializable
     /* Class attributes                                                     */
     /************************************************************************/
     private ArrayList<User> users;
-    private HashMap<String, ArrayList<Account>> usersAccounts;
+    private HashMap<User, ArrayList<Account>> userAccounts;
 
     /************************************************************************/
     /* Constructor(s)                                                       */
@@ -27,9 +27,9 @@ public class AtmData implements Serializable
     public AtmData()
     {
         users = new ArrayList<>();
-        usersAccounts = new HashMap<>();
+        userAccounts = new HashMap<>();
 
-        initializeData(users, usersAccounts);
+        initializeData(users, userAccounts);
     }
 
     /************************************************************************/
@@ -97,7 +97,7 @@ public class AtmData implements Serializable
     {
         ArrayList<Account> accounts = new ArrayList<>();
 
-        for(Map.Entry<String, ArrayList<Account>> entry : usersAccounts.entrySet())
+        for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
         {
             accounts.addAll(entry.getValue());
         }
@@ -109,7 +109,7 @@ public class AtmData implements Serializable
     {
         ArrayList<CheckAccount> checkAccounts = new ArrayList<>();
 
-        for(Map.Entry<String, ArrayList<Account>> entry : usersAccounts.entrySet())
+        for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
         {
             for(Account account : entry.getValue())
             {
@@ -127,7 +127,7 @@ public class AtmData implements Serializable
     {
         ArrayList<SavingAccount> savingAccounts = new ArrayList<>();
 
-        for(Map.Entry<String, ArrayList<Account>> entry : usersAccounts.entrySet())
+        for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
         {
             for(Account account : entry.getValue())
             {
@@ -141,9 +141,19 @@ public class AtmData implements Serializable
         return savingAccounts;
     }
 
-    public ArrayList<Account> getUserAccounts(final String userNip)
+    public ArrayList<Account> getUserAccounts(final String accountNip)
     {
-        return usersAccounts.get(userNip);
+        for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
+        {
+            User user = entry.getKey();
+
+            if(user.getAccountNIP() == accountNip)
+            {
+                return entry.getValue();
+            }
+        }
+
+        return null;
     }
 
     public boolean updateUserAccounts(final ArrayList<Account> userAccounts)
@@ -162,17 +172,25 @@ public class AtmData implements Serializable
     /************************************************************************/
     /* Private Class methods                                                */
     /************************************************************************/
-    private void initializeData(ArrayList<User> users,HashMap<String, ArrayList<Account>> usersAccounts)
+    private void initializeData(ArrayList<User> users, HashMap<User, ArrayList<Account>> userAccountsData)
     {
-        users.add(new Admin("Doe", "John", "Admin", "D001"));
+        Admin admin1 = new Admin("Doe", "John", "Admin", "D001");
+        users.add(admin1);
 
-        users.add(new Client("Zurek", "Maxime", "MaximeZurek", "1234"));
-        ArrayList<Account> zurekMaximeAccounts = new ArrayList<>();
-        zurekMaximeAccounts.add(new CheckAccount());
-        zurekMaximeAccounts.add(new SavingAccount());
+        Client maximeZurek = new Client("Zurek", "Maxime", "MaximeZurek", "1234");
+        users.add(maximeZurek);
+        ArrayList<Account> maximeZurekAccounts = new ArrayList<>();
+        maximeZurekAccounts.add(new CheckAccount(1001, 10500.95));
+        maximeZurekAccounts.add(new SavingAccount(2001, 1000.50));
+        userAccountsData.put(maximeZurek, maximeZurekAccounts);
+
+        Client jeremyDubeau = new Client("Dubeau", "Jeremy", "JeremyDubeau", "1234");
+        users.add(jeremyDubeau);
+        ArrayList<Account> jeremyDubeauAccounts = new ArrayList<>();
+        jeremyDubeauAccounts.add(new CheckAccount(1002, 20500.95));
+        jeremyDubeauAccounts.add(new SavingAccount(2002, 2000.50));
+        userAccountsData.put(jeremyDubeau, jeremyDubeauAccounts);
 
         Collections.sort(users);
-        //TODO Sort zurekMaximeAccounts, implement compare to in Account class
-        usersAccounts.put("1234", zurekMaximeAccounts);
     }
 }
