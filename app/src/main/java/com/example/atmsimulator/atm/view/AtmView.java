@@ -173,7 +173,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra(EViewKey.ATM_DATA.label, userAccounts);
+                        returnIntent.putExtra(EViewKey.USER_ACCOUNTS.label, userAccounts);
                         returnIntent.putExtra(EViewKey.USER.label, user);
                         setResult(Activity.RESULT_OK, returnIntent);
                         dialog.cancel();

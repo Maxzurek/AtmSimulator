@@ -118,13 +118,14 @@ public class LoginActivityPresenter
         }
     }
 
-    public void updateUserAccounts(Serializable user, Serializable userAccounts)
+    public void updateUserAccounts(Serializable _user, Serializable userAccounts)
     {
+        User user = (User)_user;
         ArrayList<Account> accounts = (ArrayList<Account>) userAccounts;
 
-        if(accounts != null)
+        if(user!= null && accounts != null)
         {
-            atmData.updateUserAccounts((User) user, accounts);
+            atmData.updateUserAccounts(user, accounts);
         }
     }
 

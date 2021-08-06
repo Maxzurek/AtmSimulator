@@ -162,7 +162,9 @@ public class AtmData implements Serializable
         {
             for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
             {
-                if(entry.getKey().equals(user))
+                User keyUser = entry.getKey();
+
+                if(keyUser.equals(user))
                 {
                    entry.setValue(_userAccounts);
                 }

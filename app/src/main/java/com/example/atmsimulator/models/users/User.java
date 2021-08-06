@@ -124,12 +124,22 @@ public abstract class User implements Comparable<User>, Serializable, IListLayou
             return false;
         }
 
-        Client client = (Client) o;
+        Client other = (Client) o;
 
-        return getAccountNIP() == client.getAccountNIP() &&
-                Objects.equals(getLastName(), client.getLastName()) &&
-                Objects.equals(getFirstName(), client.getFirstName()) &&
-                Objects.equals(getUserName(), client.getUserName());
+        if(!accountNIP.equalsIgnoreCase(other.getAccountNIP()))
+        {
+            return false;
+        }
+        if(!lastName.equalsIgnoreCase(other.getLastName()))
+        {
+            return false;
+        }
+        if(!userName.equalsIgnoreCase(other.getUserName()))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
