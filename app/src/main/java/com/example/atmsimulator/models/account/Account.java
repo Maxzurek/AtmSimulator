@@ -73,10 +73,10 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         public int getIconResID(){return R.drawable.list_view_account_icon;};
 
         @Override
-        public String getItem1(Context context){return context.getString(R.string.list_layout_item1_admin_prefix)+" "+getAccountNumber();}
+        public String getItem1(Context context){return context.getString(R.string.list_layout_item1_account_prefix)+" "+getAccountNumber();}
 
         @Override
-        public String getItem2(Context context){return context.getString(R.string.list_layout_item2_admin_prefix)+" "+getAccountAmount();}
+        public String getItem2(Context context){return context.getString(R.string.list_layout_item2_account_prefix)+" "+getAccountAmount();}
         @Override
 
         //Comparable

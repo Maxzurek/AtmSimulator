@@ -105,6 +105,42 @@ public class AtmData implements Serializable
         return accounts;
     }
 
+    public ArrayList<CheckAccount> getCheckAccounts()
+    {
+        ArrayList<CheckAccount> checkAccounts = new ArrayList<>();
+
+        for(Map.Entry<String, ArrayList<Account>> entry : usersAccounts.entrySet())
+        {
+            for(Account account : entry.getValue())
+            {
+                if(account instanceof CheckAccount)
+                {
+                    checkAccounts.add((CheckAccount) account);
+                }
+            }
+        }
+
+        return checkAccounts;
+    }
+
+    public ArrayList<SavingAccount> getSavingAccounts()
+    {
+        ArrayList<SavingAccount> savingAccounts = new ArrayList<>();
+
+        for(Map.Entry<String, ArrayList<Account>> entry : usersAccounts.entrySet())
+        {
+            for(Account account : entry.getValue())
+            {
+                if(account instanceof SavingAccount)
+                {
+                    savingAccounts.add((SavingAccount) account);
+                }
+            }
+        }
+
+        return savingAccounts;
+    }
+
     public ArrayList<Account> getUserAccounts(final String userNip)
     {
         return usersAccounts.get(userNip);

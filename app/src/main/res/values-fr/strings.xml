@@ -52,4 +52,5 @@
     <string name="login_activity_textview_fetchingData_error">Une erreur est survenue lors de la connection.\\nVeuillez contacter notre equipe de support si le problème persiste.</string>
     <string name="list_layout_title_account_check">List des comptes chèques</string>
     <string name="list_layout_title_account_saving">Liste des comptes épargnes</string>
+    <string name="list_layout_item2_account_prefix">"Solde du compte: "</string>
 </resources>
