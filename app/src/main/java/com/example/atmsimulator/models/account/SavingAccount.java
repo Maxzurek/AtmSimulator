@@ -16,7 +16,7 @@ public class SavingAccount extends Account implements Serializable
         super();
     }
 
-    public SavingAccount(String accountNumber, String accountAmount)
+    public SavingAccount(int accountNumber, double accountAmount)
     {
         super(accountNumber, accountAmount);
     }
@@ -36,23 +36,6 @@ public class SavingAccount extends Account implements Serializable
     }
 
 
-
-
-    /************************************************************************/
-    /* Public Methods                                                       */
-    /************************************************************************/
-
-
-    /*public void withdrawSavingAccount(float Amount){
-
-
-
-    }
-    public void depositSavingAccount(float Amount){
-
-
-
-    }*/
 }
 
 

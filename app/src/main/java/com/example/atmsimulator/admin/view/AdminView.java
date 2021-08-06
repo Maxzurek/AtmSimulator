@@ -9,10 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.atmsimulator.AdminListView;
+import com.example.atmsimulator.admin.AdminListView;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.admin.presenter.AdminActivityPresenter;
-import com.example.atmsimulator.views.EViewKey;
+import com.example.atmsimulator.EViewKey;
+import com.example.atmsimulator.models.AtmData;
 
 import java.io.Serializable;
 
@@ -44,12 +45,10 @@ public class AdminView extends AppCompatActivity implements IAdminView
     /************************************************************************/
     /* Interface Implementation                                             */
     /************************************************************************/
-    @Override
-    public Serializable getAtmData()
+    public AtmData getAtmData()
     {
-        return getIntent().getSerializableExtra(EViewKey.ATM_DATA.label);
+        return (AtmData) getIntent().getSerializableExtra(EViewKey.ATM_DATA.label);
     }
-
 
 
     /************************************************************************/
@@ -67,12 +66,20 @@ public class AdminView extends AppCompatActivity implements IAdminView
     
     public void onClickCheckAccountList(View view)
     {
+        Intent adminListIntent = new Intent(this, AdminListView.class);
 
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_TITLE.label, getString(R.string.list_layout_title_account_check));
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_DATA.label, getAtmData().getCheckAccounts());
+        startActivity(adminListIntent);
     }
 
     public void onCLickSavingAccountList(View view)
     {
+        Intent adminListIntent = new Intent(this, AdminListView.class);
 
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_TITLE.label, getString(R.string.list_layout_title_account_saving));
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_DATA.label, getAtmData().getSavingAccounts());
+        startActivity(adminListIntent);
     }
 
     public void onClickClientList(View view)
@@ -80,7 +87,7 @@ public class AdminView extends AppCompatActivity implements IAdminView
         Intent adminListIntent = new Intent(this, AdminListView.class);
 
         adminListIntent.putExtra(EViewKey.ADMIN_LIST_TITLE.label, getString(R.string.list_layout_title_client));
-        adminListIntent.putExtra(EViewKey.ADMIN_LIST_DATA.label, getAtmData());
+        adminListIntent.putExtra(EViewKey.ADMIN_LIST_DATA.label, getAtmData().getClients());
         startActivity(adminListIntent);
     }
 

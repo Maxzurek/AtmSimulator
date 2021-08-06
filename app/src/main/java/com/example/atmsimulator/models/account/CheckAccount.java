@@ -6,48 +6,33 @@ import com.example.atmsimulator.R;
 
 import java.io.Serializable;
 
-public class CheckAccount extends Account implements Serializable
-{
+public class CheckAccount extends Account implements Serializable {
     /************************************************************************/
     /* Constructor(s)                                                       */
-    /************************************************************************/
-    public CheckAccount()
-        {
-            super();
-        }
 
-    public CheckAccount(String accountNumber, String accountAmount)
-    {
+    /************************************************************************/
+    public CheckAccount() {
+        super();
+    }
+
+    public CheckAccount(int accountNumber, double accountAmount) {
         super(accountNumber, accountAmount);
     }
 
-    public CheckAccount(Account other)
-    {
+    public CheckAccount(Account other) {
         super(other);
     }
 
     /************************************************************************/
     /* Overridden Methods                                                   */
+
     /************************************************************************/
     @Override
-    public String toString()
-        {
-            return "CheckAccount" + super.toString();
-        }
-
-
-  /*  public void withdrawCheckAccount(float Amount){
-
-
-
+    public String toString() {
+        return "CheckAccount" + super.toString();
     }
-    public void depositCheckAccount(float Amount){
 
-
-
-    }*/
 
 }
-
 
 

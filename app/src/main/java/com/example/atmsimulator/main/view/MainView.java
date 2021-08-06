@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.main.presenter.MainActivityPresenter;
-import com.example.atmsimulator.views.EViewKey;
 import com.example.atmsimulator.login.view.LoginView;
 
 import java.io.Serializable;

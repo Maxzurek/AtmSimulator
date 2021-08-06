@@ -53,8 +53,6 @@ public class ListLayoutAdapter extends ArrayAdapter<IListLayoutAdapter>
             final ImageView imageViewIcon = view.findViewById(R.id.imageViewListIcon);
             imageViewIcon.setImageResource(data.getIconResID());
 
-            //TODO implement interface in Account class
-
             final TextView item1 = view.findViewById(R.id.textViewListItem1);
             item1.setText(data.getItem1(context));
 
