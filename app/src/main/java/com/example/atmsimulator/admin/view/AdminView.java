@@ -9,10 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.atmsimulator.AdminListView;
+import com.example.atmsimulator.admin.AdminListView;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.admin.presenter.AdminActivityPresenter;
-import com.example.atmsimulator.views.EViewKey;
+import com.example.atmsimulator.EViewKey;
 
 import java.io.Serializable;
 

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.atm.presenter.AtmActivityPresenter;
-import com.example.atmsimulator.views.EViewKey;
+import com.example.atmsimulator.EViewKey;
 
 import java.io.Serializable;
 

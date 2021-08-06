@@ -1,4 +1,4 @@
-package com.example.atmsimulator;
+package com.example.atmsimulator.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.atmsimulator.EViewKey;
+import com.example.atmsimulator.R;
 import com.example.atmsimulator.adapters.IListLayoutAdapter;
 import com.example.atmsimulator.adapters.ListLayoutAdapter;
-import com.example.atmsimulator.views.EViewKey;
 
 import java.util.ArrayList;
 
