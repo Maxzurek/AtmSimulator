@@ -28,20 +28,9 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    Button button0;
-    Button button1;
-    Button button2;
-    Button button3;
-    Button button4;
-    Button button5;
-    Button button6;
-    Button button7;
-    Button button8;
-    Button button9;
-    Button buttonDot;
-    Button buttonClear;
+
     EditText editTextInput;
-    ArrayList<Account> usersAccounts;
+    ArrayList<Account> userAccounts;
 
 
     private final String KEY_INPUT = "key_input";
@@ -64,48 +53,13 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atm);
 
-        usersAccounts = (ArrayList<Account>) getIntent().getSerializableExtra(EViewKey.USER_ACCOUNTS.label);
-
-        button0 = findViewById(R.id.button0);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
-        button5 = findViewById(R.id.button5);
-        button6 = findViewById(R.id.button6);
-        button7 = findViewById(R.id.button7);
-        button8 = findViewById(R.id.button8);
-        button9 = findViewById(R.id.button9);
-        buttonDot = findViewById(R.id.buttonDot);
-        buttonClear = findViewById(R.id.buttonClear);
-
-        editTextInput = findViewById(R.id.editTextInput);
+        userAccounts = (ArrayList<Account>) getIntent().getSerializableExtra(EViewKey.USER_ACCOUNTS.label);
 
         presenter = new AtmActivityPresenter(this);
         setAccountSummaryVisibility(accountSummaryVisibility);
         setTransactionSummaryVisibility(false);
 
-        button0.setOnClickListener(view -> chiffreClick("0"));
 
-        button1.setOnClickListener(view -> chiffreClick("1"));
-
-        button2.setOnClickListener(view -> chiffreClick("2"));
-
-        button3.setOnClickListener(view -> chiffreClick("3"));
-
-        button4.setOnClickListener(view -> chiffreClick("4"));
-
-        button5.setOnClickListener(view -> chiffreClick("5"));
-
-        button6.setOnClickListener(view -> chiffreClick("6"));
-
-        button7.setOnClickListener(view -> chiffreClick("7"));
-
-        button8.setOnClickListener(view -> chiffreClick("8"));
-
-        button9.setOnClickListener(view -> chiffreClick("9"));
-
-        buttonDot.setOnClickListener(view -> chiffreClick("."));
     }
 
     @Override
@@ -217,8 +171,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent returnIntent = new Intent();
-                        //TODO get accounts data from presenter and add them to the intent
-                        returnIntent.putExtra(EViewKey.ATM_DATA.label, presenter.getUserAccounts());
+                        returnIntent.putExtra(EViewKey.ATM_DATA.label, userAccounts);
                         setResult(Activity.RESULT_OK, returnIntent);
                         dialog.cancel();
                         finish();
@@ -237,7 +190,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         logoutWarning.show();
     }
 
-    public void chiffreClick(String nombre) {
+    public void chiffreClick(String nombre) {//todo changer edittext findbyid "findViewById(R.id.editTextInput)"
 
         if (!editTextInput.getText().equals("0"))
 
@@ -248,7 +201,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
     public void onClickClear(View view) {
 
-        editTextInput.setText("");
+        editTextInput.setText("");//todo changer edittext findbyid "findViewById(R.id.editTextInput)"
     }
 
     public void onClickSubmit(View view) {
@@ -266,7 +219,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
         if (radioButtonSelectedAccount == R.id.radioButtonCheck) {
             CheckAccount checkAccount = new CheckAccount();
-            for (Account account : usersAccounts) {
+            for (Account account : userAccounts) {
                 if (account instanceof CheckAccount) {
                     checkAccount = (CheckAccount) account;
                 }
@@ -284,4 +237,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
         }
     }
+    //todo ONCLICK 
+
+
 }
