@@ -34,6 +34,25 @@ public class SavingAccount extends Account implements Serializable
     {
         return "SavingAccount" + super.toString();
     }
+
+
+
+
+    /************************************************************************/
+    /* Public Methods                                                       */
+    /************************************************************************/
+
+
+    /*public void withdrawSavingAccount(float Amount){
+
+
+
+    }
+    public void depositSavingAccount(float Amount){
+
+
+
+    }*/
 }
 
 

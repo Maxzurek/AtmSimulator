@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,12 +26,28 @@ public class AtmView extends AppCompatActivity implements IAtmView
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
+    Button button0;
+    Button button1;
+    Button button2;
+    Button button3;
+    Button button4;
+    Button button5;
+    Button button6;
+    Button button7;
+    Button button8;
+    Button button9;
+    Button buttonDot;
+    Button buttonClear;
+    EditText editTextInput;
+
+
     private final String KEY_INPUT = "key_input";
     private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
     private final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
     private final String KEY_CHECK_AMOUNT = "key_check_amount";
     private final String KEY_SAVING_AMOUNT = "key_saving_amount";
     private final String KEY_ACCOUNT_SUMMARY_VISIBILITY = "key_account_summary_visibility";
+
 
     private AtmActivityPresenter presenter;
     private boolean accountSummaryVisibility = false;
@@ -44,9 +61,46 @@ public class AtmView extends AppCompatActivity implements IAtmView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atm);
 
+        button0 = (Button) findViewById (R. id.button0);
+        button1 = (Button) findViewById (R. id.button1);
+        button2 = (Button) findViewById (R. id.button2);
+        button3 = (Button) findViewById (R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R.id.button5);
+        button6 = (Button) findViewById(R.id.button6);
+        button7 = (Button) findViewById(R.id.button7);
+        button8 = (Button) findViewById(R.id.button8);
+        button9 = (Button) findViewById(R.id.button9);
+        buttonDot = (Button) findViewById(R.id.buttonDot);
+        buttonClear = (Button) findViewById(R.id.buttonClear);
+
+        editTextInput = (EditText) findViewById(R.id.editTextInput);
+
         presenter = new AtmActivityPresenter(this);
         setAccountSummaryVisibility(accountSummaryVisibility);
         setTransactionSummaryVisibility(false);
+
+        button0.setOnClickListener (view -> chiffreClick("0"));
+
+        button1.setOnClickListener (view -> chiffreClick("1"));
+
+        button2.setOnClickListener (view -> chiffreClick("2"));
+
+        button3.setOnClickListener (view -> chiffreClick("3"));
+
+        button4.setOnClickListener (view -> chiffreClick("4"));
+
+        button5.setOnClickListener (view -> chiffreClick("5"));
+
+        button6.setOnClickListener (view -> chiffreClick("6"));
+
+        button7.setOnClickListener (view -> chiffreClick("7"));
+
+        button8.setOnClickListener (view -> chiffreClick("8"));
+
+        button9.setOnClickListener (view -> chiffreClick("9"));
+
+        buttonDot.setOnClickListener (view -> chiffreClick("."));
     }
 
     @Override
@@ -191,4 +245,49 @@ public class AtmView extends AppCompatActivity implements IAtmView
 
         logoutWarning.show();
     }
+    public void chiffreClick (String nombre) {
+
+        if(!editTextInput. getText (). equals ("0"))
+
+            nombre = editTextInput.getText() + nombre;
+
+        editTextInput. setText (nombre);
+    }
+
+    public void onClickClear(View view) {
+
+        editTextInput.setText("");
+    }
+
+    /*public void onClickSubmit(View view) {
+        int radioButtonSelectedAccount;
+        int radioButtonSelectedTransaction;
+
+        RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
+        RadioGroup radioGroupTransaction = findViewById((R.id.radioGroupTransaction));
+
+        radioButtonSelectedTransaction = radioGroupTransaction.getCheckedRadioButtonId();
+        radioButtonSelectedAccount = radioGroupAccount.getCheckedRadioButtonId();
+
+        if(radioButtonSelectedAccount == R.id.radioButtonCheck)
+        {
+            if(radioButtonSelectedTransaction == R.id.radioButtonDeposit)
+            {
+
+            }
+            if(radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
+
+            }
+        }
+        else{
+
+
+        }
+
+
+
+
+
+
+    }*/
 }

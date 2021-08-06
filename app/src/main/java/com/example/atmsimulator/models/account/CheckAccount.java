@@ -34,6 +34,19 @@ public class CheckAccount extends Account implements Serializable
         {
             return "CheckAccount" + super.toString();
         }
+
+
+  /*  public void withdrawCheckAccount(float Amount){
+
+
+
+    }
+    public void depositCheckAccount(float Amount){
+
+
+
+    }*/
+
 }
 
 

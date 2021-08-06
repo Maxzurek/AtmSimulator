@@ -123,6 +123,30 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         {
             return Objects.hash(getAccountNumber(), getAccountAmount());
         }
+
+
+        /************************************************************************/
+        /* Public Methods                                                       */
+        /************************************************************************/
+
+        public float withdraw(float Amount){
+
+            float newAccountAmount;
+            newAccountAmount = Float.parseFloat(accountAmount) - Amount;
+
+            return newAccountAmount;
+
+        }
+
+        public float deposit(float Amount){
+
+            float newAccountAmount;
+            newAccountAmount = Float.parseFloat(accountAmount) + Amount;
+
+            return newAccountAmount;
+
+        }
+
     }
 
 
