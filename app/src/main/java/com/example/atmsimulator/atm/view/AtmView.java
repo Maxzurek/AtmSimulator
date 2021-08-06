@@ -9,11 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.atmsimulator.models.users.User;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.atm.presenter.AtmActivityPresenter;
 import com.example.atmsimulator.EViewKey;
@@ -31,6 +31,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
     EditText editTextInput;
     ArrayList<Account> userAccounts;
+    User user;
 
 
     private final String KEY_INPUT = "key_input";
@@ -54,6 +55,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         setContentView(R.layout.activity_atm);
 
         userAccounts = (ArrayList<Account>) getIntent().getSerializableExtra(EViewKey.USER_ACCOUNTS.label);
+        user = (User) getIntent().getSerializableExtra(EViewKey.USER.label);
 
         presenter = new AtmActivityPresenter(this);
         setAccountSummaryVisibility(accountSummaryVisibility);
@@ -172,6 +174,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra(EViewKey.ATM_DATA.label, userAccounts);
+                        returnIntent.putExtra(EViewKey.USER.label, user);
                         setResult(Activity.RESULT_OK, returnIntent);
                         dialog.cancel();
                         finish();
@@ -207,37 +210,53 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     public void onClickSubmit(View view) {
         int radioButtonSelectedAccount;
         int radioButtonSelectedTransaction;
-        float editTextAmount;
+        double editTextAmount;
 
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
         RadioGroup radioGroupTransaction = findViewById((R.id.radioGroupTransaction));
 
-        editTextAmount = Float.parseFloat(editTextAmountChange.getText().toString());
+        editTextAmount = Double.parseDouble(editTextAmountChange.getText().toString());
         radioButtonSelectedTransaction = radioGroupTransaction.getCheckedRadioButtonId();
         radioButtonSelectedAccount = radioGroupAccount.getCheckedRadioButtonId();
 
-        if (radioButtonSelectedAccount == R.id.radioButtonCheck) {
+        if (radioButtonSelectedAccount == R.id.radioButtonCheck)
+        {
             CheckAccount checkAccount = new CheckAccount();
-            for (Account account : userAccounts) {
-                if (account instanceof CheckAccount) {
+
+            for (Account account : userAccounts)
+            {
+                if (account instanceof CheckAccount)
+                {
                     checkAccount = (CheckAccount) account;
                 }
             }
 
-            if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
+            if (radioButtonSelectedTransaction == R.id.radioButtonDeposit)
+            {
 
                 checkAccount.deposit(editTextAmount);
             }
-            if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
+            if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw)
+            {
                 checkAccount.withdraw(editTextAmount);
             }
-        } else {
-
+        }
+        else
+        {
 
         }
     }
-    //todo ONCLICK 
 
+    //todo ONCLICK
+    public void onClickZero(View view) {
+    }
+
+    public void onClickThree(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText("3");
+    }
 
 }

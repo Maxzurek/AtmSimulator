@@ -6,7 +6,7 @@ public interface ILoginView
 {
     Serializable getAtmData();
 
-    void startAtmActivity(Serializable atmData);
+    void startAtmActivity(Serializable user, Serializable atmData);
 
     void startAdminActivity(Serializable atmData);
 

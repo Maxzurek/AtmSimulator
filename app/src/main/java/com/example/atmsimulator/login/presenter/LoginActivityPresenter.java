@@ -85,7 +85,7 @@ public class LoginActivityPresenter
                 }
                 else
                 {
-                    view.startAtmActivity(atmData.getUserAccounts(nip));
+                    view.startAtmActivity(user, atmData.getUserAccounts(user));
                 }
             }
             else
@@ -118,13 +118,13 @@ public class LoginActivityPresenter
         }
     }
 
-    public void updateUserAccounts(Serializable userAccounts)
+    public void updateUserAccounts(Serializable user, Serializable userAccounts)
     {
         ArrayList<Account> accounts = (ArrayList<Account>) userAccounts;
 
         if(accounts != null)
         {
-            atmData.updateUserAccounts(accounts);
+            atmData.updateUserAccounts((User) user, accounts);
         }
     }
 

@@ -88,11 +88,12 @@ public class LoginView extends AppCompatActivity implements ILoginView
     }
 
     @Override
-    public void startAtmActivity(Serializable userAccounts)
+    public void startAtmActivity(Serializable user, Serializable userAccounts)
     {
         Intent atmIntent = new Intent(this, AtmView.class);
 
         atmIntent.putExtra(EViewKey.USER_ACCOUNTS.label, userAccounts);
+        atmIntent.putExtra(EViewKey.USER.label, user);
         atmActivityLauncher.launch(atmIntent);
     }
 
@@ -145,7 +146,7 @@ public class LoginView extends AppCompatActivity implements ILoginView
                         if (result.getResultCode() == Activity.RESULT_OK)
                         {
                             Intent data = result.getData();
-                            presenter.updateUserAccounts(data.getSerializableExtra(EViewKey.USER_ACCOUNTS.label));
+                            presenter.updateUserAccounts(data.getSerializableExtra(EViewKey.USER.label), data.getSerializableExtra(EViewKey.USER_ACCOUNTS.label));
                         }
                     });
     }

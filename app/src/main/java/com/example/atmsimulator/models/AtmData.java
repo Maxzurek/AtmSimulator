@@ -141,13 +141,13 @@ public class AtmData implements Serializable
         return savingAccounts;
     }
 
-    public ArrayList<Account> getUserAccounts(final String accountNip)
+    public ArrayList<Account> getUserAccounts(final User _user)
     {
         for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
         {
             User user = entry.getKey();
 
-            if(user.getAccountNIP() == accountNip)
+            if(user.equals(_user))
             {
                 return entry.getValue();
             }
@@ -156,12 +156,17 @@ public class AtmData implements Serializable
         return null;
     }
 
-    public boolean updateUserAccounts(final ArrayList<Account> userAccounts)
+    public boolean updateUserAccounts(final User user, final ArrayList<Account> _userAccounts)
     {
-        if(userAccounts != null)
+        if(_userAccounts != null)
         {
-            //TODO Get account nip and replace data in the usersAccounts hashmap with the specified key
-            //userAccounts.get(0);
+            for(Map.Entry<User, ArrayList<Account>> entry : userAccounts.entrySet())
+            {
+                if(entry.getKey().equals(user))
+                {
+                   entry.setValue(_userAccounts);
+                }
+            }
 
             return true;
         }

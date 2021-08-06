@@ -3,6 +3,7 @@ package com.example.atmsimulator;
 public enum EViewKey
 {
     ATM_DATA("atmData"),
+    USER("user"),
     USER_ACCOUNTS("userAccounts"),
     ADMIN_LIST_TITLE("adminListTitle"),
     ADMIN_LIST_DATA("adminListData");
