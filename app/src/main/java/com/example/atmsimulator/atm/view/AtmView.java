@@ -32,7 +32,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     EditText editTextInput;
     ArrayList<Account> userAccounts;
     User user;
-
+    boolean hasdot = false;
 
     private final String KEY_INPUT = "key_input";
     private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
@@ -194,9 +194,12 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     }
 
 
-    public void onClickClear(View view) {
+    public void onClickClear(View view)
+    {
+        EditText editTextInput = findViewById(R.id.editTextInput);
 
-        editTextInput.setText("");//todo changer edittext findbyid "findViewById(R.id.editTextInput)"
+        editTextInput.setText("");
+
     }
 
     public void onClickSubmit(View view) {
@@ -241,18 +244,115 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     }
 
     //todo ONCLICK
-    public void onClickZero(View view) {
+    public void onClickZero(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "0");
+    }
+
+    public void onClickOne(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "1");
+    }
+    public void onClickTwo(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "2");
     }
 
     public void onClickThree(View view)
     {
         EditText textInput = findViewById(R.id.editTextInput);
 
-        textInput.setText("3");
+        textInput.setText(textInput.getText() + "3");
+    }
+
+    public void onClickFour(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "4");
+    }
+
+    public void onClickFive(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "5");
+    }
+
+    public void onClickSix(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "6");
+    }
+
+    public void onClickSeven(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "7");
+    }
+
+    public void onClickEight(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "8");
+    }
+
+    public void onClickNine(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + "9");
+    }
+
+    public void onClickDot(View view)
+    {
+        if(!hasdot)
+        {
+            EditText textInput = findViewById(R.id.editTextInput);
+
+            textInput.setText(textInput.getText() + ".");
+            hasdot = true;
+        }
+        else
+        {
+            EditText textInput = findViewById(R.id.editTextInput);
+
+            textInput.setText(textInput.getText() + "");
+        }
+
     }
 
     public void OnClickLogout(View view) {
         //todo displayLogoutWarning()
 
     }
+
+    public void onClickSummary(View view) {
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
