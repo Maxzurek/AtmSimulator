@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AtmSimulator</string>
-    <string name="default_monetary_value">0.00$</string>
 
     <string name="login_activity_editTextUsername_hint">Username</string>
     <string name="login_activity_editTextNIP_hint">NIP</string>
