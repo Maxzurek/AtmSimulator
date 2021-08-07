@@ -22,21 +22,21 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /************************************************************************/
         /* Constructor(s)                                                       */
         /************************************************************************/
-    public Account()
+        public Account()
         {
             accountNumber = 0;
             accountAmount = 0;
 
         }
 
-    public Account(int accountNumber, double accountAmount)
+        public Account(int accountNumber, double accountAmount)
         {
             this.setAccountNumber(accountNumber);
             this.setAccountAmount(accountAmount);
 
         }
 
-    public Account(Account other)
+        public Account(Account other)
         {
             this.setAccountNumber(other.getAccountNumber());
             this.setAccountAmount(other.getAccountAmount());
@@ -166,7 +166,8 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
             }
         }
 
-        public boolean deposit(double Amount){
+        public boolean deposit(double Amount)
+        {
 
             if(Amount < 0)
             {
@@ -178,7 +179,7 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
 
                 return true;
             }
-        }
+        }//todo transfer
 
     }
 

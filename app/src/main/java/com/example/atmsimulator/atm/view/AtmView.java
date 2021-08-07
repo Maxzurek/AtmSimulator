@@ -193,14 +193,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         logoutWarning.show();
     }
 
-    public void chiffreClick(String nombre) {//todo changer edittext findbyid "findViewById(R.id.editTextInput)"
-
-        if (!editTextInput.getText().equals("0"))
-
-            nombre = editTextInput.getText() + nombre;
-
-        editTextInput.setText(nombre);
-    }
 
     public void onClickClear(View view) {
 
@@ -259,4 +251,8 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         textInput.setText("3");
     }
 
+    public void OnClickLogout(View view) {
+        //todo displayLogoutWarning()
+
+    }
 }
