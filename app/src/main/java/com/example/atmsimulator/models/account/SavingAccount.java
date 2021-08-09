@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class SavingAccount extends Account implements Serializable
 {
+    private final double INTEREST_RATE = 1.25;
     /************************************************************************/
     /* Constructor(s)                                                       */
     /************************************************************************/
@@ -33,6 +34,12 @@ public class SavingAccount extends Account implements Serializable
     public String toString()
     {
         return "SavingAccount" + super.toString();
+    }
+
+    public void interestPayment()
+    {
+        setAccountAmount(getAccountAmount() * INTEREST_RATE);
+
     }
 
 

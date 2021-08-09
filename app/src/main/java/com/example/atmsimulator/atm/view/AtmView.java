@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.atmsimulator.models.account.SavingAccount;
 import com.example.atmsimulator.models.users.User;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.atm.presenter.AtmActivityPresenter;
@@ -22,6 +24,7 @@ import com.example.atmsimulator.models.account.CheckAccount;
 
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AtmView extends AppCompatActivity implements IAtmView {
@@ -29,10 +32,10 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     /* Class attributes                                                     */
     /************************************************************************/
 
-    EditText editTextInput;
+    
     ArrayList<Account> userAccounts;
     User user;
-    boolean hasdot = false;
+
 
     private final String KEY_INPUT = "key_input";
     private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
@@ -207,48 +210,157 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         int radioButtonSelectedTransaction;
         double editTextAmount;
 
+        setTransactionSummaryVisibility(true);
+
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
         RadioGroup radioGroupTransaction = findViewById((R.id.radioGroupTransaction));
 
-        editTextAmount = Double.parseDouble(editTextAmountChange.getText().toString());
         radioButtonSelectedTransaction = radioGroupTransaction.getCheckedRadioButtonId();
         radioButtonSelectedAccount = radioGroupAccount.getCheckedRadioButtonId();
+        CheckAccount checkAccount = new CheckAccount();
+        SavingAccount savingAccount = new SavingAccount();
+        String StringTransactionSummary = editTextAmountChange.getText().toString();
 
-        if (radioButtonSelectedAccount == R.id.radioButtonCheck)
+        try
         {
-            CheckAccount checkAccount = new CheckAccount();
+            editTextAmount = Double.parseDouble(editTextAmountChange.getText().toString());
+        }
+        catch(NumberFormatException e)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_fieldEmpty));
+            return;
+        }
 
-            for (Account account : userAccounts)
-            {
-                if (account instanceof CheckAccount)
-                {
-                    checkAccount = (CheckAccount) account;
+        if(StringTransactionSummary.length() > 0) {
+
+
+            if (radioButtonSelectedAccount == R.id.radioButtonCheck) {
+
+
+                for (Account account : userAccounts) {
+                    if (account instanceof CheckAccount) {
+                        checkAccount = (CheckAccount) account;
+
+                    }
+                    if (account instanceof SavingAccount) {
+                        savingAccount = (SavingAccount) account;
+                    }
+                }
+
+                if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
+
+                    if (checkAccount.deposit(editTextAmount) == true)
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
+                    }
+                    else
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                    }
+
+
+                    editTextAmountChange.setText("");
+
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
+                    if(checkAccount.withdraw(editTextAmount) == true)
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
+                    }
+                    else
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                    }
+
+                    editTextAmountChange.setText("");
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonTransfer) {
+                    if (editTextAmount > 100000) {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
+                    } else if (editTextAmount > savingAccount.getAccountAmount()) {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
+                    } else {
+                        checkAccount.setAccountAmount(checkAccount.getAccountAmount() + editTextAmount);
+                        savingAccount.setAccountAmount(savingAccount.getAccountAmount() - editTextAmount);
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
+                        editTextAmountChange.setText("");
+                    }
+
+
                 }
             }
+            if (radioButtonSelectedAccount == R.id.radioButtonSaving) {
+                for (Account account : userAccounts) {
+                    if (account instanceof CheckAccount) {
+                        checkAccount = (CheckAccount) account;
 
-            if (radioButtonSelectedTransaction == R.id.radioButtonDeposit)
-            {
+                    }
+                    if (account instanceof SavingAccount) {
+                        savingAccount = (SavingAccount) account;
+                    }
+                }
 
-                checkAccount.deposit(editTextAmount);
+                if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
+                    if(savingAccount.deposit(editTextAmount)== true)
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+                    }
+                    else
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                    }
+
+                    editTextAmountChange.setText("");
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
+                    if(savingAccount.withdraw(editTextAmount) == true)
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+                    }
+                    else
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                    }
+
+                    editTextAmountChange.setText("");
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonTransfer) {
+                    if (editTextAmount > 100000) {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
+                    }
+                    if (editTextAmount > checkAccount.getAccountAmount()) {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
+                    } else {
+                        savingAccount.setAccountAmount(savingAccount.getAccountAmount() + editTextAmount);
+                        checkAccount.setAccountAmount(checkAccount.getAccountAmount() - editTextAmount);
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
+                        editTextAmountChange.setText("");
+                    }
+
+                }
             }
-            if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw)
-            {
-                checkAccount.withdraw(editTextAmount);
-            }
+            updateAccountSummary();
         }
-        else
-        {
 
-        }
     }
 
-    //todo ONCLICK
+
+
     public void onClickZero(View view)
     {
         EditText textInput = findViewById(R.id.editTextInput);
+        String textInputString = textInput.getText().toString();
 
-        textInput.setText(textInput.getText() + "0");
+        if(textInputString.length() <= 0)
+        {
+            textInput.setText(textInput.getText() + "");
+        }
+        else
+        {
+            textInput.setText(textInput.getText() + "0");
+        }
     }
 
     public void onClickOne(View view)
@@ -315,30 +427,76 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
     public void onClickDot(View view)
     {
-        if(!hasdot)
-        {
-            EditText textInput = findViewById(R.id.editTextInput);
 
+
+        EditText textInput = findViewById(R.id.editTextInput);
+        String textImputString =  textInput.getText().toString();
+        textImputString.contains(".");
+
+        if(!textImputString.contains("."))
+        {
             textInput.setText(textInput.getText() + ".");
-            hasdot = true;
+
         }
         else
         {
-            EditText textInput = findViewById(R.id.editTextInput);
 
             textInput.setText(textInput.getText() + "");
         }
 
     }
 
-    public void OnClickLogout(View view) {
-        //todo displayLogoutWarning()
+    public void OnClickLogout(View view)
+    {
+         displayLogoutWarning();
 
     }
 
-    public void onClickSummary(View view) {
-        
+    public void onClickSummary(View view)
+    {
+
+        if (accountSummaryVisibility == true)
+        {
+            setAccountSummaryVisibility(false);
+            accountSummaryVisibility = false;
+
+        }
+        else
+        {
+            setAccountSummaryVisibility(true);
+            accountSummaryVisibility = true;
+
+        }
+        updateAccountSummary();
+
+
     }
+    private void updateAccountSummary()
+    {
+        TextView balanceCheck = findViewById(R.id.textViewCheckAmount);
+        TextView balanceSaving = findViewById(R.id.textViewSavingAmount);
+        CheckAccount checkAccount = new CheckAccount();
+        SavingAccount savingAccount = new SavingAccount();
+        DecimalFormat decimalFormat = new DecimalFormat("#.##$");
+
+
+        for (Account account : userAccounts)
+        {
+            if (account instanceof CheckAccount)
+            {
+                checkAccount = (CheckAccount) account;
+
+            }
+            if(account instanceof SavingAccount)
+            {
+                savingAccount = (SavingAccount) account;
+            }
+        }
+        balanceCheck.setText(decimalFormat.format(checkAccount.getAccountAmount()));
+        balanceSaving.setText(decimalFormat.format(savingAccount.getAccountAmount()));
+
+    }
+
 }
 
 

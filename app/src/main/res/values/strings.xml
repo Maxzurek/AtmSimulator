@@ -37,6 +37,18 @@
     <string name="atm_activity_button_submit">SUBMIT</string>
     <string name="atm_activity_textView_check">Check account balance:</string>
     <string name="atm_activity_textView_saving">Saving account balance:</string>
+    <string name="atm_activity_textView_transaction_deposit"> You deposit </string>
+    <string name="atm_activity_textView_transaction_withdraw"> You withdraw </string>
+    <string name="atm_activity_textView_transaction_checkAccount"> in your Check Account </string>
+    <string name="atm_activity_textView_transaction_savingAccount"> in your Saving Account </string>
+    <string name="atm_activity_textView_emptyField"> enter an amount to deposit or withdraw </string>
+    <string name="atm_activity_textView_notEnoughMoney"> You don\'t have enough money in your account</string>
+    <string name="atm_activity_textView_Transfer"> Transfer of </string>
+    <string name="atm_activity_textView_Transfer_checkToSaving">" from your Check account to your Saving account "</string>
+    <string name="atm_activity_textView_Transfer_savingToCheck"> from your saving account to your check account </string>
+    <string name="atm_activity_textView_maximumTransfer"> Maximum transfer is 100 000$</string>
+    <string name="atm_activity_textView_fieldEmpty"> Enter a amount over 0</string>
+    <string name="atm_activity_textView_errorAmount"> The amount entered can\'t be process</string>
 
     <string name="list_layout_title_client">Client list</string>
     <string name="list_layout_title_account_check">Check accounts</string>

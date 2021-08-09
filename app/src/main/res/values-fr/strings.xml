@@ -37,6 +37,18 @@
     <string name="atm_activity_button_submit">SOUMETTRE</string>
     <string name="atm_activity_textView_check">Solde compte Chèque:</string>
     <string name="atm_activity_textView_saving">Solde compte Épargne:</string>
+    <string name="atm_activity_textView_transaction_deposit">Dépot de </string>
+    <string name="atm_activity_textView_transaction_withdraw">Retrait de </string>
+    <string name="atm_activity_textView_transaction_checkAccount">dans votre compte Chèque</string>
+    <string name="atm_activity_textView_transaction_savingAccount"> dans votre compte Épargne </string>
+    <string name="atm_activity_textView_notEnoughMoney">vous n\'avez pas asser d\'argent dans votre compte</string>
+    <string name="atm_activity_textView_emptyField">Entré un montant a deposer ou retirer</string>
+    <string name="atm_activity_textView_Transfer">Virement de</string>
+    <string name="atm_activity_textView_Transfer_checkToSaving">de votre compte Cheque vers votre compte Epargne</string>
+    <string name="atm_activity_textView_Transfer_savingToCheck">de votre compte Epargne vers votre compte Cheque</string>
+    <string name="atm_activity_textView_maximumTransfer">Virement maximal est de 100 000$</string>
+    <string name="atm_activity_textView_fieldEmpty">Entrer un motant plus que 0</string>
+
 
     <string name="list_layout_title_client">Liste des clients</string>
     <string name="list_layout_item1_client_prefix">Nom du client:</string>
@@ -52,4 +64,7 @@
     <string name="list_layout_title_account_check">List des comptes chèques</string>
     <string name="list_layout_title_account_saving">Liste des comptes épargnes</string>
     <string name="list_layout_item2_account_prefix">"Solde du compte: "</string>
+    <string name="atm_activity_textView_errorAmount">Le montant entrer est invalide</string>
+
+
 </resources>

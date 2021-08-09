@@ -179,7 +179,8 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
 
                 return true;
             }
-        }//todo transfer
+        }
+
 
     }
 
