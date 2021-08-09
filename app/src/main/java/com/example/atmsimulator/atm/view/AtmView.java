@@ -255,7 +255,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
                     }
-                    else
+                    if (editTextAmount % 10 != 0)
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
                     }
@@ -361,6 +361,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         {
             textInput.setText(textInput.getText() + "0");
         }
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickOne(View view)
@@ -368,12 +369,14 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "1");
+        textInput.setSelection(textInput.getText().length());
     }
     public void onClickTwo(View view)
     {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "2");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickThree(View view)
@@ -381,6 +384,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "3");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickFour(View view)
@@ -388,6 +392,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "4");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickFive(View view)
@@ -395,6 +400,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "5");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickSix(View view)
@@ -402,6 +408,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "6");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickSeven(View view)
@@ -409,6 +416,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "7");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickEight(View view)
@@ -416,6 +424,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "8");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickNine(View view)
@@ -423,6 +432,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText textInput = findViewById(R.id.editTextInput);
 
         textInput.setText(textInput.getText() + "9");
+        textInput.setSelection(textInput.getText().length());
     }
 
     public void onClickDot(View view)
@@ -443,6 +453,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
             textInput.setText(textInput.getText() + "");
         }
+        textInput.setSelection(textInput.getText().length());
 
     }
 

@@ -14,6 +14,7 @@ import com.example.atmsimulator.admin.presenter.AdminActivityPresenter;
 import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.models.account.Account;
+import com.example.atmsimulator.models.account.SavingAccount;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -62,12 +63,17 @@ public class AdminView extends AppCompatActivity implements IAdminView
 
     public void onClickPayInterest(View view)
     {
+
         ArrayList<Account> accounts = getAtmData().getAccounts();
 
         for(Account account : accounts)
         {
-            //TODO call payInterest method from account object
+            if(account instanceof SavingAccount)
+            {
+               ((SavingAccount) account).interestPayment();
+            }
         }
+
     }
     
     public void onClickCheckAccountList(View view)
