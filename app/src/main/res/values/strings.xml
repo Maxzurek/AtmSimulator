@@ -30,7 +30,7 @@
     <string name="atm_activity_button_clear">c</string>
     <string name="atm_activity_radioButton_deposit">Deposit</string>
     <string name="atm_activity_radioButton_withdraw">Withdraw</string>
-    <string name="atm_activity_radioButton_transfert">Transfer</string>
+    <string name="atm_activity_radioButton_transfer">Transfer</string>
     <string name="atm_activity_radioButton_check">Check</string>
     <string name="atm_activity_radioButton_saving">Saving</string>
     <string name="atm_activity_button_accountSummary">Accounts summary</string>
@@ -41,18 +41,15 @@
     <string name="atm_activity_textView_transaction_withdraw"> You withdraw </string>
     <string name="atm_activity_textView_transaction_checkAccount"> in your Check Account </string>
     <string name="atm_activity_textView_transaction_savingAccount"> in your Saving Account </string>
-    <string name="atm_activity_textView_emptyField"> enter an amount to deposit or withdraw </string>
-    <string name="atm_activity_textView_notEnoughMoney"> You don\'t have enough money in your account</string>
-    <string name="atm_activity_textView_Transfer"> Transfer of </string>
-    <string name="atm_activity_textView_Transfer_checkToSaving">" from your Check account to your Saving account "</string>
-    <string name="atm_activity_textView_Transfer_savingToCheck"> from your saving account to your check account </string>
-    <string name="atm_activity_textView_maximumTransfer"> Maximum transfer is 100 000$</string>
-    <string name="atm_activity_textView_fieldEmpty"> Enter a amount over 0</string>
-    <string name="atm_activity_textView_errorAmount1000"> The amount entered can\'t be process need to be under 1000$</string>
-    <string name="atm_activity_textView_errorAmountDivisableBy10"> the amount need to be a multiple of 10</string>
-    <string name="atm_activity_textView_errorAmountZero"> the amount need to be higher than 0</string>
-    <string name="atm_activity_textView_errorAmountGreaterThanAccount"> You don\'t have enough money in your account to make this operation</string>
-
+    <string name="atm_activity_textView_emptyField">" Enter an amount to deposit or withdraw."</string>
+    <string name="atm_activity_textView_insufficient_funds">Transaction failed. Insufficient funds.</string>
+    <string name="atm_activity_textView_Transfer">Transaction completed. Transferred</string>
+    <string name="atm_activity_textView_Transfer_checkToSaving">" from your Check account to your Saving account."</string>
+    <string name="atm_activity_textView_Transfer_savingToCheck">" from your saving account to your check account. "</string>
+    <string name="atm_activity_textView_maximumTransfer">Transaction failed. Maximum transfer amount is 100 000$.</string>
+    <string name="atm_activity_textView_errorAmount1000">Transaction failed. Maximum withdraw amount of 1000$.</string>
+    <string name="atm_activity_textView_error_amount_modulo10">Transaction failed. The amount must be divisible by 10.</string>
+    <string name="atm_activity_textView_errorAmountZero">Transaction failed. The amount must be greater than 0.</string>
 
     <string name="list_layout_title_client">Client list</string>
     <string name="list_layout_title_account_check">Check accounts</string>
@@ -67,4 +64,5 @@
     <string name="logout_warning_message">Do you want to log out?</string>
     <string name="logout_warning_button_yes">Yes</string>
     <string name="logout_warning_button_no">No</string>
+
 </resources>

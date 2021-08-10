@@ -362,7 +362,7 @@
             android:id="@+id/radioButtonTransfer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/atm_activity_radioButton_transfert" />
+            android:text="@string/atm_activity_radioButton_transfer" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

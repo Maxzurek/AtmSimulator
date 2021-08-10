@@ -30,7 +30,7 @@
     <string name="atm_activity_button_clear">c</string>
     <string name="atm_activity_radioButton_deposit">Dépot</string>
     <string name="atm_activity_radioButton_withdraw">Retrait</string>
-    <string name="atm_activity_radioButton_transfert">Virement</string>
+    <string name="atm_activity_radioButton_transfer">Virement</string>
     <string name="atm_activity_radioButton_check">Chèque</string>
     <string name="atm_activity_radioButton_saving">Épargne</string>
     <string name="atm_activity_button_accountSummary">ÉTAT DES COMPTES</string>
@@ -41,18 +41,15 @@
     <string name="atm_activity_textView_transaction_withdraw">Retrait de </string>
     <string name="atm_activity_textView_transaction_checkAccount">dans votre compte Chèque</string>
     <string name="atm_activity_textView_transaction_savingAccount"> dans votre compte Épargne </string>
-    <string name="atm_activity_textView_notEnoughMoney">vous n\'avez pas asser d\'argent dans votre compte</string>
-    <string name="atm_activity_textView_emptyField">Entré un montant a deposer ou retirer</string>
-    <string name="atm_activity_textView_Transfer">Virement de</string>
-    <string name="atm_activity_textView_Transfer_checkToSaving">de votre compte Cheque vers votre compte Epargne</string>
-    <string name="atm_activity_textView_Transfer_savingToCheck">de votre compte Epargne vers votre compte Cheque</string>
-    <string name="atm_activity_textView_maximumTransfer">Virement maximal est de 100 000$</string>
-    <string name="atm_activity_textView_fieldEmpty">Entrer un motant plus que 0</string>
-    <string name="atm_activity_textView_errorAmount1000">Le montant entrer est invalide il doit etre en dessous de 1000$</string>
-    <string name="atm_activity_textView_errorAmountDivisableBy10"> Le montant entrer doit etre un multiples de $10</string>
-    <string name="atm_activity_textView_errorAmountZero"> Le montant entrer doit etre plus grand que 0</string>
-    <string name="atm_activity_textView_errorAmountGreaterThanAccount"> vous n\'avez pas asser d\'argent dans votre compte pour faire cette transaction</string>
-
+    <string name="atm_activity_textView_insufficient_funds">Échec de la transaction. Fonds insuffisants.</string>
+    <string name="atm_activity_textView_emptyField">Entrer un montant à déposer ou retirer</string>
+    <string name="atm_activity_textView_Transfer">Transaction terminé. Virement de</string>
+    <string name="atm_activity_textView_Transfer_checkToSaving">de votre compte chèque vers votre compte épargne.</string>
+    <string name="atm_activity_textView_Transfer_savingToCheck">de votre compte épargne vers votre compte chèque.</string>
+    <string name="atm_activity_textView_maximumTransfer">Échec de la transaction. Virement maximal de 100 000$.</string>
+    <string name="atm_activity_textView_errorAmount1000">"Échec de la transaction. Le montant maximal de retrait est de 1000$. "</string>
+    <string name="atm_activity_textView_error_amount_modulo10">" Échec de la transaction. Le montant doit être divisible par 10."</string>
+    <string name="atm_activity_textView_errorAmountZero">Échec de la transaction. Le montant doit être plus grand que 0.</string>
 
     <string name="list_layout_title_client">Liste des clients</string>
     <string name="list_layout_item1_client_prefix">Nom du client:</string>
@@ -68,7 +65,5 @@
     <string name="list_layout_title_account_check">List des comptes chèques</string>
     <string name="list_layout_title_account_saving">Liste des comptes épargnes</string>
     <string name="list_layout_item2_account_prefix">"Solde du compte: "</string>
-
-
 
 </resources>

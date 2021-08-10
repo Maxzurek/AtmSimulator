@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.atmsimulator.models.account.SavingAccount;
 import com.example.atmsimulator.models.users.User;
@@ -31,12 +30,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-
-    
-    ArrayList<Account> userAccounts;
-    User user;
-
-
     private final String KEY_INPUT = "key_input";
     private final String KEY_RADIO_GROUP_TRANSACTION = "key_radio_group_transaction";
     private final String KEY_RADIO_GROUP_ACCOUNT = "key_radio_group_account";
@@ -44,16 +37,17 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     private final String KEY_SAVING_AMOUNT = "key_saving_amount";
     private final String KEY_ACCOUNT_SUMMARY_VISIBILITY = "key_account_summary_visibility";
 
-
     private AtmActivityPresenter presenter;
     private boolean accountSummaryVisibility = false;
+    private ArrayList<Account> userAccounts;
+    private User user;
 
     /************************************************************************/
     /* Overridden Methods                                                   */
-
     /************************************************************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atm);
 
@@ -63,24 +57,26 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         presenter = new AtmActivityPresenter(this);
         setAccountSummaryVisibility(accountSummaryVisibility);
         setTransactionSummaryVisibility(false);
-
-
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull @org.jetbrains.annotations.NotNull Bundle outState) {
+    protected void onSaveInstanceState(@NonNull @org.jetbrains.annotations.NotNull Bundle outState)
+    {
         super.onSaveInstanceState(outState);
 
-        if (outState != null) {
+        if (outState != null)
+        {
             outState.putAll(getSaveInstanceBundle());
         }
     }
 
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
+    {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null)
+        {
             EditText editTextInput = findViewById(R.id.editTextInput);
             RadioGroup radioGroupTransaction = findViewById(R.id.radioGroupTransaction);
             RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
@@ -98,7 +94,8 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         displayLogoutWarning();
     }
 
@@ -106,20 +103,207 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     /* Interface Implementation                                             */
 
     /************************************************************************/
-    public Serializable getUserAccounts() {
+    public Serializable getUserAccounts()
+    {
         return getIntent().getSerializableExtra(EViewKey.USER_ACCOUNTS.label);
     }
 
     /************************************************************************/
     /* Events Handling                                                      */
     /************************************************************************/
+    public void onClickClear(View view)
+    {
+        EditText editTextInput = findViewById(R.id.editTextInput);
 
+        editTextInput.setText("");
+    }
+
+    public void onClickSubmit(View view)
+    {
+        int radioButtonSelectedAccount;
+        int radioButtonSelectedTransaction;
+        double editTextAmount;
+
+        setTransactionSummaryVisibility(true);
+
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
+        RadioGroup radioGroupTransaction = findViewById((R.id.radioGroupTransaction));
+
+        radioButtonSelectedTransaction = radioGroupTransaction.getCheckedRadioButtonId();
+        radioButtonSelectedAccount = radioGroupAccount.getCheckedRadioButtonId();
+        String StringTransactionSummary = editTextAmountChange.getText().toString();
+
+        try
+        {
+            editTextAmount = Double.parseDouble(editTextAmountChange.getText().toString());
+        }
+        catch(NumberFormatException e)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
+            return;
+        }
+
+        if(StringTransactionSummary.length() > 0)
+        {
+            if (radioButtonSelectedAccount == R.id.radioButtonCheck)
+            {
+                getCheckAccount();
+
+                if (radioButtonSelectedTransaction == R.id.radioButtonDeposit)
+                {
+                    checkDeposit(editTextAmount);
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw)
+                {
+
+                    checkWithdraw(editTextAmount);
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonTransfer)
+                {
+                    savingToCheckTransfer(editTextAmount);
+                }
+            }
+            if (radioButtonSelectedAccount == R.id.radioButtonSaving)
+            {
+                getSavingAccount();
+
+                if (radioButtonSelectedTransaction == R.id.radioButtonDeposit)
+                {
+                    savingDeposit(editTextAmount);
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw)
+                {
+                    savingWithdraw(editTextAmount);
+                }
+                if (radioButtonSelectedTransaction == R.id.radioButtonTransfer)
+                {
+                    checkToSavingTransfer(editTextAmount);
+                }
+            }
+            updateAccountSummary();
+        }
+    }
+
+    public void onClickZero(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+        String textInputString = textInput.getText().toString();
+
+        if(textInputString.length() == 0)
+        {
+            return;
+        }
+        else
+        {
+            concatToTextInput("0");
+        }
+    }
+
+    public void onClickOne(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("1");
+    }
+    public void onClickTwo(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("2");
+    }
+
+    public void onClickThree(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("3");
+    }
+
+    public void onClickFour(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("4");
+    }
+
+    public void onClickFive(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("5");
+    }
+
+    public void onClickSix(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("6");
+    }
+
+    public void onClickSeven(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("7");
+    }
+
+    public void onClickEight(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("8");
+    }
+
+    public void onClickNine(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        concatToTextInput("9");
+    }
+
+    public void onClickDot(View view)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+        String textInputString =  textInput.getText().toString();
+
+        if(textInputString.contains("."))
+        {
+            return;
+        }
+        else
+        {
+            concatToTextInput(".");
+        }
+    }
+
+    public void OnClickLogout(View view)
+    {
+        displayLogoutWarning();
+
+    }
+
+    public void onClickSummary(View view)
+    {
+        if (accountSummaryVisibility == true)
+        {
+            setAccountSummaryVisibility(false);
+            accountSummaryVisibility = false;
+        }
+        else
+        {
+            setAccountSummaryVisibility(true);
+            accountSummaryVisibility = true;
+        }
+        updateAccountSummary();
+    }
 
     /************************************************************************/
     /* Private class methods                                                */
-
     /************************************************************************/
-    private Bundle getSaveInstanceBundle() {
+    private Bundle getSaveInstanceBundle()
+    {
         Bundle bundle = new Bundle();
 
         EditText editTextInput = findViewById(R.id.editTextInput);
@@ -131,12 +315,16 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         TextView textViewSavingAmount = findViewById(R.id.textViewSavingAmount);
 
         bundle.putString(KEY_INPUT, editTextInput.getText().toString());
-        if (transactionCheckedRadioButtonID != -1) {
+
+        if (transactionCheckedRadioButtonID != -1)
+        {
             bundle.putInt(KEY_RADIO_GROUP_TRANSACTION, transactionCheckedRadioButtonID);
         }
-        if (accountCheckedRadioButtonID != -1) {
+        if (accountCheckedRadioButtonID != -1)
+        {
             bundle.putInt(KEY_RADIO_GROUP_ACCOUNT, accountCheckedRadioButtonID);
         }
+
         bundle.putString(KEY_CHECK_AMOUNT, textViewCheckAmount.getText().toString());
         bundle.putString(KEY_SAVING_AMOUNT, textViewSavingAmount.getText().toString());
         bundle.putBoolean(KEY_ACCOUNT_SUMMARY_VISIBILITY, accountSummaryVisibility);
@@ -144,7 +332,8 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         return bundle;
     }
 
-    private void setAccountSummaryVisibility(boolean isVisible) {
+    private void setAccountSummaryVisibility(boolean isVisible)
+    {
         int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
         TextView textViewCheck = findViewById(R.id.textViewCheck);
         TextView textViewSaving = findViewById(R.id.textViewSaving);
@@ -159,14 +348,16 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         accountSummaryVisibility = isVisible;
     }
 
-    private void setTransactionSummaryVisibility(boolean isVisible) {
+    private void setTransactionSummaryVisibility(boolean isVisible)
+    {
         int visibility = isVisible ? View.VISIBLE : View.INVISIBLE;
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
         textViewTransactionSummary.setVisibility(visibility);
     }
 
-    private void displayLogoutWarning() {
+    private void displayLogoutWarning()
+    {
         AlertDialog.Builder logoutWarningBuilder = new AlertDialog.Builder(this);
 
         logoutWarningBuilder.setMessage(getString(R.string.logout_warning_message));
@@ -196,217 +387,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         logoutWarning.show();
     }
 
-
-    public void onClickClear(View view)
-    {
-        EditText editTextInput = findViewById(R.id.editTextInput);
-
-        editTextInput.setText("");
-
-    }
-
-    public void onClickSubmit(View view) {
-        int radioButtonSelectedAccount;
-        int radioButtonSelectedTransaction;
-        double editTextAmount;
-
-        setTransactionSummaryVisibility(true);
-
-        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
-        EditText editTextAmountChange = findViewById(R.id.editTextInput);
-        RadioGroup radioGroupAccount = findViewById(R.id.radioGroupAccount);
-        RadioGroup radioGroupTransaction = findViewById((R.id.radioGroupTransaction));
-
-        radioButtonSelectedTransaction = radioGroupTransaction.getCheckedRadioButtonId();
-        radioButtonSelectedAccount = radioGroupAccount.getCheckedRadioButtonId();
-        String StringTransactionSummary = editTextAmountChange.getText().toString();
-
-        try
-        {
-            editTextAmount = Double.parseDouble(editTextAmountChange.getText().toString());
-        }
-        catch(NumberFormatException e)
-        {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_fieldEmpty));
-            return;
-        }
-
-        if(StringTransactionSummary.length() > 0) {
-
-
-            if (radioButtonSelectedAccount == R.id.radioButtonCheck) {
-
-                getCheckAccount();
-
-                if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
-                    checkDeposit(editTextAmount);
-
-                }
-                if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
-
-                    checkWithdraw(editTextAmount);
-
-                }
-                if (radioButtonSelectedTransaction == R.id.radioButtonTransfer) {
-                    savingToCheckTransfer(editTextAmount);
-
-
-                }
-            }
-            if (radioButtonSelectedAccount == R.id.radioButtonSaving) {
-                getSavingAccount();
-
-                if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
-                    savingDeposit(editTextAmount);
-                }
-                if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
-                    savingWithdraw(editTextAmount);
-                }
-                if (radioButtonSelectedTransaction == R.id.radioButtonTransfer) {
-                    checkToSavingTransfer(editTextAmount);
-                }
-            }
-            updateAccountSummary();
-        }
-
-    }
-
-
-
-    public void onClickZero(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-        String textInputString = textInput.getText().toString();
-
-        if(textInputString.length() <= 0)
-        {
-            textInput.setText(textInput.getText() + "");
-        }
-        else
-        {
-            textInput.setText(textInput.getText() + "0");
-        }
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickOne(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "1");
-        textInput.setSelection(textInput.getText().length());
-    }
-    public void onClickTwo(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "2");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickThree(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "3");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickFour(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "4");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickFive(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "5");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickSix(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "6");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickSeven(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "7");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickEight(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "8");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickNine(View view)
-    {
-        EditText textInput = findViewById(R.id.editTextInput);
-
-        textInput.setText(textInput.getText() + "9");
-        textInput.setSelection(textInput.getText().length());
-    }
-
-    public void onClickDot(View view)
-    {
-
-
-        EditText textInput = findViewById(R.id.editTextInput);
-        String textImputString =  textInput.getText().toString();
-        textImputString.contains(".");
-
-        if(!textImputString.contains("."))
-        {
-            textInput.setText(textInput.getText() + ".");
-
-        }
-        else
-        {
-
-            textInput.setText(textInput.getText() + "");
-        }
-        textInput.setSelection(textInput.getText().length());
-
-    }
-
-    public void OnClickLogout(View view)
-    {
-         displayLogoutWarning();
-
-    }
-
-    public void onClickSummary(View view)
-    {
-
-        if (accountSummaryVisibility == true)
-        {
-            setAccountSummaryVisibility(false);
-            accountSummaryVisibility = false;
-
-        }
-        else
-        {
-            setAccountSummaryVisibility(true);
-            accountSummaryVisibility = true;
-
-        }
-        updateAccountSummary();
-
-
-    }
     private void updateAccountSummary()
     {
         TextView balanceCheck = findViewById(R.id.textViewCheckAmount);
@@ -414,7 +394,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         CheckAccount checkAccount = new CheckAccount();
         SavingAccount savingAccount = new SavingAccount();
         DecimalFormat decimalFormat = new DecimalFormat("#.##$");
-
 
         for (Account account : userAccounts)
         {
@@ -428,17 +407,15 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                 savingAccount = (SavingAccount) account;
             }
         }
+
         balanceCheck.setText(decimalFormat.format(checkAccount.getAccountAmount()));
         balanceSaving.setText(decimalFormat.format(savingAccount.getAccountAmount()));
-
     }
 
     private void checkDeposit(double amount)
     {
-
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
-
 
         if (amount < 0)
         {
@@ -458,7 +435,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
-
         if (amount < 0)
         {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
@@ -477,14 +453,13 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
-
         if(getSavingAccount().withdraw(amount))
         {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
         }
         if(amount % 10 != 0)
         {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_error_amount_modulo10));
         }
         if(amount> 1000)
         {
@@ -503,14 +478,13 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
-
         if(getCheckAccount().withdraw(amount))
         {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
         }
         if(amount % 10 != 0)
         {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_error_amount_modulo10));
         }
         if(amount> 1000)
         {
@@ -529,18 +503,21 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
-        if (amount > 100000) {
+        if (amount > 100000)
+        {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
         }
-        if (amount > getCheckAccount().getAccountAmount()) {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
-        } else {
+        if (amount > getCheckAccount().getAccountAmount())
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_insufficient_funds));
+        }
+        else
+        {
             getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() + amount);
             getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() - amount);
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
             editTextAmountChange.setText("");
         }
-
     }
 
     private void savingToCheckTransfer(double amount)
@@ -548,27 +525,32 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         EditText editTextAmountChange = findViewById(R.id.editTextInput);
         TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
 
-        if (amount > 100000) {
+        if (amount > 100000)
+        {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
-        } else if (amount > getSavingAccount().getAccountAmount()) {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
-        } else {
+        }
+        else if (amount > getSavingAccount().getAccountAmount())
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_insufficient_funds));
+        }
+        else
+        {
             getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() + amount);
             getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() - amount);
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
             editTextAmountChange.setText("");
         }
-
     }
 
     private CheckAccount getCheckAccount()
     {
         CheckAccount checkAccount = null;
 
-        for (Account account : userAccounts) {
-            if (account instanceof CheckAccount) {
+        for (Account account : userAccounts)
+        {
+            if (account instanceof CheckAccount)
+            {
                 checkAccount = (CheckAccount) account;
-
             }
         }
         return checkAccount;
@@ -576,31 +558,23 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
     private SavingAccount getSavingAccount()
     {
-
         SavingAccount savingAccount = null;
 
-        for (Account account : userAccounts) {
-
-            if (account instanceof SavingAccount) {
+        for (Account account : userAccounts)
+        {
+            if (account instanceof SavingAccount)
+            {
                 savingAccount = (SavingAccount) account;
             }
         }
         return savingAccount;
     }
+
+    private void concatToTextInput(String text)
+    {
+        EditText textInput = findViewById(R.id.editTextInput);
+
+        textInput.setText(textInput.getText() + text);
+        textInput.setSelection(textInput.getText().length());
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
