@@ -255,7 +255,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
                     }
-                    if (editTextAmount > 0)
+                    if (editTextAmount < 0)
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
                     }
@@ -311,7 +311,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
                     }
-                    if (editTextAmount > 0)
+                    if (editTextAmount < 0)
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
                     }
@@ -330,6 +330,10 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     if(editTextAmount> 1000)
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
+                    }
+                    if(editTextAmount > savingAccount.getAccountAmount())
+                    {
+
                     }
 
                     editTextAmountChange.setText("");

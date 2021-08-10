@@ -51,6 +51,7 @@
     <string name="atm_activity_textView_errorAmount1000">Le montant entrer est invalide il doit etre en dessous de 1000$</string>
     <string name="atm_activity_textView_errorAmountDivisableBy10"> Le montant entrer doit etre un multiples de $10</string>
     <string name="atm_activity_textView_errorAmountZero"> Le montant entrer doit etre plus grand que 0</string>
+    <string name="atm_activity_textView_errorAmountGreaterThanAccount"> vous n\'avez pas asser d\'argent dans votre compte pour faire cette transaction</string>
 
 
     <string name="list_layout_title_client">Liste des clients</string>

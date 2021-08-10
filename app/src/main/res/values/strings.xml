@@ -51,6 +51,8 @@
     <string name="atm_activity_textView_errorAmount1000"> The amount entered can\'t be process need to be under 1000$</string>
     <string name="atm_activity_textView_errorAmountDivisableBy10"> the amount need to be a multiple of 10</string>
     <string name="atm_activity_textView_errorAmountZero"> the amount need to be higher than 0</string>
+    <string name="atm_activity_textView_errorAmountGreaterThanAccount"> You don\'t have enough money in your account to make this operation</string>
+
 
     <string name="list_layout_title_client">Client list</string>
     <string name="list_layout_title_account_check">Check accounts</string>
