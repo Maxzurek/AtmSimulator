@@ -255,9 +255,9 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
                     }
-                    if (editTextAmount % 10 != 0)
+                    if (editTextAmount > 0)
                     {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
                     }
 
 
@@ -269,9 +269,13 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
                     }
-                    else
+                    if(editTextAmount % 10 != 0)
                     {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
+                    }
+                    if(editTextAmount> 1000)
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
                     }
 
                     editTextAmountChange.setText("");
@@ -305,11 +309,11 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                 if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
                     if(savingAccount.deposit(editTextAmount)== true)
                     {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
                     }
-                    else
+                    if (editTextAmount > 0)
                     {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
                     }
 
                     editTextAmountChange.setText("");
@@ -319,9 +323,13 @@ public class AtmView extends AppCompatActivity implements IAtmView {
                     {
                         textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
                     }
-                    else
+                    if(editTextAmount % 10 != 0)
                     {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount));
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
+                    }
+                    if(editTextAmount> 1000)
+                    {
+                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
                     }
 
                     editTextAmountChange.setText("");

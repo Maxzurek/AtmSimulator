@@ -48,6 +48,9 @@
     <string name="atm_activity_textView_Transfer_savingToCheck">de votre compte Epargne vers votre compte Cheque</string>
     <string name="atm_activity_textView_maximumTransfer">Virement maximal est de 100 000$</string>
     <string name="atm_activity_textView_fieldEmpty">Entrer un motant plus que 0</string>
+    <string name="atm_activity_textView_errorAmount1000">Le montant entrer est invalide il doit etre en dessous de 1000$</string>
+    <string name="atm_activity_textView_errorAmountDivisableBy10"> Le montant entrer doit etre un multiples de $10</string>
+    <string name="atm_activity_textView_errorAmountZero"> Le montant entrer doit etre plus grand que 0</string>
 
 
     <string name="list_layout_title_client">Liste des clients</string>
@@ -64,7 +67,7 @@
     <string name="list_layout_title_account_check">List des comptes chèques</string>
     <string name="list_layout_title_account_saving">Liste des comptes épargnes</string>
     <string name="list_layout_item2_account_prefix">"Solde du compte: "</string>
-    <string name="atm_activity_textView_errorAmount">Le montant entrer est invalide</string>
+
 
 
 </resources>
