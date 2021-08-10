@@ -1,4 +1,4 @@
-package com.example.atmsimulator.main.view;
+package com.example.atmsimulator.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,17 +8,19 @@ import android.widget.ImageView;
 
 import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.main.presenter.MainActivityPresenter;
 import com.example.atmsimulator.login.view.LoginView;
+import com.example.atmsimulator.models.AtmData;
 
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class MainView extends AppCompatActivity implements IMainView
+public class MainView extends AppCompatActivity
 {
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
-    private MainActivityPresenter presenter;
+    private AtmData atmData;
 
     /************************************************************************/
     /* Overridden Methods                                                   */
@@ -30,17 +32,58 @@ public class MainView extends AppCompatActivity implements IMainView
         setContentView(R.layout.activity_main);
 
         setTitle(R.string.main_activity_title);
-
-        presenter = new MainActivityPresenter(this);
-
-        presenter.initializeApp();
+        initializeApp();
     }
 
     /************************************************************************/
-    /* Interface Implementation                                             */
+    /* Private Methods                                                      */
     /************************************************************************/
-    @Override
-    public void rotateImageViewLoading(float rotation)
+    private void initializeApp()
+    {
+        loadData();
+        simulateLoading();
+    }
+
+    private void loadData()
+    {
+        atmData = new AtmData();
+    }
+
+    private void simulateLoading()
+    {
+        final int LOADING_WAIT_TIME = 3000;
+        final int ROTATION_DELAY = 0;
+        final int ROTATION_PERIOD = 90;
+        final float IMAGE_VIEW_ROTATION = 10; //10 degrees
+
+        //Spin loading icon in main view
+        Timer timerRotate = new Timer();
+        TimerTask taskRotate = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                rotateImageViewLoading(IMAGE_VIEW_ROTATION);
+            }
+        };
+        timerRotate.schedule(taskRotate, ROTATION_DELAY, ROTATION_PERIOD);
+
+
+        //Simulate 3 seconds loading
+        Timer timerWait = new Timer();
+        TimerTask taskWait = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                timerRotate.cancel();
+                startLoginActivity(atmData);
+            }
+        };
+        timerWait.schedule(taskWait, LOADING_WAIT_TIME);
+    }
+
+    private void rotateImageViewLoading(float rotation)
     {
         ImageView imageViewLoading = findViewById(R.id.imageViewLoading);
 
@@ -53,8 +96,7 @@ public class MainView extends AppCompatActivity implements IMainView
         }
     }
 
-    @Override
-    public void startLoginActivity(Serializable atmData)
+    private void startLoginActivity(Serializable atmData)
     {
         Intent loginIntent = new Intent(this, LoginView.class);
         loginIntent.putExtra(EViewKey.ATM_DATA.label, atmData);

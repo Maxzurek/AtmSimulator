@@ -1,4 +1,4 @@
-package com.example.atmsimulator.atm.view;
+package com.example.atmsimulator.atm;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.example.atmsimulator.models.account.SavingAccount;
 import com.example.atmsimulator.models.users.User;
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.atm.presenter.AtmActivityPresenter;
 import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.models.account.Account;
 import com.example.atmsimulator.models.account.CheckAccount;
@@ -26,7 +25,8 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class AtmView extends AppCompatActivity implements IAtmView {
+public class AtmView extends AppCompatActivity
+{
     /************************************************************************/
     /* Class attributes                                                     */
     /************************************************************************/
@@ -37,7 +37,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
     private final String KEY_SAVING_AMOUNT = "key_saving_amount";
     private final String KEY_ACCOUNT_SUMMARY_VISIBILITY = "key_account_summary_visibility";
 
-    private AtmActivityPresenter presenter;
     private boolean accountSummaryVisibility = false;
     private ArrayList<Account> userAccounts;
     private User user;
@@ -54,7 +53,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         userAccounts = (ArrayList<Account>) getIntent().getSerializableExtra(EViewKey.USER_ACCOUNTS.label);
         user = (User) getIntent().getSerializableExtra(EViewKey.USER.label);
 
-        presenter = new AtmActivityPresenter(this);
         setAccountSummaryVisibility(accountSummaryVisibility);
         setTransactionSummaryVisibility(false);
     }

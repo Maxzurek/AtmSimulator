@@ -1,4 +1,4 @@
-package com.example.atmsimulator.admin.view;
+package com.example.atmsimulator.amin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,22 +10,15 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.admin.presenter.AdminActivityPresenter;
 import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.models.AtmData;
 import com.example.atmsimulator.models.account.Account;
 import com.example.atmsimulator.models.account.SavingAccount;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AdminView extends AppCompatActivity implements IAdminView
+public class AdminView extends AppCompatActivity
 {
-    /************************************************************************/
-    /* Class attributes                                                     */
-    /************************************************************************/
-    private AdminActivityPresenter presenter;
-
     /************************************************************************/
     /* Overridden Methods                                                   */
     /************************************************************************/
@@ -34,8 +27,6 @@ public class AdminView extends AppCompatActivity implements IAdminView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-
-        presenter = new AdminActivityPresenter(this);
     }
 
     @Override
@@ -43,15 +34,6 @@ public class AdminView extends AppCompatActivity implements IAdminView
     {
         displayLogoutWarning();
     }
-
-    /************************************************************************/
-    /* Interface Implementation                                             */
-    /************************************************************************/
-    public AtmData getAtmData()
-    {
-        return (AtmData) getIntent().getSerializableExtra(EViewKey.ATM_DATA.label);
-    }
-
 
     /************************************************************************/
     /* Events Handling                                                      */
@@ -106,6 +88,11 @@ public class AdminView extends AppCompatActivity implements IAdminView
     /************************************************************************/
     /* Private class methods                                                */
     /************************************************************************/
+    private AtmData getAtmData()
+    {
+        return (AtmData) getIntent().getSerializableExtra(EViewKey.ATM_DATA.label);
+    }
+
     private void displayLogoutWarning()
     {
         AlertDialog.Builder logoutWarningBuilder = new AlertDialog.Builder(this);
@@ -120,7 +107,7 @@ public class AdminView extends AppCompatActivity implements IAdminView
                     {
                         dialog.cancel();
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra(EViewKey.ATM_DATA.label, presenter.getAtmData());
+                        returnIntent.putExtra(EViewKey.ATM_DATA.label, getAtmData());
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }

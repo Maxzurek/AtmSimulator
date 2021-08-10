@@ -2,7 +2,6 @@ package com.example.atmsimulator.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.atmsimulator.R;
-import com.example.atmsimulator.models.account.Account;
-import com.example.atmsimulator.models.users.User;
 
 import java.util.ArrayList;
 

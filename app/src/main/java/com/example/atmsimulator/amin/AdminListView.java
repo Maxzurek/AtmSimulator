@@ -1,4 +1,4 @@
-package com.example.atmsimulator.admin.view;
+package com.example.atmsimulator.amin;
 
 import androidx.appcompat.app.AppCompatActivity;
 

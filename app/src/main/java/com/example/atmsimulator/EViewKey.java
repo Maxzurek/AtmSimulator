@@ -10,7 +10,7 @@ public enum EViewKey
 
     public final String label;
 
-    private EViewKey(String label)
+    EViewKey(String label)
     {
         this.label = label;
     }

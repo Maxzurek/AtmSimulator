@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.example.atmsimulator.EViewKey;
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.login.presenter.LoginActivityPresenter;
-import com.example.atmsimulator.admin.view.AdminView;
-import com.example.atmsimulator.atm.view.AtmView;
+import com.example.atmsimulator.amin.AdminView;
+import com.example.atmsimulator.atm.AtmView;
 
 import org.jetbrains.annotations.NotNull;
 
