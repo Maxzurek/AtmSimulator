@@ -18,7 +18,6 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         private int accountNumber;
         private double accountAmount;
 
-
         /************************************************************************/
         /* Constructor(s)                                                       */
         /************************************************************************/
@@ -26,21 +25,18 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         {
             accountNumber = 0;
             accountAmount = 0;
-
         }
 
         public Account(int accountNumber, double accountAmount)
         {
             this.setAccountNumber(accountNumber);
             this.setAccountAmount(accountAmount);
-
         }
 
         public Account(Account other)
         {
             this.setAccountNumber(other.getAccountNumber());
             this.setAccountAmount(other.getAccountAmount());
-
         }
 
         /************************************************************************/
@@ -71,11 +67,16 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
         /************************************************************************/
         //Comparable
         @Override
-        public int getIconResID(){return R.drawable.list_view_account_icon;};
+        public int getIconResID()
+        {
+            return R.drawable.list_view_account_icon;
+        };
 
         @Override
-        public String getItem1(Context context){
-            return context.getString(R.string.list_layout_item1_account_prefix)+" "+getAccountNumber();}
+        public String getItem1(Context context)
+        {
+            return context.getString(R.string.list_layout_item1_account_prefix)+" "+getAccountNumber();
+        }
 
         @Override
         public String getItem2(Context context)
@@ -138,12 +139,9 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
             return Objects.hash(getAccountNumber(), getAccountAmount());
         }
 
-
         /************************************************************************/
         /* Public Methods                                                       */
         /************************************************************************/
-
-
         public boolean withdraw(double amount)
         {
             if (amount > accountAmount)
@@ -168,7 +166,6 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
 
         public boolean deposit(double Amount)
         {
-
             if(Amount < 0)
             {
                 return false;
@@ -180,8 +177,6 @@ public abstract class Account implements Comparable<Account>, Serializable, ILis
                 return true;
             }
         }
-
-
     }
 
 

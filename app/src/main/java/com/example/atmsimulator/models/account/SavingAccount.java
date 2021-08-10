@@ -8,7 +8,11 @@ import java.io.Serializable;
 
 public class SavingAccount extends Account implements Serializable
 {
-    private final double INTEREST_RATE = 1.25;
+    /************************************************************************/
+    /* Class attributes                                                     */
+    /************************************************************************/
+    private final double INTEREST_RATE = 1.0125;
+
     /************************************************************************/
     /* Constructor(s)                                                       */
     /************************************************************************/
@@ -39,10 +43,7 @@ public class SavingAccount extends Account implements Serializable
     public void interestPayment()
     {
         setAccountAmount(getAccountAmount() * INTEREST_RATE);
-
     }
-
-
 }
 
 

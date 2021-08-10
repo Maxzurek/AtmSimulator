@@ -53,6 +53,8 @@
     <string name="atm_activity_textView_error_amount_modulo10">Transaction failed.\nThe amount must be divisible by 10.</string>
     <string name="atm_activity_textView_errorAmountZero">Transaction failed.\nThe amount must be greater than 0.</string>
 
+    <string name="admin_activity_interestComplete">Interest payments completed with success.</string>
+
     <string name="list_layout_title_client">Client list</string>
     <string name="list_layout_title_account_check">Check accounts</string>
     <string name="list_layout_title_account_saving">Saving accounts</string>

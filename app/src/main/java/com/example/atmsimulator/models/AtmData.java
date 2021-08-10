@@ -181,9 +181,11 @@ public class AtmData implements Serializable
     /************************************************************************/
     private void initializeData(ArrayList<User> users, HashMap<User, ArrayList<Account>> userAccountsData)
     {
+        //Create Admin account
         Admin admin1 = new Admin("Doe", "John", "Admin", "D001");
         users.add(admin1);
 
+        //Create User account MaximeZurek
         Client maximeZurek = new Client("Zurek", "Maxime", "MaximeZurek", "1234");
         users.add(maximeZurek);
         ArrayList<Account> maximeZurekAccounts = new ArrayList<>();
@@ -191,6 +193,7 @@ public class AtmData implements Serializable
         maximeZurekAccounts.add(new SavingAccount(2001, 1000.50));
         userAccountsData.put(maximeZurek, maximeZurekAccounts);
 
+        //Create User account JeremyDubeau
         Client jeremyDubeau = new Client("Dubeau", "Jeremy", "JeremyDubeau", "1234");
         users.add(jeremyDubeau);
         ArrayList<Account> jeremyDubeauAccounts = new ArrayList<>();

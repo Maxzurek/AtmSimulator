@@ -67,5 +67,6 @@
     <string name="list_layout_item2_account_prefix">"Solde du compte: "</string>
     <string name="atm_activity_textView_transaction_withdraw_checkAccount_suffix">de votre compte chèque.</string>
     <string name="atm_activity_textView_transaction_withdraw_savingAccount_suffix">de votre compte épargne.</string>
+    <string name="admin_activity_interestComplete">Paiement des interets completé avec succes.</string>
 
 </resources>

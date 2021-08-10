@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.atmsimulator.R;
 import com.example.atmsimulator.EViewKey;
@@ -45,7 +46,6 @@ public class AdminView extends AppCompatActivity
 
     public void onClickPayInterest(View view)
     {
-
         ArrayList<Account> accounts = getAtmData().getAccounts();
 
         for(Account account : accounts)
@@ -56,6 +56,7 @@ public class AdminView extends AppCompatActivity
             }
         }
 
+        Toast.makeText(this, R.string.admin_activity_interestComplete, Toast.LENGTH_LONG).show();
     }
     
     public void onClickCheckAccountList(View view)
