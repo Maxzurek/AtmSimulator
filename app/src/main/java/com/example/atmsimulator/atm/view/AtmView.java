@@ -424,7 +424,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         else
         {
             getCheckAccount().deposit(amount);
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit_prefix) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_transaction_deposit_checkAccount_suffix));
         }
 
         editTextAmountChange.setText("");
@@ -442,7 +442,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         else
         {
             getSavingAccount().deposit(amount);
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit_prefix) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_transaction_deposit_checkAccount_suffix));
         }
 
         editTextAmountChange.setText("");
@@ -455,7 +455,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
         if(getSavingAccount().withdraw(amount))
         {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_transaction_withdraw_savingAccount_suffix));
         }
         if(amount % 10 != 0)
         {
@@ -480,7 +480,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
         if(getCheckAccount().withdraw(amount))
         {
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_transaction_withdraw_checkAccount_suffix));
         }
         if(amount % 10 != 0)
         {
@@ -515,7 +515,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         {
             getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() + amount);
             getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() - amount);
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
             editTextAmountChange.setText("");
         }
     }
@@ -537,7 +537,7 @@ public class AtmView extends AppCompatActivity implements IAtmView {
         {
             getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() + amount);
             getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() - amount);
-            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
             editTextAmountChange.setText("");
         }
     }
