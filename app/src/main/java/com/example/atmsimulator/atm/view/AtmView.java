@@ -219,8 +219,6 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
         radioButtonSelectedTransaction = radioGroupTransaction.getCheckedRadioButtonId();
         radioButtonSelectedAccount = radioGroupAccount.getCheckedRadioButtonId();
-        CheckAccount checkAccount = new CheckAccount();
-        SavingAccount savingAccount = new SavingAccount();
         String StringTransactionSummary = editTextAmountChange.getText().toString();
 
         try
@@ -238,119 +236,34 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
             if (radioButtonSelectedAccount == R.id.radioButtonCheck) {
 
-
-                for (Account account : userAccounts) {
-                    if (account instanceof CheckAccount) {
-                        checkAccount = (CheckAccount) account;
-
-                    }
-                    if (account instanceof SavingAccount) {
-                        savingAccount = (SavingAccount) account;
-                    }
-                }
+                getCheckAccount();
 
                 if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
-
-                    if (checkAccount.deposit(editTextAmount) == true)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
-                    }
-                    if (editTextAmount < 0)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
-                    }
-
-
-                    editTextAmountChange.setText("");
+                    checkDeposit(editTextAmount);
 
                 }
                 if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
-                    if(checkAccount.withdraw(editTextAmount) == true)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
-                    }
-                    if(editTextAmount % 10 != 0)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
-                    }
-                    if(editTextAmount> 1000)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
-                    }
 
-                    editTextAmountChange.setText("");
+                    checkWithdraw(editTextAmount);
+
                 }
                 if (radioButtonSelectedTransaction == R.id.radioButtonTransfer) {
-                    if (editTextAmount > 100000) {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
-                    } else if (editTextAmount > savingAccount.getAccountAmount()) {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
-                    } else {
-                        checkAccount.setAccountAmount(checkAccount.getAccountAmount() + editTextAmount);
-                        savingAccount.setAccountAmount(savingAccount.getAccountAmount() - editTextAmount);
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
-                        editTextAmountChange.setText("");
-                    }
+                    savingToCheckTransfer(editTextAmount);
 
 
                 }
             }
             if (radioButtonSelectedAccount == R.id.radioButtonSaving) {
-                for (Account account : userAccounts) {
-                    if (account instanceof CheckAccount) {
-                        checkAccount = (CheckAccount) account;
-
-                    }
-                    if (account instanceof SavingAccount) {
-                        savingAccount = (SavingAccount) account;
-                    }
-                }
+                getSavingAccount();
 
                 if (radioButtonSelectedTransaction == R.id.radioButtonDeposit) {
-                    if(savingAccount.deposit(editTextAmount)== true)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
-                    }
-                    if (editTextAmount < 0)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
-                    }
-
-                    editTextAmountChange.setText("");
+                    savingDeposit(editTextAmount);
                 }
                 if (radioButtonSelectedTransaction == R.id.radioButtonWidthdraw) {
-                    if(savingAccount.withdraw(editTextAmount) == true)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
-                    }
-                    if(editTextAmount % 10 != 0)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
-                    }
-                    if(editTextAmount> 1000)
-                    {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
-                    }
-                    if(editTextAmount > savingAccount.getAccountAmount())
-                    {
-
-                    }
-
-                    editTextAmountChange.setText("");
+                    savingWithdraw(editTextAmount);
                 }
                 if (radioButtonSelectedTransaction == R.id.radioButtonTransfer) {
-                    if (editTextAmount > 100000) {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
-                    }
-                    if (editTextAmount > checkAccount.getAccountAmount()) {
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
-                    } else {
-                        savingAccount.setAccountAmount(savingAccount.getAccountAmount() + editTextAmount);
-                        checkAccount.setAccountAmount(checkAccount.getAccountAmount() - editTextAmount);
-                        textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
-                        editTextAmountChange.setText("");
-                    }
-
+                    checkToSavingTransfer(editTextAmount);
                 }
             }
             updateAccountSummary();
@@ -520,6 +433,160 @@ public class AtmView extends AppCompatActivity implements IAtmView {
 
     }
 
+    private void checkDeposit(double amount)
+    {
+
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+
+        if (amount < 0)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
+        }
+        else
+        {
+            getCheckAccount().deposit(amount);
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
+        }
+
+        editTextAmountChange.setText("");
+    }
+
+    private void savingDeposit(double amount)
+    {
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+
+        if (amount < 0)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountZero));
+        }
+        else
+        {
+            getSavingAccount().deposit(amount);
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_deposit) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_checkAccount));
+        }
+
+        editTextAmountChange.setText("");
+    }
+
+    private void savingWithdraw(double amount)
+    {
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+
+        if(getSavingAccount().withdraw(amount))
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+        }
+        if(amount % 10 != 0)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
+        }
+        if(amount> 1000)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
+        }
+        if(amount > getSavingAccount().getAccountAmount())
+        {
+
+        }
+
+        editTextAmountChange.setText("");
+    }
+
+    private void checkWithdraw(double amount)
+    {
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+
+        if(getCheckAccount().withdraw(amount))
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_transaction_withdraw) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_transaction_savingAccount));
+        }
+        if(amount % 10 != 0)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmountDivisableBy10));
+        }
+        if(amount> 1000)
+        {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_errorAmount1000));
+        }
+        if(amount > getCheckAccount().getAccountAmount())
+        {
+
+        }
+
+        editTextAmountChange.setText("");
+    }
+
+    private void checkToSavingTransfer(double amount)
+    {
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+        if (amount > 100000) {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
+        }
+        if (amount > getCheckAccount().getAccountAmount()) {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
+        } else {
+            getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() + amount);
+            getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() - amount);
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
+            editTextAmountChange.setText("");
+        }
+
+    }
+
+    private void savingToCheckTransfer(double amount)
+    {
+        EditText editTextAmountChange = findViewById(R.id.editTextInput);
+        TextView textViewTransactionSummary = findViewById(R.id.textViewTransactionSummary);
+
+        if (amount > 100000) {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
+        } else if (amount > getSavingAccount().getAccountAmount()) {
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_notEnoughMoney));
+        } else {
+            getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() + amount);
+            getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() - amount);
+            textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + " " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
+            editTextAmountChange.setText("");
+        }
+
+    }
+
+    private CheckAccount getCheckAccount()
+    {
+        CheckAccount checkAccount = null;
+
+        for (Account account : userAccounts) {
+            if (account instanceof CheckAccount) {
+                checkAccount = (CheckAccount) account;
+
+            }
+        }
+        return checkAccount;
+    }
+
+    private SavingAccount getSavingAccount()
+    {
+
+        SavingAccount savingAccount = null;
+
+        for (Account account : userAccounts) {
+
+            if (account instanceof SavingAccount) {
+                savingAccount = (SavingAccount) account;
+            }
+        }
+        return savingAccount;
+    }
 }
 
 
