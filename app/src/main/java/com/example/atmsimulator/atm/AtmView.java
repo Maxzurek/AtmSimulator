@@ -505,7 +505,7 @@ public class AtmView extends AppCompatActivity
         {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_maximumTransfer));
         }
-        if (amount > getCheckAccount().getAccountAmount())
+        else if (amount > getCheckAccount().getAccountAmount())
         {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_insufficient_funds));
         }
