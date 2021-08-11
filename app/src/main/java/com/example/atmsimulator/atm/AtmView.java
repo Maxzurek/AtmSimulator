@@ -508,14 +508,15 @@ public class AtmView extends AppCompatActivity
         else if (amount > getCheckAccount().getAccountAmount())
         {
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_insufficient_funds));
+
         }
         else
         {
             getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() + amount);
             getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() - amount);
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_Transfer_checkToSaving));
-            editTextAmountChange.setText("");
         }
+        editTextAmountChange.setText("");
     }
 
     private void savingToCheckTransfer(double amount)
@@ -536,8 +537,8 @@ public class AtmView extends AppCompatActivity
             getCheckAccount().setAccountAmount(getCheckAccount().getAccountAmount() + amount);
             getSavingAccount().setAccountAmount(getSavingAccount().getAccountAmount() - amount);
             textViewTransactionSummary.setText(getString(R.string.atm_activity_textView_Transfer) + " " + editTextAmountChange.getText().toString() + "$ " + getString(R.string.atm_activity_textView_Transfer_savingToCheck));
-            editTextAmountChange.setText("");
         }
+        editTextAmountChange.setText("");
     }
 
     private CheckAccount getCheckAccount()
